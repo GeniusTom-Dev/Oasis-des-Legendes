@@ -1,97 +1,89 @@
 package fr.tmm.modele.creature;
 
 public abstract class Creature {
-    private String nomEspece;
-    private String sexe;
-    private double poids;
-    private double taille;
+    private String name;
+    private String type;
+    private String sex;
+    private double weight;
+    private double height;
     private int age;
-    private boolean indicateurFaim;
-    private boolean indicateurSommeil;
-    private boolean indicateurSante;
-    private static final int AGE_MAX = 100;
+    private boolean hunger;
+    private boolean sleep;
+    private boolean health;
 
-    public Creature(String nomEspece, String sexe, double poids, double taille, int age) {
-        this.nomEspece = nomEspece;
-        this.sexe = sexe;
-        this.poids = poids;
-        this.taille = taille;
+    public Creature(String name, String sex, double weight, double height, int age) {
+        this.name = name;
+        this.sex = sex;
+        this.weight = weight;
+        this.height = height;
         this.age = age;
-        this.indicateurFaim = true;
-        this.indicateurSommeil = false;
-        this.indicateurSante = true;
+        this.hunger = true;
+        this.sleep = false;
+        this.health = true;
+        this.type = this.getClass().getSimpleName();
     }
 
-    public String getNomEspece() {
-        return nomEspece;
+    public void makeNoise() {
+        System.out.println("Le " + this.name + " émet un son puissant !");
     }
 
-    public String getSexe() {
-        return sexe;
+    public String getName() {
+        return name;
     }
 
-    public double getPoids() {
-        return poids;
+    public String getType() {
+        return type;
     }
 
-    public double getTaille() {
-        return taille;
+    public String getSex() {
+        return sex;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public int getAge() {
         return age;
     }
 
-    public boolean isIndicateurFaim() {
-        return indicateurFaim;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public boolean isIndicateurSommeil() {
-        return indicateurSommeil;
+    public boolean isHunger() {
+        return hunger;
     }
 
-    public boolean isIndicateurSante() {
-        return indicateurSante;
+    public void setHunger(boolean hunger) {
+        this.hunger = hunger;
     }
 
-    public void setIndicateurFaim(boolean indicateurFaim) {
-        this.indicateurFaim = indicateurFaim;
+    public boolean isSleep() {
+        return sleep;
     }
 
-    public void setIndicateurSommeil(boolean indicateurSommeil) {
-        this.indicateurSommeil = indicateurSommeil;
+    public void setSleep(boolean sleep) {
+        this.sleep = sleep;
     }
 
-    public void setIndicateurSante(boolean indicateurSante) {
-        this.indicateurSante = indicateurSante;
+    public boolean isHealth() {
+        return health;
     }
 
-    public void emettreSon() {
-        System.out.println("Le " + this.nomEspece + " émet un son puissant !");
-    }
-
-    public void manger() {
-        if (!indicateurSommeil) {
-            indicateurFaim = false;
-        }
-    }
-
-    public void sEndormir() {
-        indicateurSommeil = true;
-    }
-
-    public void seRéveiller() {
-        indicateurSommeil = false;
-    }
-
-    public void soigner() {
-        indicateurSante = true;
-    }
-
-    public void vieillir() {
-        age++;
-        if (age >= AGE_MAX || !indicateurSante) {
-            System.out.println("La créature est morte.");
-        }
+    public void setHealth(boolean health) {
+        this.health = health;
     }
 }
