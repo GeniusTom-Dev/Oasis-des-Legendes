@@ -9,11 +9,6 @@ public class Mermaid extends Viviparous implements Swimmer {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("Le Mermaid émet un son puissant !");
-    }
-
-    @Override
     public void swim() {
         System.out.println("Le Mermaid nage dans les profondeurs de l'océan.");
     }

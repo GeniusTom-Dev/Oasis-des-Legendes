@@ -9,11 +9,6 @@ public class Megalodon extends Oviparous implements Swimmer {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("Le Megalodon émet un son puissant !");
-    }
-
-    @Override
     public void swim() {
         System.out.println("Le Megalodon nage dans les profondeurs de l'océan.");
     }

@@ -5,28 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a5479b-0ede-4015-b472-c4f80231699c" name="Changes" comment="Init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/Zoo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/ZooMaster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/Creature.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/Oviparous.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/Viviparous.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/methodOfMovement/Flyer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/methodOfMovement/Swimmer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/methodOfMovement/Walker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Dragon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Human.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Kraken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Lycanthrope.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Megalodon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Mermaid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Nymph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Phenix.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Unicorn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/enclosure/Aquarium.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/enclosure/Aviary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/enclosure/Enclosure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/Creature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Dragon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Dragon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Kraken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Kraken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Lycanthrope.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Lycanthrope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Megalodon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Megalodon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Mermaid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Mermaid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Nymph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Nymph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Phenix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Phenix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Unicorn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/tmm/modele/creature/species/Unicorn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +35,16 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2XqNsaHN9puVlvcXChzKHwlo5dL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -91,6 +86,9 @@
       <updated>1699352857243</updated>
       <workItem from="1699352858559" duration="1115000" />
       <workItem from="1699394593376" duration="3414000" />
+      <workItem from="1699515080578" duration="501000" />
+      <workItem from="1699515673612" duration="57000" />
+      <workItem from="1699515779141" duration="1413000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1699353406004</created>

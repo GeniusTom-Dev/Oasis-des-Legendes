@@ -66,9 +66,9 @@ public abstract class Creature {
         this.indicateurSante = indicateurSante;
     }
 
-    public abstract void emettreSon();
-
-    public abstract void renaître();
+    public void emettreSon() {
+        System.out.println("Le " + this.nomEspece + " émet un son puissant !");
+    }
 
     public void manger() {
         if (!indicateurSommeil) {

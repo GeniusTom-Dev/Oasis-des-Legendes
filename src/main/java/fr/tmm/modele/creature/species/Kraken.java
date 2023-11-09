@@ -9,11 +9,6 @@ public class Kraken extends Oviparous implements Swimmer {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("Le Kraken émet un son puissant !");
-    }
-
-    @Override
     public void swim() {
         System.out.println("Le Kraken nage dans les profondeurs de l'océan.");
     }

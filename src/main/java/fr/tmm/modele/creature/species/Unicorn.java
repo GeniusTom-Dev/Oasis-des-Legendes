@@ -8,11 +8,6 @@ public class Unicorn extends Viviparous implements Walker {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("La Licorne émet un son puissant !");
-    }
-
-    @Override
     public void run() {
         System.out.println("La Licorne court.");
     }

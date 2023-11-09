@@ -9,11 +9,6 @@ public class Phenix extends Oviparous implements Flyer {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("Le Phenix émet un son puissant !");
-    }
-
-    @Override
     public void fly() {
         System.out.println("Le Phenix vole.");
     }
@@ -27,7 +22,6 @@ public class Phenix extends Oviparous implements Flyer {
         }
     }
 
-    @Override
     public void renaître() {
         System.out.println("Le Phénix renaît de ses cendres et prend un nouveau départ !");
         setIndicateurFaim(true);

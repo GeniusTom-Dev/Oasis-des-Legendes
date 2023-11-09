@@ -6,12 +6,6 @@ public class Lycanthrope extends Viviparous implements Walker {
     public Lycanthrope(String nomEspece, String sexe, double poids, double taille, int age) {
         super(nomEspece, sexe, poids, taille, age);
     }
-
-    @Override
-    public void emettreSon() {
-        System.out.println("Le Lycanthrope émet un son puissant !");
-    }
-
     @Override
     public void run() {
         System.out.println("Le Lycanthrope court.");

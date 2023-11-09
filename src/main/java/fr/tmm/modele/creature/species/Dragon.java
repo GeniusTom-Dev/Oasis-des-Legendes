@@ -11,11 +11,6 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("Le Dragon émet un son puissant !");
-    }
-
-    @Override
     public void swim() {
         System.out.println("Le Dragon nage dans les profondeurs de l'océan.");
     }
@@ -39,7 +34,6 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer {
         }
     }
 
-    @Override
     public void renaître() {
         System.out.println("Le Dragon renaît et prend un nouveau départ !");
         setIndicateurFaim(true);

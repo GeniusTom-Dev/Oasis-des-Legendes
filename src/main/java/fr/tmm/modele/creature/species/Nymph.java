@@ -8,11 +8,6 @@ public class Nymph extends Viviparous implements Walker {
     }
 
     @Override
-    public void emettreSon() {
-        System.out.println("La Nymph émet un son puissant !");
-    }
-
-    @Override
     public void run() {
         System.out.println("La Nymph court.");
     }
@@ -26,7 +21,6 @@ public class Nymph extends Viviparous implements Walker {
         }
     }
 
-    @Override
     public void renaître() {
         System.out.println("La Nymph renaît et prend un nouveau départ !");
         setIndicateurFaim(true);
