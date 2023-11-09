@@ -7,17 +7,4 @@ public class Unicorn extends Viviparous implements Walker {
         super(nomEspece, sexe, poids, taille, age);
     }
 
-    @Override
-    public void run() {
-        System.out.println("La Licorne court.");
-    }
-
-    @Override
-    public void mettreBas() {
-        if (getSexe().equals("Femelle")) {
-            System.out.println("La femelle Licorne met bas avec une durée de gestation spécifique.");
-        } else {
-            System.out.println("Les mâles Licorne ne mettent pas bas.");
-        }
-    }
 }

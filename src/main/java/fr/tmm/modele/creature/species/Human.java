@@ -6,9 +6,4 @@ public class Human extends Viviparous implements Walker {
     public Human(String nomEspece, String sexe, double poids, double taille, int age) {
         super(nomEspece, sexe, poids, taille, age);
     }
-
-    @Override
-    public void run() {
-        System.out.println("L'humain court.");
-    }
 }
