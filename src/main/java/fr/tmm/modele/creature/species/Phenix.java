@@ -5,8 +5,8 @@ import fr.tmm.modele.creature.Reincarnate;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
 
 public class Phenix extends Oviparous implements Flyer, Reincarnate {
-    public Phenix(String nomEspece, String sexe, double poids, double taille, int age) {
-        super(nomEspece, sexe, poids, taille, age);
+    public Phenix(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 
 

@@ -3,7 +3,7 @@ import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 
 public class Lycanthrope extends Viviparous implements Walker {
-    public Lycanthrope(String nomEspece, String sexe, double poids, double taille, int age) {
-        super(nomEspece, sexe, poids, taille, age);
+    public Lycanthrope(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 }

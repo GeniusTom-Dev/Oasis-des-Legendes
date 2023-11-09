@@ -4,7 +4,7 @@ import fr.tmm.modele.creature.Oviparous;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 
 public class Megalodon extends Oviparous implements Swimmer {
-    public Megalodon(String nomEspece, String sexe, double poids, double taille, int age) {
-        super(nomEspece, sexe, poids, taille, age);
+    public Megalodon(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 }

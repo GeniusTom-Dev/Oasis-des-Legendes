@@ -4,8 +4,8 @@ import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 
 public class Nymph extends Viviparous implements Walker, Reincarnate {
-    public Nymph(String nomEspece, String sexe, double poids, double taille, int age) {
-        super(nomEspece, sexe, poids, taille, age);
+    public Nymph(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 
     @Override
