@@ -73,11 +73,11 @@ public abstract class Creature {
         this.hunger = hunger;
     }
 
-    public int getSleep() {
+    public int getSleepiness() {
         return sleep;
     }
 
-    public void setSleep(int sleep) {
+    public void setSleepiness(int sleep) {
         this.sleep = sleep;
     }
 
@@ -132,6 +132,9 @@ public abstract class Creature {
     }
 
     public void sleep() {
-        setHunger(SLEEP_MAX);
+        setSleepiness(SLEEP_MAX);
     }
+    public void wakeUp() {setSleepiness(0);}
+
+    public void aging() {++this.age;}
 }
