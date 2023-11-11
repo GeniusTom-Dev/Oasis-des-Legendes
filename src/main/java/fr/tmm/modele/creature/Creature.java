@@ -12,8 +12,7 @@ public abstract class Creature {
     private double height;
     private int age;
     private SatietyIndicator satiety;
-    private EnergyIndicator energy;
-    private boolean isAsleep;
+    private EnergyIndicator energy; // contain a method isAsleep()
     private HealthIndicator health;
 
     public Creature(String name, String sex, double weight, double height, int age) {
@@ -82,6 +81,10 @@ public abstract class Creature {
         return this.satiety.getValue();
     }
 
+    public void getHungrier() {
+        this.satiety.decrement(2); // valeur arbitraire
+    }
+
     public void eat() {
         this.satiety.increment(80);
     }
@@ -102,24 +105,22 @@ public abstract class Creature {
 
     public void setEnergy(int energy) {
         this.energy.setValue(energy);
-        if (this.energy.getValue() == 0) {
-            this.isAsleep = true;
-        }
     }
 
     public int getEnergy() {
         return this.energy.getValue();
     }
 
+    public void getSleepier() {
+        this.energy.decrement(1); // valeur arbitraire
+    }
+
     public void sleep() {
         this.energy.increment(5);
-        if (this.energy.getValue() == 100) {
-            this.isAsleep = false;
-        }
     }
 
     public boolean isAsleep() {
-        return isAsleep;
+        return this.energy.isAsleep();
     }
 
     // --- Health ---

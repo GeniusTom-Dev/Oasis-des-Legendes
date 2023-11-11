@@ -33,6 +33,12 @@ class CreatureTest {
     }
 
     @Test
+    @DisplayName("Falling asleep")
+    void fallingAsleep() {
+        creature.setEnergy(5);
+    }
+
+    @Test
     @DisplayName("aging()")
     void aging() {
         //Field field = Creature.class.getDeclaredField("age");

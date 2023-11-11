@@ -18,11 +18,25 @@ public class EnergyIndicator extends Indicator {
     }
 
     @Override
+    public void increment(int amount) {
+        super.increment(amount);
+        if (this.isAsleep && this.value == 100) {
+            this.isAsleep = false;
+        }
+    }
+
+    @Override
     public void setValue(int value) {
         super.setValue(value);
         if (this.value == 0) {
             this.isAsleep = true;
+        } else if (this.value == 100) {
+            this.isAsleep = false;
         }
+    }
+
+    public boolean isAsleep() {
+        return this.isAsleep;
     }
 
     public String toString(String name) {
