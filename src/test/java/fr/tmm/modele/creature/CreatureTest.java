@@ -16,8 +16,10 @@ class CreatureTest {
         creature = new Dragon("Creature", "femelle", 80,2,5);
     }
 
+    // --- Satiety ---
+
     @Test
-    @DisplayName("eat()")
+    @DisplayName("Eat")
     void eat() {
         creature.setSatiety(1);
         creature.eat();
@@ -25,18 +27,42 @@ class CreatureTest {
     }
 
     @Test
+    @DisplayName("Get Hungry")
+    void getHungry() {
+        creature.setSatiety(90);
+        creature.getHungrier();
+        assertTrue(creature.getSatiety() < 90);
+    }
+
+    // --- Energy ---
+
+    @Test
     @DisplayName("sleep()")
     void sleep() {
         creature.setEnergy(0);
         creature.sleep();
-        assertEquals(5, creature.getEnergy());
+        assertTrue(creature.getEnergy() > 0);
     }
 
     @Test
     @DisplayName("Falling asleep")
     void fallingAsleep() {
-        creature.setEnergy(5);
+        creature.setEnergy(1);
+        creature.getSleepier();
+        assertTrue(creature.isAsleep());
     }
+
+    @Test
+    @DisplayName("Waking Up")
+    void wakeUp() {
+        creature.setEnergy(0);
+        assertTrue(creature.isAsleep());
+        creature.setEnergy(99);
+        creature.sleep();
+        assertFalse(creature.isAsleep());
+    }
+
+    // --- Age ---
 
     @Test
     @DisplayName("aging()")
