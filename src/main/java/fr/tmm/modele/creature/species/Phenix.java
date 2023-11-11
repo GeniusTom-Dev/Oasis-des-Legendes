@@ -14,4 +14,5 @@ public class Phenix extends Oviparous implements Flyer, Reincarnate {
     public void reincarnate() {
 
     }
+
 }

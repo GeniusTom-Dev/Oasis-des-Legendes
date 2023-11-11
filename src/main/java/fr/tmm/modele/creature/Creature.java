@@ -1,5 +1,9 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.indicator.EnergyIndicator;
+import fr.tmm.modele.indicator.HealthIndicator;
+import fr.tmm.modele.indicator.SatietyIndicator;
+
 public abstract class Creature {
     private String name;
     private String type;
@@ -7,11 +11,10 @@ public abstract class Creature {
     private double weight;
     private double height;
     private int age;
-    private int hunger;
-    private int sleep;
-    private int health;
-    private static final int HUNGER_MAX = 100;
-    private static final int SLEEP_MAX = 100;
+    private SatietyIndicator satiety;
+    private EnergyIndicator energy;
+    private boolean isAsleep;
+    private HealthIndicator health;
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
@@ -19,9 +22,9 @@ public abstract class Creature {
         this.weight = weight;
         this.height = height;
         this.age = age;
-        this.hunger = hunger;
-        this.sleep = sleep;
-        this.health = health;
+        this.satiety = new SatietyIndicator();
+        this.energy = new EnergyIndicator();
+        this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
     }
 
@@ -65,76 +68,89 @@ public abstract class Creature {
         this.age = age;
     }
 
-    public int getHunger() {
-        return hunger;
+    // --- Satiety ---
+
+    public String displaySatietyLevel() {
+        return satiety.toString();
     }
 
-    public void setHunger(int hunger) {
-        this.hunger = hunger;
+    public void setSatiety(int satiety) {
+        this.satiety.setValue(satiety);
     }
 
-    public int getSleepiness() {
-        return sleep;
-    }
-
-    public void setSleepiness(int sleep) {
-        this.sleep = sleep;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void hungerLevel() {
-        if (hunger >= 0 && hunger <= 25) {
-            System.out.println(getName() + " a une faim intense.");
-            // Logique spécifique pour une faim intense
-        } else if (hunger > 25 && hunger <= 50) {
-            System.out.println(getName() + " a une faim importante.");
-            // Logique spécifique pour une faim importante
-        } else if (hunger > 50 && hunger <= 75) {
-            System.out.println(getName() + " a une faim modérée.");
-            // Logique spécifique pour une faim modéréeé
-        } else if (hunger > 75 && hunger <= 100) {
-            System.out.println(getName() + " a une faim légère.");
-            // Logique spécifique pour une faim légère
-        } else {
-            System.out.println("La valeur de la faim n'est pas dans une plage valide.");
-            // Logique par défaut pour les valeurs de faim en dehors des plages définies
-        }
+    public int getSatiety() {
+        return this.satiety.getValue();
     }
 
     public void eat() {
-        setHunger(HUNGER_MAX);
+        this.satiety.increment(80);
     }
 
-    public void sleepLevel() {
-        if (sleep >= 0 && sleep <= 25) {
-            System.out.println(getName() + " a un sommeil intense.");
-            // Logique spécifique pour un sommeil intense
-        } else if (sleep > 25 && sleep <= 50) {
-            System.out.println(getName() + " a un sommeil important.");
-            // Logique spécifique pour un sommeil important
-        } else if (sleep > 50 && sleep <= 75) {
-            System.out.println(getName() + " a un sommeil modéré.");
-            // Logique spécifique pour un sommeil modéré
-        } else if (sleep > 75 && sleep <= 100) {
-            System.out.println(getName() + " a un sommeil léger.");
-            // Logique spécifique pour un sommeil léger
-        } else {
-            System.out.println("La valeur de sommeil n'est pas dans une plage valide.");
-            // Logique par défaut pour les valeurs de sommeil en dehors des plages définies
+    public boolean isStarving() {
+        return this.satiety.getValue() == 0;
+    }
+
+    public void starve() {
+        this.health.decrement(10);
+    }
+
+    // --- Energy ---
+
+    public String displayEnergyLevel() {
+        return this.energy.toString();
+    }
+
+    public void setEnergy(int energy) {
+        this.energy.setValue(energy);
+        if (this.energy.getValue() == 0) {
+            this.isAsleep = true;
         }
     }
 
-    public void sleep() {
-        setSleepiness(SLEEP_MAX);
+    public int getEnergy() {
+        return this.energy.getValue();
     }
-    public void wakeUp() {setSleepiness(0);}
+
+    public void sleep() {
+        this.energy.increment(5);
+        if (this.energy.getValue() == 100) {
+            this.isAsleep = false;
+        }
+    }
+
+    public boolean isAsleep() {
+        return isAsleep;
+    }
+
+    // --- Health ---
+
+    public String displayHealthLevel() {
+        return this.health.toString();
+    }
+
+    public void setHealth(int health) {
+        this.health.setValue(health);
+    }
+
+    public int getHealth() {
+        return this.health.getValue();
+    }
+
+    public void heal() {
+        this.health.increment(100);
+    }
+
+    public void die(Creature creature) {
+        if (this.equals(creature)) {
+            creature = null;
+        }
+    }
+
+    public void die2() {
+        Creature instance = this;
+        instance = null;
+    }
+
 
     public void aging() {++this.age;}
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 class CreatureTest {
     Creature creature;
@@ -17,29 +19,37 @@ class CreatureTest {
     @Test
     @DisplayName("eat()")
     void eat() {
-        creature.setHunger(1);
+        creature.setSatiety(1);
         creature.eat();
-        assertEquals(100, creature.getHunger());
+        assertEquals(81, creature.getSatiety());
     }
 
     @Test
     @DisplayName("sleep()")
     void sleep() {
-        creature.setSleepiness(100);
+        creature.setEnergy(0);
         creature.sleep();
-        creature.wakeUp();
-        assertEquals(0, creature.getSleepiness());
+        assertEquals(5, creature.getEnergy());
     }
 
     @Test
-    @DisplayName("vieillir()")
-    void vieillir() {
+    @DisplayName("aging()")
+    void aging() {
         //Field field = Creature.class.getDeclaredField("age");
         //field.setAccessible(true);
         //field.set(creature, new int(10));
         creature.setAge(5);
         creature.aging();
         assertEquals(6, creature.getAge());
+    }
+
+    @Test
+    @DisplayName("die()")
+    void die() {
+        ArrayList<Creature> creatures = new ArrayList<>();
+        creatures.add(creature);
+        creature.die(creature);
+        assertEquals(0, creatures.size());
     }
 
 }
