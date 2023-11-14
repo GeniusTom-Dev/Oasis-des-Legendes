@@ -17,9 +17,9 @@ public class Main extends Thread {
 //        App.main();
         Dragon dragon = new Dragon("Patrick", "M", 0.5, 0.5, 0);
         System.out.println(dragon.toString());
-        launchSatietyThread();
+        /*launchSatietyThread();
         launchEnergyThread();
-        launchAgingThread();
+        launchAgingThread();*/
     }
 
     // ---  A TESTER ---

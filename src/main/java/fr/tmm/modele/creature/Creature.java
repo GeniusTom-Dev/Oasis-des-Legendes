@@ -141,7 +141,8 @@ public abstract class Creature {
         this.health.increment(100);
     }
 
-    public void die(Creature creature) {
+    // Doesn't work
+    /*public void die(Creature creature) {
         if (this.equals(creature)) {
             creature = null;
         }
@@ -150,8 +151,10 @@ public abstract class Creature {
     public void die2() {
         Creature instance = this;
         instance = null;
+    }*/
+
+
+    public void aging() {
+        ++this.age;
     }
-
-
-    public void aging() {++this.age;}
 }

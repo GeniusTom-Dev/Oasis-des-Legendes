@@ -13,6 +13,5 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincar
 
     @Override
     public void reincarnate() {
-
     }
 }
