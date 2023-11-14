@@ -6,25 +6,29 @@ import java.util.ArrayList;
 
 public class Enclosure {
     private String name;
-    private double area;
+    private double surfaceArea;
     private int maxCapacity;
     private ArrayList<Creature> creaturesPresent;
-    private String cleanlinessDegree;
+    private cleanlinessStatus cleanliness;
+
+    enum cleanlinessStatus {
+        unsanitary, dirty, clean, spotless
+    }
 
     public Enclosure(String name, double area, int maxCapacity) {
         this.name = name;
-        this.area = area;
+        this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.creaturesPresent = new ArrayList<>();
-        this.cleanlinessDegree = "correct";
+        this.cleanliness = cleanlinessStatus.spotless;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getArea() {
-        return area;
+    public double getSurfaceArea() {
+        return surfaceArea;
     }
 
     public int getMaxCapacity() {
@@ -40,21 +44,21 @@ public class Enclosure {
         this.creaturesPresent = creaturesPresent;
     }
 
-    public String getCleanlinessDegree() {
-        return cleanlinessDegree;
+    public cleanlinessStatus getCleanlinessDegree() {
+        return cleanliness;
     }
 
-    public void setCleanlinessDegree(String cleanlinessDegree) {
-        this.cleanlinessDegree = cleanlinessDegree;
+    public void setCleanlinessDegree(cleanlinessStatus cleanlinessDegree) {
+        this.cleanliness = cleanlinessDegree;
     }
 
     // Méthode pour afficher les caractéristiques de l'enclos
-    public void afficherCaracteristiques() {
+    public void showCaracteristics() {
         System.out.println("Caractéristiques de l'enclos " + name + ":");
-        System.out.println("Superficie : " + area);
+        System.out.println("Superficie : " + surfaceArea);
         System.out.println("Capacité maximale : " + maxCapacity);
         System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
-        System.out.println("Degré de propreté : " + cleanlinessDegree);
+        System.out.println("Degré de propreté : " + cleanliness);
         System.out.println("Créatures présentes :");
         for (Creature creature : creaturesPresent) {
             System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
@@ -78,7 +82,7 @@ public class Enclosure {
     }
 
     // Méthode pour enlever une créature de l'enclos
-    public void enleverCreature(Creature creature) {
+    public void removeCreature(Creature creature) {
         if (creaturesPresent.remove(creature)) {
             System.out.println(creature.getName() + " a été retiré de l'enclos " + name + ".");
         } else {
@@ -87,15 +91,29 @@ public class Enclosure {
     }
 
     // Méthode pour nourrir les créatures de l'enclos
-    public void nourrirCreatures() {
+    public void feedCreatures() {
         System.out.println("Les créatures de l'enclos " + name + " sont nourries.");
         // Logique de nourrissage spécifique à l'enclos
     }
 
     // Méthode pour entretenir l'enclos
-    public void entretenirEnclos() {
-        setCleanlinessDegree("bon");
-        System.out.println("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanlinessDegree);
+    public void clean() {
+        setCleanlinessDegree(cleanlinessStatus.spotless);
+        System.out.println("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
+    }
+
+    public void getDirty() {
+        this.cleanliness = getWorseState();
+    }
+
+    private cleanlinessStatus getWorseState() {
+        cleanlinessStatus[] statuses = cleanlinessStatus.values();
+        for (int i = 0; i < statuses.length; i++) {
+            if (statuses[i] == cleanliness && i > 0) {
+                return statuses[i - 1];
+            }
+        }
+        return cleanliness;
     }
 
 }
