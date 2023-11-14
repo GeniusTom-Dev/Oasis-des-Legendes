@@ -8,7 +8,6 @@ public class Enclosure {
     private String name;
     private double area;
     private int maxCapacity;
-    private int currentCreatureCount;
     private ArrayList<Creature> creaturesPresent;
     private String cleanlinessDegree;
 
@@ -16,7 +15,6 @@ public class Enclosure {
         this.name = name;
         this.area = area;
         this.maxCapacity = maxCapacity;
-        this.currentCreatureCount = 0;
         this.creaturesPresent = new ArrayList<>();
         this.cleanlinessDegree = "correct";
     }
@@ -33,13 +31,6 @@ public class Enclosure {
         return maxCapacity;
     }
 
-    public int getCurrentCreatureCount() {
-        return currentCreatureCount;
-    }
-
-    public void setCurrentCreatureCount(int currentCreatureCount) {
-        this.currentCreatureCount = currentCreatureCount;
-    }
 
     public ArrayList<Creature> getCreaturesPresent() {
         return creaturesPresent;
@@ -62,7 +53,7 @@ public class Enclosure {
         System.out.println("Caractéristiques de l'enclos " + name + ":");
         System.out.println("Superficie : " + area);
         System.out.println("Capacité maximale : " + maxCapacity);
-        System.out.println("Nombre de créatures présentes : " + currentCreatureCount);
+        System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
         System.out.println("Degré de propreté : " + cleanlinessDegree);
         System.out.println("Créatures présentes :");
         for (Creature creature : creaturesPresent) {
@@ -76,7 +67,6 @@ public class Enclosure {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
                 creaturesPresent.add(creature);
-                currentCreatureCount++;
                 System.out.println(creature.getName() + " a été ajouté à l'enclos " + name + ".");
             } else {
                 System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
@@ -90,7 +80,6 @@ public class Enclosure {
     // Méthode pour enlever une créature de l'enclos
     public void enleverCreature(Creature creature) {
         if (creaturesPresent.remove(creature)) {
-            currentCreatureCount--;
             System.out.println(creature.getName() + " a été retiré de l'enclos " + name + ".");
         } else {
             System.out.println(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
