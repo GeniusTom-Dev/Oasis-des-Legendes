@@ -17,5 +17,10 @@
 
             </Button>
         </HBox>
+        <HBox styleClass="lineButton">
+            <Button prefWidth="150" prefHeight="150" text="Bouton">
+
+            </Button>
+        </HBox>
     </bottom>
 </BorderPane>

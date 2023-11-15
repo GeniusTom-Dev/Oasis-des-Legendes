@@ -6,7 +6,7 @@
 }
 
 .lineButton{
-    -fx-background-color: red;
+    /*-fx-background-color: red;*/
 }
 
 .lineButton Button{
@@ -15,4 +15,5 @@
     -fx-border-width: 5;
     -fx-border-color: linear-gradient(#565e62, #739d93);;
     -fx-border-radius: 75;
+    -fx-text-fill: white;
 }
