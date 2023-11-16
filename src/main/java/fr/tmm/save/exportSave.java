@@ -36,8 +36,6 @@ public class exportSave {
     }
 
     public static void export(Zoo zoo) throws FileNotFoundException, JSONException {
-        OutputStream fos = new FileOutputStream("src/main/java/fr/tmm/save/save.json");
-        JsonGenerator jsonGenerator = Json.createGenerator(fos);
         JSONObject fichier = new JSONObject();
         JSONArray encloss = new JSONArray();
         for (Enclosure enclos : zoo.getEnclosure()) {
@@ -47,11 +45,19 @@ public class exportSave {
             for (Creature creature : enclos.getCreaturesPresent()) {
                 JSONObject creatureDetail = new JSONObject();
                 creatureDetail.put("name", creature.getName());
-                //creatures.add(creatureDetail);
+                creatures.put(creatureDetail);
             }
             encloDetails.put("creatures", creatures);
-            //encloss.add(encloDetails);
+            encloss.put(encloDetails);
         }
         fichier.put("enclos", encloss);
+        try {
+            FileWriter file = new FileWriter("src/main/java/fr/tmm/save/save.json");
+            file.write(fichier.toString());
+            file.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

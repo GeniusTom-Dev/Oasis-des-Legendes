@@ -5,15 +5,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 class CreatureTest {
     Creature creature;
 
     @BeforeEach
     void initialisation() {
-        creature = new Dragon("Creature", "femelle", 80,2,5);
+        creature = new Dragon("Creature", "femelle", 80, 2, 5);
     }
 
     // --- Satiety ---
