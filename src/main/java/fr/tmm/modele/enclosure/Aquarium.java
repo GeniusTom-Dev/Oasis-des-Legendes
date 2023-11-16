@@ -24,11 +24,10 @@ public class Aquarium extends Enclosure {
             public void run() {
                 checkState();
             }
-        }, 0, 1 * 60 * 1000); // Vérification de l'état toutes les minutes (en millisecondes)
+        }, 0, 1 * 60 * 1000);
     }
 
     private void checkState() {
-        // Logique pour vérifier l'état de l'aquarium
         String depthState = determineDepthState();
         String salinityState = determineSalinityState();
 
@@ -44,7 +43,6 @@ public class Aquarium extends Enclosure {
 
     private void deleteAquarium() {
         System.out.println("L'aquarium a été supprimé en raison d'un état critique pendant 5 minutes consécutives.");
-        // Méthode pour supprimer l'aquarium
     }
 
     public void adjustWaterDepth() {
@@ -58,8 +56,6 @@ public class Aquarium extends Enclosure {
         String depthState = determineDepthState();
         System.out.println("Le niveau d'eau est de " + depthState);
     }
-
-    // Les autres méthodes...
 
     private String determineDepthState() {
         if (waterDepth >= 100) {
