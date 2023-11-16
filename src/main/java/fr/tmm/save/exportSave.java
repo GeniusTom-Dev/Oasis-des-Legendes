@@ -2,6 +2,7 @@ package fr.tmm.save;
 
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.species.Dragon;
+import fr.tmm.modele.creature.species.Kraken;
 import fr.tmm.modele.enclosure.Enclosure;
 import fr.tmm.modele.creature.Creature;
 
@@ -18,40 +19,66 @@ import java.util.ArrayList;
 public class exportSave {
 
     public static void main(String[] args) throws FileNotFoundException, JSONException {
-        // écrire dans le fichier
-        /*OutputStream fos = new FileOutputStream("src/main/java/fr/tmm/save/save.json");
-        JsonGenerator jsonGenerator = Json.createGenerator(fos);
-        jsonGenerator.writeStartObject();
-        jsonGenerator.write("id", 1);
-        jsonGenerator.writeEnd();
-        jsonGenerator.close();*/
         Zoo zoo = new Zoo();
         Enclosure enclo = new Enclosure("enclo", 45, 5);
+        Enclosure enclo2 = new Enclosure("enclo2",60,4);
+        Kraken kraken1 = new Kraken("krak","male",20,20,5);
+        Kraken kraken2 = new Kraken("kraken2","femelle",20,20,7);
         Dragon dragon = new Dragon("kllfh", "male", 20, 20, 20);
         enclo.ajouterCreature(dragon);
+        enclo2.ajouterCreature(kraken1);
+        enclo2.ajouterCreature(kraken2);
         ArrayList<Enclosure> enclos = new ArrayList<>();
         enclos.add(enclo);
+        enclos.add(enclo2);
         zoo.setEnclosure(enclos);
         export(zoo);
     }
 
     public static void export(Zoo zoo) throws FileNotFoundException, JSONException {
-        OutputStream fos = new FileOutputStream("src/main/java/fr/tmm/save/save.json");
-        JsonGenerator jsonGenerator = Json.createGenerator(fos);
-        JSONObject fichier = new JSONObject();
-        JSONArray encloss = new JSONArray();
-        for (Enclosure enclos : zoo.getEnclosure()) {
-            JSONObject encloDetails = new JSONObject();
-            encloDetails.put("name", enclos.getName());
-            JSONArray creatures = new JSONArray();
-            for (Creature creature : enclos.getCreaturesPresent()) {
-                JSONObject creatureDetail = new JSONObject();
-                creatureDetail.put("name", creature.getName());
-                //creatures.add(creatureDetail);
+        try (OutputStream fos = new FileOutputStream("src/main/java/fr/tmm/save/save.json")) {
+            JSONObject fichier = new JSONObject();
+
+            // Zoo Master Details
+            JSONObject zooMasterDetails = new JSONObject();
+            zooMasterDetails.put("name", "Jauras");
+            zooMasterDetails.put("sex", "male");
+            fichier.put("zooMaster", zooMasterDetails);
+
+            // Zoo Details
+            JSONObject zooDetails = new JSONObject();
+            zooDetails.put("name", "Oasis des légendes");
+            zooDetails.put("nombre max d'enclos", 7);
+
+            // Enclos Array
+            JSONArray enclosArray = new JSONArray();
+            for (Enclosure enclos : zoo.getEnclosure()) {
+                JSONObject encloDetails = new JSONObject();
+                encloDetails.put("type", enclos.getClass().getSimpleName());
+                encloDetails.put("nom", enclos.getName());
+                encloDetails.put("superficie", enclos.getSurfaceArea());
+
+                // Creatures Array
+                JSONArray creaturesArray = new JSONArray();
+                for (Creature creature : enclos.getCreaturesPresent()) {
+                    JSONObject creatureDetail = new JSONObject();
+                    creatureDetail.put("type", creature.getType());
+                    creatureDetail.put("nom", creature.getName());
+                    creatureDetail.put("satiete", creature.getSatiety());
+                    creatureDetail.put("energie", creature.getEnergy());
+                    creaturesArray.put(creatureDetail);
+                }
+
+                encloDetails.put("creatures", creaturesArray);
+                enclosArray.put(encloDetails);
             }
-            encloDetails.put("creatures", creatures);
-            //encloss.add(encloDetails);
+
+            zooDetails.put("enclos", enclosArray);
+            fichier.put("zoo", zooDetails);
+
+            fos.write(fichier.toString(2).getBytes()); // Utilisez toString(2) pour une indentation lisible
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        fichier.put("enclos", encloss);
     }
 }
