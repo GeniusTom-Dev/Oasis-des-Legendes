@@ -17,6 +17,20 @@ public class Aquarium extends Enclosure {
         scheduleCriticalCheck();
     }
 
+    public void ajouterCreature(Creature creature) {
+        if (creature != null) {
+            if (creature instanceof Swimmer) {
+                creaturesPresent.add(creature);
+                System.out.println(creature.getName() + " a été ajouté à l'aquarium " + name + ".");
+            } else {
+                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'aquarium " + name +
+                        " car ce n'est pas une créature aquatique.");
+            }
+        } else {
+            System.out.println("La créature est invalide.");
+        }
+    }
+
     private void scheduleCriticalCheck() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -24,11 +38,10 @@ public class Aquarium extends Enclosure {
             public void run() {
                 checkState();
             }
-        }, 0, 1 * 60 * 1000); // Vérification de l'état toutes les minutes (en millisecondes)
+        }, 0, 1 * 60 * 1000);
     }
 
     private void checkState() {
-        // Logique pour vérifier l'état de l'aquarium
         String depthState = determineDepthState();
         String salinityState = determineSalinityState();
 
@@ -44,7 +57,6 @@ public class Aquarium extends Enclosure {
 
     private void deleteAquarium() {
         System.out.println("L'aquarium a été supprimé en raison d'un état critique pendant 5 minutes consécutives.");
-        // Méthode pour supprimer l'aquarium
     }
 
     public void adjustWaterDepth() {
@@ -58,8 +70,6 @@ public class Aquarium extends Enclosure {
         String depthState = determineDepthState();
         System.out.println("Le niveau d'eau est de " + depthState);
     }
-
-    // Les autres méthodes...
 
     private String determineDepthState() {
         if (waterDepth >= 100) {

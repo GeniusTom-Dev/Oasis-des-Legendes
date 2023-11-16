@@ -12,6 +12,20 @@ public class Aviary extends Enclosure {
         scheduleRoofCheck();
     }
 
+    public void ajouterCreature(Creature creature) {
+        if (creature != null) {
+            if (creature instanceof Flyer) {
+                creaturesPresent.add(creature);
+                System.out.println(creature.getName() + " a été ajouté à la volière " + name + ".");
+            } else {
+                System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
+                        " car ce n'est pas une créature volante.");
+            }
+        } else {
+            System.out.println("La créature est invalide.");
+        }
+    }
+
     private void scheduleRoofCheck() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
