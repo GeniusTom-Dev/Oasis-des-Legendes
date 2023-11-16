@@ -1,0 +1,11 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.tmm.controlers.EnclosureController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/enclosure.css" fx:id="borderPane" styleClass="root">
+
+    <center>
+        <Text text="Coucou" style="-fx-text-fill: black">COucou</Text>
+    </center>
+
+</BorderPane>
