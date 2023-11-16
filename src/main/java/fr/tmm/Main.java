@@ -20,6 +20,7 @@ public class Main extends Thread {
         /*launchSatietyThread();
         launchEnergyThread();
         launchAgingThread();*/
+        dragon.run();
     }
 
     // ---  A TESTER ---

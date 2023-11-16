@@ -4,4 +4,5 @@ open module tmm.javafx {
     requires javafx.graphics;
     requires javafx.fxml;
     requires javax.json;
+    requires android.json;
 }

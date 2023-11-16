@@ -4,7 +4,7 @@ import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
-public abstract class Creature {
+public abstract class Creature implements Runnable {
     private String name;
     private String type;
     private String sex;
@@ -25,6 +25,24 @@ public abstract class Creature {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
+    }
+
+    public void run() {
+        int cmp = 0;
+        try {
+            Thread.sleep(5000);
+            this.energy.decrement(1);
+            this.satiety.decrement(1);
+            // une chance de faire du bruit
+            if (cmp == 5) {
+                ++this.age;
+                cmp = 0;
+            } else {
+                ++cmp;
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void makeNoise() {
