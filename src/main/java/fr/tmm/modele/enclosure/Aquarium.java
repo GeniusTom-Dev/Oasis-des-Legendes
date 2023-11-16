@@ -17,6 +17,20 @@ public class Aquarium extends Enclosure {
         scheduleCriticalCheck();
     }
 
+    public void ajouterCreature(Creature creature) {
+        if (creature != null) {
+            if (creature instanceof Swimmer) {
+                creaturesPresent.add(creature);
+                System.out.println(creature.getName() + " a été ajouté à l'aquarium " + name + ".");
+            } else {
+                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'aquarium " + name +
+                        " car ce n'est pas une créature aquatique.");
+            }
+        } else {
+            System.out.println("La créature est invalide.");
+        }
+    }
+
     private void scheduleCriticalCheck() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
