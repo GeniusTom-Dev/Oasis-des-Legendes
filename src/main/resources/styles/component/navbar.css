@@ -4,15 +4,21 @@
     -fx-border-width: 5;
     -fx-border-color: linear-gradient(#565e62, #739d93);
     -fx-border-radius: 15;
-    -fx-text-fill: white;
     -fx-min-width: 900;
     -fx-min-height: 75;
     -fx-max-width: 900;
     -fx-max-height: 75;
 }
 
+Label{
+    -fx-text-fill: white;
+}
+
+.title{
+    -fx-font-family: "Brush Script MT", cursive;
+}
+
 .case{
     -fx-min-width: 180;
     -fx-max-width: 180;
-    -fx-text-fill: white;
 }
