@@ -44,7 +44,7 @@ public class Zoo {
         this.enclosures = enclosures;
     }
 
-    public void addAnEnclosure(Enclosure enclosure) {
+    public int addAnEnclosure(Enclosure enclosure) {
         if (this.enclosures.size() < NB_MAX_ENCLOSURE) {
             this.enclosures.add(enclosure);
             return 0;
