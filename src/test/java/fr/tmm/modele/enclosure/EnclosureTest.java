@@ -46,13 +46,13 @@ class EnclosureTest {
         enclosure.ajouterCreature(this.dragon2);
         enclosure.ajouterCreature(this.dragon3);
         assertEquals(enclosure.getCreaturesPresent().size(), 3);
-        enclosure.ajouterCreature(new Dragon("effe", "firhf", 5, 5, 5));
+        enclosure.ajouterCreature(new Dragon("Dragon", "male", 5, 5, 5));
         assertEquals(enclosure.getCreaturesPresent().size(), 3);
     }
 
     @Test
     void putIncompatibleCreatureInAquarium() {
-        Aquarium aquarium = new Aquarium("klrv", 75, 5);
+        Aquarium aquarium = new Aquarium("Aquarium", 75.0, 5, 12.0, 5);
         aquarium.ajouterCreature(this.nymph);
         assertEquals(aquarium.getCreaturesPresent().size(), 0);
     }

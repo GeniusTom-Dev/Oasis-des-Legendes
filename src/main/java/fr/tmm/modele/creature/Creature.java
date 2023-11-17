@@ -13,7 +13,7 @@ public abstract class Creature implements Runnable {
     private int age;
     private SatietyIndicator satiety;
     private EnergyIndicator energy; // contain a method isAsleep()
-    private HealthIndicator health;
+    private HealthIndicator health; // contain a method isSick and isAlive
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
@@ -45,8 +45,8 @@ public abstract class Creature implements Runnable {
         }
     }
 
-    public void makeNoise() {
-        System.out.println("Le " + this.name + " émet un son puissant !");
+    public String makeNoise() {
+        return this.name + " émet un son puissant !";
     }
 
     public String getName() {
@@ -104,7 +104,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void eat() {
-        this.satiety.increment(80);
+        if (!this.isAsleep()) this.satiety.increment(80);
     }
 
     public boolean isStarving() {
@@ -155,24 +155,20 @@ public abstract class Creature implements Runnable {
         return this.health.getValue();
     }
 
+    public HealthIndicator getHealthindicator() {
+        return this.health;
+    }
+
     public void heal() {
+
         this.health.increment(100);
     }
 
-    // Doesn't work
-    /*public void die(Creature creature) {
-        if (this.equals(creature)) {
-            creature = null;
-        }
-    }
-
-    public void die2() {
-        Creature instance = this;
-        instance = null;
-    }*/
-
-
     public void aging() {
         ++this.age;
+    }
+
+    public boolean isAlive() {
+        return this.health.isAlive();
     }
 }

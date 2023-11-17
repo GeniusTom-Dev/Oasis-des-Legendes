@@ -1,9 +1,12 @@
 package fr.tmm.modele.creature;
 
-import fr.tmm.modele.creature.species.Dragon;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.creature.species.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +34,15 @@ class CreatureTest {
         creature.setSatiety(90);
         creature.getHungrier();
         assertTrue(creature.getSatiety() < 90);
+    }
+
+    @Test
+    void UnableToEatWhileSleeping() {
+        creature.setEnergy(0);
+        assertTrue(creature.isAsleep());
+        creature.setSatiety(50);
+        creature.eat();
+        assertEquals(50, creature.getSatiety());
     }
 
     // --- Energy ---
@@ -74,13 +86,34 @@ class CreatureTest {
         assertEquals(6, creature.getAge());
     }
 
-/*    @Test
-    @DisplayName("die()")
+    @Test
     void die() {
-        ArrayList<Creature> creatures = new ArrayList<>();
-        creatures.add(creature);
-        creature.die(creature);
-        assertEquals(0, creatures.size());
-    }*/
+        creature.setHealth(1);
+        assertTrue(creature.isAlive());
+        creature.getHealthindicator().decrement(1);
+        assertFalse(creature.isAlive());
+    }
 
+    // --- Emettre un son
+
+    @Test
+    void makeNoise() {
+        assertEquals("Creature émet un son puissant !", this.creature.makeNoise());
+    }
+
+    // Implementation
+
+    @Test
+    void checkImplementation() {
+        Dragon dragon = new Dragon("", "", 5, 5, 5);
+        Human human = new Human("", "", 5, 5, 5);
+        Kraken kraken = new Kraken("", "", 5, 5, 5);
+        Lycanthrope lycan = new Lycanthrope("", "", 5, 5, 5);
+        Megalodon megalodon = new Megalodon("", "", 5, 5, 5);
+        Mermaid mermaid = new Mermaid("", "", 5, 5, 5);
+        Nymph nymph = new Nymph("", "", 5, 5, 5);
+        Phenix phenix = new Phenix("", "", 5, 5, 5);
+        Unicorn unicorn = new Unicorn("", "", 5, 5, 5);
+        assertTrue(dragon instanceof Walker);
+    }
 }

@@ -9,7 +9,7 @@ public class Zoo {
 
     private String name;
     private ZooMaster zooMaster;
-    final private int NB_MAX_ENCLOSURE;
+    final private int NB_MAX_ENCLOSURE = 10;
     private ArrayList<Enclosure> enclosures;
 
     // NAME
@@ -20,7 +20,7 @@ public class Zoo {
 
     public void setName(String newName) {
         this.name = newName;
-    }   
+    }
 
     // ZOO MASTER
 
@@ -39,7 +39,7 @@ public class Zoo {
     public ArrayList<Enclosure> getEnclosures() {
         return this.enclosures;
     }
-    
+
     public void setEnclosures(ArrayList<Enclosure> enclosures) {
         this.enclosures = enclosures;
     }
@@ -52,4 +52,11 @@ public class Zoo {
         return -1;
     }
 
+    public ArrayList<Creature> getAllCreatures() {
+        ArrayList<Creature> creatures = new ArrayList<>();
+        for (Enclosure enclo : this.enclosures) {
+            creatures.addAll(enclo.getCreaturesPresent());
+        }
+        return creatures;
+    }
 }

@@ -21,9 +21,9 @@ public class exportSave {
     public static void main(String[] args) throws FileNotFoundException, JSONException {
         Zoo zoo = new Zoo();
         Enclosure enclo = new Enclosure("enclo", 45, 5);
-        Enclosure enclo2 = new Enclosure("enclo2",60,4);
-        Kraken kraken1 = new Kraken("krak","male",20,20,5);
-        Kraken kraken2 = new Kraken("kraken2","femelle",20,20,7);
+        Enclosure enclo2 = new Enclosure("enclo2", 60, 4);
+        Kraken kraken1 = new Kraken("krak", "male", 20, 20, 5);
+        Kraken kraken2 = new Kraken("kraken2", "femelle", 20, 20, 7);
         Dragon dragon = new Dragon("kllfh", "male", 20, 20, 20);
         enclo.ajouterCreature(dragon);
         enclo2.ajouterCreature(kraken1);
@@ -31,7 +31,7 @@ public class exportSave {
         ArrayList<Enclosure> enclos = new ArrayList<>();
         enclos.add(enclo);
         enclos.add(enclo2);
-        zoo.setEnclosure(enclos);
+        zoo.setEnclosures(enclos);
         export(zoo);
     }
 
@@ -52,7 +52,7 @@ public class exportSave {
 
             // Enclos Array
             JSONArray enclosArray = new JSONArray();
-            for (Enclosure enclos : zoo.getEnclosure()) {
+            for (Enclosure enclos : zoo.getEnclosures()) {
                 JSONObject encloDetails = new JSONObject();
                 encloDetails.put("type", enclos.getClass().getSimpleName());
                 encloDetails.put("nom", enclos.getName());

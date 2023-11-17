@@ -5,11 +5,11 @@ import fr.tmm.modele.creature.Creature;
 import java.util.ArrayList;
 
 public class Enclosure {
-    private String name;
-    private double surfaceArea;
-    private int maxCapacity;
-    private ArrayList<Creature> creaturesPresent;
-    private cleanlinessStatus cleanliness;
+    protected String name;
+    protected double surfaceArea;
+    protected int maxCapacity;
+    protected ArrayList<Creature> creaturesPresent;
+    protected cleanlinessStatus cleanliness;
 
     enum cleanlinessStatus {
         unsanitary, dirty, clean, spotless

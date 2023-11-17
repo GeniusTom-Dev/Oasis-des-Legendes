@@ -1,5 +1,8 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.methodOfMovement.Flyer;
+
 import java.util.Timer;
 import java.util.TimerTask;
 

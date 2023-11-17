@@ -1,6 +1,32 @@
 package fr.tmm.modele.indicator;
 
-public class HealthIndicator extends Indicator{
+public class HealthIndicator extends Indicator {
+
+    private boolean isSick;
+    private boolean isAlive;
+
+    public HealthIndicator() {
+        this.isSick = false;
+        this.isAlive = true;
+    }
+
+    @Override
+    public void decrement(int amount) {
+        super.decrement(amount);
+        if (this.value == 0) {
+            this.isAlive = false;
+        }
+    }
+
+    @Override
+    public void setValue(int value) {
+        super.setValue(value);
+        if (this.value == 0) {
+            this.isAlive = false;
+        } else {
+            this.isAlive = true;
+        }
+    }
 
     public String toString(String name) {
         if (this.value == 0) {
@@ -16,4 +42,13 @@ public class HealthIndicator extends Indicator{
         }
         throw new IllegalArgumentException("The indicator value must not be greater than 100");
     }
+
+    public boolean isSick() {
+        return this.isSick;
+    }
+
+    public boolean isAlive() {
+        return this.isAlive;
+    }
+
 }
