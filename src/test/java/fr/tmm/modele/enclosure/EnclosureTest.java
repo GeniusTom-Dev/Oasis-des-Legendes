@@ -37,7 +37,7 @@ class EnclosureTest {
         enclosure.ajouterCreature(this.dragon1);
         enclosure.ajouterCreature(this.nymph);
         assertEquals(enclosure.getCreaturesPresent().size(), 1);
-        assertTrue(enclosure.getCreaturesPresent().get(0).getType() == "Dragon");
+        assertEquals("Dragon", enclosure.getCreaturesPresent().get(0).getType());
     }
 
     @Test
@@ -59,13 +59,24 @@ class EnclosureTest {
 
     @Test
     void removeCreature() {
+        enclosure.ajouterCreature(dragon1);
+        assertEquals(1, enclosure.getCreaturesPresent().size());
         enclosure.removeCreature(dragon1);
-        assertEquals(enclosure.getCreaturesPresent().size(), 1);
+        assertEquals(0, enclosure.getCreaturesPresent().size());
     }
 
     @Test
     void feedCreatures() {
-        // TO DO
+        enclosure.ajouterCreature(dragon1);
+        enclosure.ajouterCreature(dragon2);
+        enclosure.ajouterCreature(dragon3);
+        dragon1.setSatiety(10);
+        dragon2.setSatiety(10);
+        dragon3.setSatiety(10);
+        enclosure.feedCreatures();
+        assertTrue(dragon1.getSatiety() > 10);
+        assertTrue(dragon2.getSatiety() > 10);
+        assertTrue(dragon3.getSatiety() > 10);
     }
 
     @Test

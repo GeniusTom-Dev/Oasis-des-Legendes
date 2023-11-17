@@ -92,8 +92,10 @@ public class Enclosure {
 
     // Méthode pour nourrir les créatures de l'enclos
     public void feedCreatures() {
+        for (Creature creature : this.getCreaturesPresent()) {
+            creature.eat();
+        }
         System.out.println("Les créatures de l'enclos " + name + " sont nourries.");
-        // Logique de nourrissage spécifique à l'enclos
     }
 
     // Méthode pour entretenir l'enclos

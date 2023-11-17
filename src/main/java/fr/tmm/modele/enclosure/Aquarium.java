@@ -26,8 +26,7 @@ public class Aquarium extends Enclosure {
                 creaturesPresent.add(creature);
                 System.out.println(creature.getName() + " a été ajouté à l'aquarium " + name + ".");
             } else {
-                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'aquarium " + name +
-                        " car ce n'est pas une créature aquatique.");
+                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'aquarium " + name + " car ce n'est pas une créature aquatique.");
             }
         } else {
             System.out.println("La créature est invalide.");
