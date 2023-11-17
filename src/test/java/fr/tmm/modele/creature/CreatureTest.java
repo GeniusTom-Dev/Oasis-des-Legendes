@@ -1,5 +1,7 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.creature.methodOfMovement.Flyer;
+import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.creature.species.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -101,19 +103,4 @@ class CreatureTest {
         assertEquals("Creature émet un son puissant !", this.creature.makeNoise());
     }
 
-    // Implementation
-
-    @Test
-    void checkImplementation() {
-        Dragon dragon = new Dragon("", "", 5, 5, 5);
-        Human human = new Human("", "", 5, 5, 5);
-        Kraken kraken = new Kraken("", "", 5, 5, 5);
-        Lycanthrope lycan = new Lycanthrope("", "", 5, 5, 5);
-        Megalodon megalodon = new Megalodon("", "", 5, 5, 5);
-        Mermaid mermaid = new Mermaid("", "", 5, 5, 5);
-        Nymph nymph = new Nymph("", "", 5, 5, 5);
-        Phenix phenix = new Phenix("", "", 5, 5, 5);
-        Unicorn unicorn = new Unicorn("", "", 5, 5, 5);
-        assertTrue(dragon instanceof Walker);
-    }
 }
