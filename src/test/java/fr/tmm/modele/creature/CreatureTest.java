@@ -96,6 +96,17 @@ class CreatureTest {
         assertFalse(creature.isAlive());
     }
 
+    // --- Health ---
+
+    @Test
+    void heal() {
+        creature.getHealthindicator().setSick(true);
+        creature.setHealth(50);
+        creature.heal();
+        assertFalse(creature.getHealthindicator().isSick());
+        assertEquals(100, creature.getHealth());
+    }
+
     // --- Emettre un son
 
     @Test

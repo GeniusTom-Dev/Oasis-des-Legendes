@@ -2,12 +2,21 @@ package fr.tmm.modele.indicator;
 
 public class HealthIndicator extends Indicator {
 
+    public void setSick(boolean sick) {
+        isSick = sick;
+    }
+
     private boolean isSick;
     private boolean isAlive;
 
     public HealthIndicator() {
         this.isSick = false;
         this.isAlive = true;
+    }
+
+    public void heal() {
+        this.value = 100;
+        this.isSick = false;
     }
 
     @Override

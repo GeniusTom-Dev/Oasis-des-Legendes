@@ -160,8 +160,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void heal() {
-
-        this.health.increment(100);
+        this.health.heal();
     }
 
     public void aging() {
