@@ -18,10 +18,7 @@ public class Main extends Thread {
     static boolean gameIsRunning = true;
 
     public static void main(String[] args) {
-        try{
-            readJSON("src/main/resources/config/decrement.json");
-        }catch (FileNotFoundException e){
-            throw new RuntimeException(e);
-        }
+        Dragon dragon = new Dragon("Dragon", "Male", 0.5, 0.5, 0);
+        dragon.run();
     }
 }

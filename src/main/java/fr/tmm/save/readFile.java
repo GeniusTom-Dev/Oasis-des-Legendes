@@ -9,17 +9,15 @@ import java.io.InputStream;
 
 public class readFile {
 
-    public static void readJSON(String path) throws FileNotFoundException {
-        JsonObject json = null;
+    public static JsonObject readJSON(String path) throws FileNotFoundException {
         try {
             InputStream fis = new FileInputStream(path);
             JsonReader reader = Json.createReader(fis);
-            json = reader.readObject();
+            JsonObject json = reader.readObject();
             reader.close();
+            return json;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException("File not found");
         }
-
-        System.out.println(json.getJsonObject("dragon").getInt("energy"));
     }
 }

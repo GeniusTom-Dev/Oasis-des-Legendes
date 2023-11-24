@@ -1,6 +1,7 @@
 {
   "dragon": {
     "energy": 3,
-    "satiety": 2
+    "satiety": 2,
+    "health": 4
   }
 }

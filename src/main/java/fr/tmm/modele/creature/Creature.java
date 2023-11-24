@@ -4,6 +4,16 @@ import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
+import javax.json.JsonObject;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static fr.tmm.save.readFile.readJSON;
+
 public abstract class Creature implements Runnable {
     private String name;
     private String type;
@@ -28,21 +38,46 @@ public abstract class Creature implements Runnable {
     }
 
     public void run() {
-        int cmp = 0;
+        int counter = 0;
         try {
             Thread.sleep(5000);
             this.energy.decrement(1);
             this.satiety.decrement(1);
             // une chance de faire du bruit
-            if (cmp == 5) {
+            if (counter == 5) {
                 ++this.age;
-                cmp = 0;
+                counter = 0;
             } else {
-                ++cmp;
+                ++counter;
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Map<String, Integer> getParameters() {
+        Map<String, Integer> creatureParameters = new HashMap<>();
+
+        try{
+            JsonObject jsonParameters = readJSON("src/main/resources/config/decrement.json");
+            JsonObject parameters = jsonParameters.getJsonObject(this.type.toLowerCase());
+            for (String key : parameters.keySet()) {
+                creatureParameters.put(key, parameters.getInt(key));
+            }
+        }catch (FileNotFoundException e){
+            throw new RuntimeException(e);
+        }
+
+        creatureParameters = creatureParameters.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new));
+
+        return creatureParameters;
     }
 
     public String makeNoise() {
