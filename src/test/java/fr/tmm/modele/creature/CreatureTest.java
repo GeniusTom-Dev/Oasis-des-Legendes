@@ -17,7 +17,7 @@ class CreatureTest {
 
     @BeforeEach
     void initialisation() {
-        creature = new Dragon("Creature", "femelle", 80, 2, 5);
+        creature = new Dragon("Creature", "femelle", 80, 2, 5, null);
     }
 
     // --- Satiety ---

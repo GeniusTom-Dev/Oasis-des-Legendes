@@ -14,7 +14,7 @@ class AquariumTest {
     @BeforeEach
     void init() {
         this.aquarium = new Aquarium("Aquarium", 50.0, 3, 50, 5);
-        this.dragon1 = new Dragon("dragon", "m", 5, 5, 5);
+        this.dragon1 = new Dragon("dragon", "m", 5, 5, 5, null);
     }
 
     @Test
@@ -70,7 +70,7 @@ class AquariumTest {
 
     @Test
     void putIncompatibleCreatureInAquarium() {
-        Unicorn unicorn = new Unicorn("mermaid", "m", 5, 5, 5);
+        Unicorn unicorn = new Unicorn("mermaid", "m", 5, 5, 5, null);
         this.aquarium.addCreature(unicorn);
         assertEquals(aquarium.getCreaturesPresent().size(), 0);
     }
@@ -83,7 +83,7 @@ class AquariumTest {
 
     @Test
     void addIncompatibleCreature() {
-        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5);
+        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5, null);
         aquarium.addCreature(this.dragon1);
         aquarium.addCreature(phenix);
         assertEquals(aquarium.getCreaturesPresent().size(), 1);
@@ -92,13 +92,13 @@ class AquariumTest {
 
     @Test
     void addMoreThanMaxCapacity() {
-        Dragon dragon2 = new Dragon("cui", "m", 5, 5, 5);
-        Dragon dragon3 = new Dragon("kje", "m", 5, 5, 5);
+        Dragon dragon2 = new Dragon("cui", "m", 5, 5, 5, null);
+        Dragon dragon3 = new Dragon("kje", "m", 5, 5, 5, null);
         aquarium.addCreature(this.dragon1);
         aquarium.addCreature(dragon2);
         aquarium.addCreature(dragon3);
         assertEquals(aquarium.getCreaturesPresent().size(), 3);
-        aquarium.addCreature(new Dragon("Dragon", "male", 5, 5, 5));
+        aquarium.addCreature(new Dragon("Dragon", "male", 5, 5, 5, null));
         assertEquals(aquarium.getCreaturesPresent().size(), 3);
     }
 

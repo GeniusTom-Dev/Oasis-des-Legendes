@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
@@ -14,8 +15,9 @@ public abstract class Creature implements Runnable {
     private SatietyIndicator satiety;
     private EnergyIndicator energy; // contain a method isAsleep()
     private HealthIndicator health; // contain a method isSick and isAlive
+    private CreatureDeathListener listener;
 
-    public Creature(String name, String sex, double weight, double height, int age) {
+    public Creature(String name, String sex, double weight, double height, int age, CreatureDeathListener listener) {
         this.name = name;
         this.sex = sex;
         this.weight = weight;
@@ -25,9 +27,14 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
+        this.listener = listener;
     }
 
-    public void run() {
+    public void die() {
+        listener.onCreatureDeath(this);
+    }
+
+    /*public void run() {
         int cmp = 0;
         try {
             Thread.sleep(5000);
@@ -43,7 +50,7 @@ public abstract class Creature implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public String makeNoise() {
         return this.name + " émet un son puissant !";

@@ -2,7 +2,10 @@ package fr.tmm;
 
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.creature.species.Dragon;
+import fr.tmm.modele.creature.species.Phenix;
+import fr.tmm.modele.enclosure.Enclosure;
 
 /**
  * La classe de lancement du logiciel appelant l'application.
@@ -15,12 +18,14 @@ public class Main extends Thread {
 
     public static void main(String[] args) {
 //        App.main();
-        Dragon dragon = new Dragon("Patrick", "M", 0.5, 0.5, 0);
-        System.out.println(dragon.toString());
+        /*Phenix phenix = new Phenix("Patrick", "M", 0.5, 0.5, 0);
+        Enclosure test = new Enclosure("dede", 50.0, 50);
+        phenix.setDeathListener(test);*/
+        //System.out.println(dragon.toString());
         /*launchSatietyThread();
         launchEnergyThread();
         launchAgingThread();*/
-        dragon.run();
+        //dragon.run();
     }
 
     // ---  A TESTER ---

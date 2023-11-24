@@ -1,21 +1,25 @@
 package fr.tmm.modele.creature;
 
-public abstract class Viviparous extends Creature{
-    public Viviparous(String nomEspece, String sexe, double poids, double taille, int age) {
-        super(nomEspece, sexe, poids, taille, age);
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
+
+public abstract class Viviparous extends Creature {
+    public Viviparous(String nomEspece, String sexe, double poids, double taille, int age, CreatureDeathListener listener) {
+        super(nomEspece, sexe, poids, taille, age, listener);
     }
 
-    public String calve(int nbChild){
+    public String calve(int nbChild) {
         try {
-            if(this.getSex().equals("Femelle")){
+            if (this.getSex().equals("Femelle")) {
                 String strChild = nbChild > 1 ? " enfants." : "enfant.";
                 System.out.println(this.getName() + ", la femelle " + this.getType() + " vient de mettre bas " + nbChild + strChild);
-            }else{
+            } else {
                 throw new Exception("Les mâles ne peuvent pas mettre bas");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
         return "";
-    };
+    }
+
+    ;
 }

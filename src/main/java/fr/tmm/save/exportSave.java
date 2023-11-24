@@ -19,9 +19,9 @@ public class exportSave {
         Zoo zoo = new Zoo();
         Enclosure enclo = new Enclosure("enclo", 45, 5);
         Enclosure enclo2 = new Enclosure("enclo2", 60, 4);
-        Kraken kraken1 = new Kraken("krak", "male", 20, 20, 5);
-        Kraken kraken2 = new Kraken("kraken2", "femelle", 20, 20, 7);
-        Dragon dragon = new Dragon("kllfh", "male", 20, 20, 20);
+        Kraken kraken1 = new Kraken("krak", "male", 20, 20, 5, null);
+        Kraken kraken2 = new Kraken("kraken2", "femelle", 20, 20, 7, null);
+        Dragon dragon = new Dragon("kllfh", "male", 20, 20, 20, null);
         enclo.addCreature(dragon);
         enclo2.addCreature(kraken1);
         enclo2.addCreature(kraken2);
