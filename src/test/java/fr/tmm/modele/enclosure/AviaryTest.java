@@ -29,6 +29,21 @@ class AviaryTest {
         assertEquals(Aviary.RoofState.BROKEN, this.aviary.getRoofState());
     }
 
+    @Test
+    void repareRoof() {
+        this.aviary.setRoofState(Aviary.RoofState.DAMAGED);
+        this.aviary.repareRoof();
+        assertEquals(Aviary.RoofState.INTACT, this.aviary.getRoofState());
+        this.aviary.setRoofState(Aviary.RoofState.INTACT);
+        this.aviary.repareRoof();
+        assertEquals(Aviary.RoofState.INTACT, this.aviary.getRoofState());
+    }
+
+    @Test
+    void roofIsBroken() {
+        // TO DO
+    }
+
 
     @Test
     void putIncompatibleCreatureInAviary() {
@@ -71,6 +86,4 @@ class AviaryTest {
         aviary.removeCreature(dragon1);
         assertEquals(0, aviary.getCreaturesPresent().size());
     }
-
-
 }
