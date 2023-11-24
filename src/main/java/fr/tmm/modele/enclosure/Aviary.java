@@ -7,29 +7,55 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Aviary extends Enclosure {
-    private String roofState;
+    private RoofState roofState;
+
+    public enum RoofState {
+        BROKEN, DAMAGED, GOOD, INTACT
+    }
 
     public Aviary(String name, double surfaceArea, int maxCapacity) {
         super(name, surfaceArea, maxCapacity);
-        this.roofState = "Neuf";
-        scheduleRoofCheck();
+        this.roofState = RoofState.INTACT;
+        /*scheduleRoofCheck();*/
     }
 
-    public void ajouterCreature(Creature creature) {
-        if (creature != null) {
-            if (creature instanceof Flyer) {
-                creaturesPresent.add(creature);
-                System.out.println(creature.getName() + " a été ajouté à la volière " + name + ".");
-            } else {
-                System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
-                        " car ce n'est pas une créature volante.");
-            }
+    @Override
+    public void addCreature(Creature creature) {
+        if (creature instanceof Flyer) {
+            super.addCreature(creature);
         } else {
-            System.out.println("La créature est invalide.");
+            System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
+                    " car ce n'est pas une créature volante.");
         }
     }
 
-    private void scheduleRoofCheck() {
+    public void repareRoof() {
+        this.roofState = RoofState.INTACT;
+    }
+
+    public void damageRoof() {
+        this.roofState = getWorseRoofState();
+    }
+
+    private RoofState getWorseRoofState() {
+        RoofState[] statuses = RoofState.values();
+        for (int i = 0; i < statuses.length; i++) {
+            if (statuses[i] == roofState && i > 0) {
+                return statuses[i - 1];
+            }
+        }
+        return roofState;
+    }
+
+    public RoofState getRoofState() {
+        return this.roofState;
+    }
+
+    public void setRoofState(RoofState newRoofState) {
+        this.roofState = newRoofState;
+    }
+
+ /*   private void scheduleRoofCheck() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -37,8 +63,9 @@ public class Aviary extends Enclosure {
                 checkRoofState();
             }
         }, 0, 5 * 60 * 1000);
-    }
+    }*/
 
+/*
     private void checkRoofState() {
         alterRoofState();
         System.out.println("L'état du toit est : " + roofState);
@@ -53,8 +80,9 @@ public class Aviary extends Enclosure {
             }, 5 * 60 * 1000);
         }
     }
+*/
 
-    private void alterRoofState() {
+/*    private void alterRoofState() {
         double randomValue = Math.random();
 
         if (roofState.equals("EXCELLENT")) {
@@ -80,5 +108,5 @@ public class Aviary extends Enclosure {
 
     private void deleteAviary() {
         System.out.println("La volière a été supprimée en raison de l'état critique du toit.");
-    }
+    }*/
 }

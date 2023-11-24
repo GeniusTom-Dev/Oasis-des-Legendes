@@ -11,7 +11,7 @@ public class Enclosure {
     protected ArrayList<Creature> creaturesPresent;
     protected cleanlinessStatus cleanliness;
 
-    enum cleanlinessStatus {
+    public enum cleanlinessStatus {
         unsanitary, dirty, clean, spotless
     }
 
@@ -66,7 +66,7 @@ public class Enclosure {
     }
 
     // Méthode pour ajouter une créature à l'enclos
-    public void ajouterCreature(Creature creature) {
+    public void addCreature(Creature creature) {
         if (creature != null && creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {

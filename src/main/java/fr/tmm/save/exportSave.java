@@ -6,13 +6,10 @@ import fr.tmm.modele.creature.species.Kraken;
 import fr.tmm.modele.enclosure.Enclosure;
 import fr.tmm.modele.creature.Creature;
 
-import javax.json.Json;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.json.stream.JsonGenerator;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -25,9 +22,9 @@ public class exportSave {
         Kraken kraken1 = new Kraken("krak", "male", 20, 20, 5);
         Kraken kraken2 = new Kraken("kraken2", "femelle", 20, 20, 7);
         Dragon dragon = new Dragon("kllfh", "male", 20, 20, 20);
-        enclo.ajouterCreature(dragon);
-        enclo2.ajouterCreature(kraken1);
-        enclo2.ajouterCreature(kraken2);
+        enclo.addCreature(dragon);
+        enclo2.addCreature(kraken1);
+        enclo2.addCreature(kraken2);
         ArrayList<Enclosure> enclos = new ArrayList<>();
         enclos.add(enclo);
         enclos.add(enclo2);

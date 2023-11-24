@@ -20,7 +20,7 @@ public class Aquarium extends Enclosure {
         scheduleCriticalCheck();
     }
 
-    public void ajouterCreature(Creature creature) {
+    public void addCreature(Creature creature) {
         if (creature != null) {
             if (creature instanceof Swimmer) {
                 creaturesPresent.add(creature);
