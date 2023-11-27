@@ -48,15 +48,17 @@
 
 
     <bottom>
-        <HBox styleClass="lineButton">
-            <Button prefWidth="150" prefHeight="150">
+        <HBox styleClass="lineButton" style="-fx-background-color: blue" prefWidth="1280" alignment="CENTER">
+            <HBox styleClass="case" prefWidth="12000" minWidth="12000" maxWidth="12000" style="-fx-background-color: red">
+                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
+                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
+            </HBox>
 
-            </Button>
         </HBox>
-        <HBox styleClass="lineButton">
-            <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+<!--        <HBox styleClass="lineButton">-->
+<!--            <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">-->
 
-            </Button>
-        </HBox>
+<!--            </Button>-->
+<!--        </HBox>-->
     </bottom>
 </BorderPane>

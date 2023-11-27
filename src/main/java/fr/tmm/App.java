@@ -1,5 +1,6 @@
 package fr.tmm;
 
+import fr.tmm.modele.Zoo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ public class App extends Application {
     private static BorderPane root;
 
     private static Stage appStage;
+
+    private Zoo zoo;
 
     /**
      * La méthode principale qui lance l'application.
@@ -62,6 +65,7 @@ public class App extends Application {
             }else{
                 appStage.setTitle("Oasis des légendes | " + title);
             }
+
             return loader.getController();
         } catch (Exception e) {
             e.printStackTrace();
