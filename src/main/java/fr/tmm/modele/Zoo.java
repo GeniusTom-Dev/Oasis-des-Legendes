@@ -11,6 +11,17 @@ public class Zoo {
     private ZooMaster zooMaster;
     final private int NB_MAX_ENCLOSURE = 10;
     private ArrayList<Enclosure> enclosures;
+    private static Zoo INSTANCE;
+
+    private Zoo() {
+    }
+
+    public static Zoo getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Zoo();
+        }
+        return INSTANCE;
+    }
 
     // NAME
 

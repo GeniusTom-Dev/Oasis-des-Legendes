@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class exportSave {
 
     public static void main(String[] args) throws FileNotFoundException, JSONException {
-        Zoo zoo = new Zoo();
+        Zoo zoo = Zoo.getInstance();
         Enclosure enclo = new Enclosure("enclo", 45, 5);
         Enclosure enclo2 = new Enclosure("enclo2", 60, 4);
         Kraken kraken1 = new Kraken("krak", "male", 20, 20, 5);
