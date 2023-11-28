@@ -48,13 +48,22 @@
 
 
     <bottom>
-        <HBox styleClass="lineButton" style="-fx-background-color: blue" prefWidth="1280" alignment="CENTER">
-            <HBox styleClass="case" prefWidth="12000" minWidth="12000" maxWidth="12000" style="-fx-background-color: red">
+        <VBox>
+            <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
                 <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
+                <Region HBox.hgrow="ALWAYS"/>
                 <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
             </HBox>
 
-        </HBox>
+            <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
+                <HBox prefWidth="1000">
+                    <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure"/>
+                </HBox>
+
+            </HBox>
+        </VBox>
 <!--        <HBox styleClass="lineButton">-->
 <!--            <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">-->
 

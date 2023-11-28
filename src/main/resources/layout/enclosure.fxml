@@ -6,11 +6,7 @@
             stylesheets="@/styles/view/enclosure.css" fx:id="borderPane" styleClass="root">
 
     <center>
-        <Label text="Recherche de séismes" style="-fx-text-fill: white;">
-            <font>
-                <Font size="40"/>
-            </font>
-        </Label>
+
     </center>
 
 </BorderPane>
