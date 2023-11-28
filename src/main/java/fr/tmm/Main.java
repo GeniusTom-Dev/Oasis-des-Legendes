@@ -6,6 +6,7 @@ import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.creature.species.Dragon;
 import fr.tmm.modele.creature.species.Phenix;
 import fr.tmm.modele.enclosure.Enclosure;
+import fr.tmm.modele.utils.Utils;
 
 /**
  * La classe de lancement du logiciel appelant l'application.
@@ -17,15 +18,7 @@ public class Main extends Thread {
     static boolean gameIsRunning = true;
 
     public static void main(String[] args) {
-//        App.main();
-        /*Phenix phenix = new Phenix("Patrick", "M", 0.5, 0.5, 0);
-        Enclosure test = new Enclosure("dede", 50.0, 50);
-        phenix.setDeathListener(test);*/
-        //System.out.println(dragon.toString());
-        /*launchSatietyThread();
-        launchEnergyThread();
-        launchAgingThread();*/
-        //dragon.run();
+
     }
 
     // ---  A TESTER ---
