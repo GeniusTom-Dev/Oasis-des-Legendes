@@ -1,5 +1,7 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
+
 public abstract class Oviparous extends Creature {
 
     public Oviparous(String name, String sex, double weight, double height, int age) {

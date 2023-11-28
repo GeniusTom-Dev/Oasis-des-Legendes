@@ -1,5 +1,7 @@
 package fr.tmm.modele.creature.species;
+
 import fr.tmm.modele.creature.Viviparous;
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 
 public class Unicorn extends Viviparous implements Walker {
@@ -7,4 +9,8 @@ public class Unicorn extends Viviparous implements Walker {
         super(name, sex, weight, height, age);
     }
 
+    @Override
+    public void run() {
+
+    }
 }

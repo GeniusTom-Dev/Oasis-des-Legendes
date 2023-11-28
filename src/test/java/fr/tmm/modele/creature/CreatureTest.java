@@ -1,19 +1,23 @@
 package fr.tmm.modele.creature;
 
-import fr.tmm.modele.creature.species.Dragon;
+import fr.tmm.modele.creature.methodOfMovement.Flyer;
+import fr.tmm.modele.creature.methodOfMovement.Swimmer;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.creature.species.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 class CreatureTest {
     Creature creature;
 
     @BeforeEach
     void initialisation() {
-        creature = new Dragon("Creature", "femelle", 80,2,5);
+        creature = new Dragon("Creature", "femelle", 80, 2, 5);
     }
 
     // --- Satiety ---
@@ -32,6 +36,15 @@ class CreatureTest {
         creature.setSatiety(90);
         creature.getHungrier();
         assertTrue(creature.getSatiety() < 90);
+    }
+
+    @Test
+    void UnableToEatWhileSleeping() {
+        creature.setEnergy(0);
+        assertTrue(creature.isAsleep());
+        creature.setSatiety(50);
+        creature.eat();
+        assertEquals(50, creature.getSatiety());
     }
 
     // --- Energy ---
@@ -75,13 +88,30 @@ class CreatureTest {
         assertEquals(6, creature.getAge());
     }
 
-/*    @Test
-    @DisplayName("die()")
+    @Test
     void die() {
-        ArrayList<Creature> creatures = new ArrayList<>();
-        creatures.add(creature);
-        creature.die(creature);
-        assertEquals(0, creatures.size());
-    }*/
+        creature.setHealth(1);
+        assertTrue(creature.isAlive());
+        creature.getHealthindicator().decrement(1);
+        assertFalse(creature.isAlive());
+    }
+
+    // --- Health ---
+
+    @Test
+    void heal() {
+        creature.getHealthindicator().setSick(true);
+        creature.setHealth(50);
+        creature.heal();
+        assertFalse(creature.getHealthindicator().isSick());
+        assertEquals(100, creature.getHealth());
+    }
+
+    // --- Emettre un son
+
+    @Test
+    void makeNoise() {
+        assertEquals("Creature émet un son puissant !", this.creature.makeNoise());
+    }
 
 }
