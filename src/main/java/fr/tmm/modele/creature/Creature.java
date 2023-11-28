@@ -1,10 +1,11 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
-public abstract class Creature {
+public abstract class Creature implements Runnable {
     private String name;
     private String type;
     private String sex;
@@ -13,7 +14,13 @@ public abstract class Creature {
     private int age;
     private SatietyIndicator satiety;
     private EnergyIndicator energy; // contain a method isAsleep()
-    private HealthIndicator health;
+    private HealthIndicator health; // contain a method isSick and isAlive
+
+    public void setListener(CreatureDeathListener listener) {
+        this.listener = listener;
+    }
+
+    private CreatureDeathListener listener;
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
@@ -27,8 +34,30 @@ public abstract class Creature {
         this.type = this.getClass().getSimpleName();
     }
 
-    public void makeNoise() {
-        System.out.println("Le " + this.name + " émet un son puissant !");
+    public void die() {
+        listener.onCreatureDeath(this);
+    }
+
+    /*public void run() {
+        int cmp = 0;
+        try {
+            Thread.sleep(5000);
+            this.energy.decrement(1);
+            this.satiety.decrement(1);
+            // une chance de faire du bruit
+            if (cmp == 5) {
+                ++this.age;
+                cmp = 0;
+            } else {
+                ++cmp;
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+    public String makeNoise() {
+        return this.name + " émet un son puissant !";
     }
 
     public String getName() {
@@ -86,7 +115,7 @@ public abstract class Creature {
     }
 
     public void eat() {
-        this.satiety.increment(80);
+        if (!this.isAsleep()) this.satiety.increment(80);
     }
 
     public boolean isStarving() {
@@ -137,24 +166,19 @@ public abstract class Creature {
         return this.health.getValue();
     }
 
+    public HealthIndicator getHealthindicator() {
+        return this.health;
+    }
+
     public void heal() {
-        this.health.increment(100);
+        this.health.heal();
     }
-
-    // Doesn't work
-    /*public void die(Creature creature) {
-        if (this.equals(creature)) {
-            creature = null;
-        }
-    }
-
-    public void die2() {
-        Creature instance = this;
-        instance = null;
-    }*/
-
 
     public void aging() {
         ++this.age;
+    }
+
+    public boolean isAlive() {
+        return this.health.isAlive();
     }
 }

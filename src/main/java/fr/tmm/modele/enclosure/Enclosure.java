@@ -1,18 +1,37 @@
 package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.listener.CreatureDeathListener;
 
 import java.util.ArrayList;
 
-public class Enclosure {
-    private String name;
-    private double surfaceArea;
-    private int maxCapacity;
-    private ArrayList<Creature> creaturesPresent;
-    private cleanlinessStatus cleanliness;
+public class Enclosure implements CreatureDeathListener {
+    protected String name;
+    protected double surfaceArea;
+    protected int maxCapacity;
+    protected ArrayList<Creature> creaturesPresent;
+    protected CleanlinessStatus cleanliness;
 
-    enum cleanlinessStatus {
-        unsanitary, dirty, clean, spotless
+    @Override
+    public void onCreatureDeath(Creature deadCreature) {
+        this.creaturesPresent.remove(deadCreature);
+    }
+
+    public enum CleanlinessStatus {
+        UNSANITARY(75), // cratures have 75% chance of getting sick
+        DIRTY(25),
+        CLEAN(5),
+        SPOTLESS(0);
+
+        public int getRiskOfGettingSick() {
+            return riskOfGettingSick;
+        }
+
+        private int riskOfGettingSick;
+
+        CleanlinessStatus(int i) {
+            this.riskOfGettingSick = i;
+        }
     }
 
     public Enclosure(String name, double area, int maxCapacity) {
@@ -20,57 +39,22 @@ public class Enclosure {
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.creaturesPresent = new ArrayList<>();
-        this.cleanliness = cleanlinessStatus.spotless;
+        this.cleanliness = CleanlinessStatus.SPOTLESS;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getSurfaceArea() {
-        return surfaceArea;
-    }
-
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
-
-
-    public ArrayList<Creature> getCreaturesPresent() {
-        return creaturesPresent;
-    }
-
-    public void setCreaturesPresent(ArrayList<Creature> creaturesPresent) {
-        this.creaturesPresent = creaturesPresent;
-    }
-
-    public cleanlinessStatus getCleanlinessDegree() {
-        return cleanliness;
-    }
-
-    public void setCleanlinessDegree(cleanlinessStatus cleanlinessDegree) {
-        this.cleanliness = cleanlinessDegree;
-    }
-
-    // Méthode pour afficher les caractéristiques de l'enclos
-    public void showCaracteristics() {
-        System.out.println("Caractéristiques de l'enclos " + name + ":");
-        System.out.println("Superficie : " + surfaceArea);
-        System.out.println("Capacité maximale : " + maxCapacity);
-        System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
-        System.out.println("Degré de propreté : " + cleanliness);
-        System.out.println("Créatures présentes :");
-        for (Creature creature : creaturesPresent) {
-            System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
+    public void makeCreatureSickDependingOfCleanliness() {
+        if (this.cleanliness.riskOfGettingSick != 0) {
+            // TODO
         }
     }
 
     // Méthode pour ajouter une créature à l'enclos
-    public void ajouterCreature(Creature creature) {
+    public void addCreature(Creature creature) {
         if (creature != null && creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
                 creaturesPresent.add(creature);
+                creature.setListener(this);
                 System.out.println(creature.getName() + " a été ajouté à l'enclos " + name + ".");
             } else {
                 System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
@@ -92,28 +76,76 @@ public class Enclosure {
 
     // Méthode pour nourrir les créatures de l'enclos
     public void feedCreatures() {
+        for (Creature creature : this.getCreaturesPresent()) {
+            creature.eat();
+        }
         System.out.println("Les créatures de l'enclos " + name + " sont nourries.");
-        // Logique de nourrissage spécifique à l'enclos
     }
 
     // Méthode pour entretenir l'enclos
     public void clean() {
-        setCleanlinessDegree(cleanlinessStatus.spotless);
+        setCleanlinessDegree(CleanlinessStatus.SPOTLESS);
         System.out.println("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
     }
 
-    public void getDirty() {
+    public void getDirtier() {
         this.cleanliness = getWorseState();
     }
 
-    private cleanlinessStatus getWorseState() {
-        cleanlinessStatus[] statuses = cleanlinessStatus.values();
+    private CleanlinessStatus getWorseState() {
+        CleanlinessStatus[] statuses = CleanlinessStatus.values();
         for (int i = 0; i < statuses.length; i++) {
             if (statuses[i] == cleanliness && i > 0) {
                 return statuses[i - 1];
             }
         }
         return cleanliness;
+    }
+
+    // Méthode pour afficher les caractéristiques de l'enclos
+    public void showCaracteristics() {
+        System.out.println("Caractéristiques de l'enclos " + name + ":");
+        System.out.println("Superficie : " + surfaceArea);
+        System.out.println("Capacité maximale : " + maxCapacity);
+        System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
+        System.out.println("Degré de propreté : " + cleanliness);
+        System.out.println("Créatures présentes :");
+        for (Creature creature : creaturesPresent) {
+            System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
+        }
+    }
+
+    // --- GETTER ---
+
+    public String getName() {
+        return name;
+    }
+
+    public double getSurfaceArea() {
+        return surfaceArea;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public ArrayList<Creature> getCreaturesPresent() {
+        return creaturesPresent;
+    }
+
+    public CleanlinessStatus getCleanlinessDegree() {
+        return cleanliness;
+    }
+
+
+    // --- SETTER ---
+
+    public void setCreaturesPresent(ArrayList<Creature> creaturesPresent) {
+        this.creaturesPresent = creaturesPresent;
+    }
+
+    public void setCleanlinessDegree(CleanlinessStatus cleanlinessDegree) {
+        this.cleanliness = cleanlinessDegree;
     }
 
 }
