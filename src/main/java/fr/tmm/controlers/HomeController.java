@@ -19,7 +19,7 @@ public class HomeController {
 
     @FXML
     private void toEnclosure() {
-        EnclosureController enclosureController = (EnclosureController) setScene("layout/enclosure.fxml", "Enclos");
+        EnclosuresController enclosureController = (EnclosuresController) setScene("layout/enclosures.fxml", "Enclos");
         assert enclosureController != null;
         //send data if needed
     }

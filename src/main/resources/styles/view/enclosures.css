@@ -1,0 +1,23 @@
+@import "../base.css";
+@import "../component/navbar.css";
+@import "../component/button.css";
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+Button{
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, #5d6e6f, #121c24);
+    -fx-background-radius: 15;
+    -fx-border-width: 5;
+    -fx-border-color: linear-gradient(#565e62, #739d93);
+    -fx-border-radius: 15;
+    -fx-min-width: 150;
+    -fx-max-width: 150;
+    -fx-min-height: 150;
+    -fx-max-height: 150;
+}
