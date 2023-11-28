@@ -1,6 +1,11 @@
 package fr.tmm.modele;
 
 import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.species.Megalodon;
+import fr.tmm.modele.creature.species.Phenix;
+import fr.tmm.modele.creature.species.Unicorn;
+import fr.tmm.modele.enclosure.Aquarium;
+import fr.tmm.modele.enclosure.Aviary;
 import fr.tmm.modele.enclosure.Enclosure;
 
 import java.util.ArrayList;
@@ -14,6 +19,7 @@ public class Zoo {
     private static Zoo INSTANCE;
 
     private Zoo() {
+        temporaryInit();
     }
 
     public static Zoo getInstance() {
@@ -21,6 +27,21 @@ public class Zoo {
             INSTANCE = new Zoo();
         }
         return INSTANCE;
+    }
+
+    private void temporaryInit() {
+        Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
+        Aquarium aquarium1 = new Aquarium("Aquarium 1", 50, 5, 20, 4);
+        Aviary voiliere1 = new Aviary("Voiliere 1", 50, 7);
+        enclos1.addCreature(new Unicorn("Licorne 1", "m", 10, 10, 10));
+        enclos1.addCreature(new Unicorn("Licorne 2", "m", 10, 10, 10));
+        enclos1.addCreature(new Unicorn("Licorne 3", "m", 10, 10, 10));
+        aquarium1.addCreature(new Megalodon("Magalodon 1", "m", 10, 10, 10));
+        aquarium1.addCreature(new Megalodon("Magalodon 2", "m", 10, 10, 10));
+        voiliere1.addCreature(new Phenix("Phenix 1", "m", 10, 10, 10));
+        this.INSTANCE.addAnEnclosure(enclos1);
+        this.INSTANCE.addAnEnclosure(aquarium1);
+        this.INSTANCE.addAnEnclosure(voiliere1);
     }
 
     // NAME
