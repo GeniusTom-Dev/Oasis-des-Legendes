@@ -3,7 +3,7 @@ package fr.tmm.modele.indicator;
 public abstract class Indicator {
 
     protected int value; // Between 0 and 100
-
+    
     public Indicator() {
         this.value = 100;
     }

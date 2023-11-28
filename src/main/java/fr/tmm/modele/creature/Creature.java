@@ -15,9 +15,14 @@ public abstract class Creature implements Runnable {
     private SatietyIndicator satiety;
     private EnergyIndicator energy; // contain a method isAsleep()
     private HealthIndicator health; // contain a method isSick and isAlive
+
+    public void setListener(CreatureDeathListener listener) {
+        this.listener = listener;
+    }
+
     private CreatureDeathListener listener;
 
-    public Creature(String name, String sex, double weight, double height, int age, CreatureDeathListener listener) {
+    public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
         this.sex = sex;
         this.weight = weight;
@@ -27,7 +32,6 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
-        this.listener = listener;
     }
 
     public void die() {

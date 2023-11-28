@@ -5,8 +5,8 @@ import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 
 public class Kraken extends Oviparous implements Swimmer {
-    public Kraken(String name, String sex, double weight, double height, int age, CreatureDeathListener listener) {
-        super(name, sex, weight, height, age, listener);
+    public Kraken(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 
     @Override

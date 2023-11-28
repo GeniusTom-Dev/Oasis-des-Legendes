@@ -8,8 +8,8 @@ import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 
 public class Phenix extends Oviparous implements Flyer, Reincarnate {
 
-    public Phenix(String name, String sex, double weight, double height, int age, CreatureDeathListener listener) {
-        super(name, sex, weight, height, age, listener);
+    public Phenix(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 
     @Override

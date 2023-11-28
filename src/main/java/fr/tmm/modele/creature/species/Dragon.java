@@ -9,8 +9,8 @@ import fr.tmm.modele.creature.methodOfMovement.Walker;
 
 public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincarnate {
 
-    public Dragon(String name, String sex, double weight, double height, int age, CreatureDeathListener listener) {
-        super(name, sex, weight, height, age, listener);
+    public Dragon(String name, String sex, double weight, double height, int age) {
+        super(name, sex, weight, height, age);
     }
 
     @Override

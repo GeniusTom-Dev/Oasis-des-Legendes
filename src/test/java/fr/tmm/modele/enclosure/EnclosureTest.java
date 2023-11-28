@@ -18,10 +18,10 @@ class EnclosureTest {
     @BeforeEach
     void initialisation() {
         this.enclosure = new Enclosure("Un Enclos", 80.5, 3);
-        this.dragon1 = new Dragon("Dragon1", "male", 50, 50, 50, this.enclosure);
-        this.dragon2 = new Dragon("Dragon2", "male", 50, 50, 50, this.enclosure);
-        this.dragon3 = new Dragon("Dragon3", "male", 50, 50, 50, this.enclosure);
-        this.nymph = new Nymph("Nymph", "male", 50, 50, 50, this.enclosure);
+        this.dragon1 = new Dragon("Dragon1", "male", 50, 50, 50);
+        this.dragon2 = new Dragon("Dragon2", "male", 50, 50, 50);
+        this.dragon3 = new Dragon("Dragon3", "male", 50, 50, 50);
+        this.nymph = new Nymph("Nymph", "male", 50, 50, 50);
     }
 
     @Test
@@ -44,7 +44,7 @@ class EnclosureTest {
         enclosure.addCreature(this.dragon2);
         enclosure.addCreature(this.dragon3);
         assertEquals(enclosure.getCreaturesPresent().size(), 3);
-        enclosure.addCreature(new Dragon("Dragon", "male", 5, 5, 5, null));
+        enclosure.addCreature(new Dragon("Dragon", "male", 5, 5, 5));
         assertEquals(enclosure.getCreaturesPresent().size(), 3);
     }
 
@@ -82,22 +82,22 @@ class EnclosureTest {
 
     @Test
     void enclosureGetDirty() {
-        enclosure.setCleanlinessDegree(Enclosure.cleanlinessStatus.clean);
-        enclosure.getDirty();
-        assertEquals(Enclosure.cleanlinessStatus.dirty, enclosure.getCleanlinessDegree());
-        enclosure.setCleanlinessDegree(Enclosure.cleanlinessStatus.unsanitary);
-        enclosure.getDirty();
-        assertEquals(Enclosure.cleanlinessStatus.unsanitary, enclosure.getCleanlinessDegree());
+        enclosure.setCleanlinessDegree(Enclosure.CleanlinessStatus.CLEAN);
+        enclosure.getDirtier();
+        assertEquals(Enclosure.CleanlinessStatus.DIRTY, enclosure.getCleanlinessDegree());
+        enclosure.setCleanlinessDegree(Enclosure.CleanlinessStatus.UNSANITARY);
+        enclosure.getDirtier();
+        assertEquals(Enclosure.CleanlinessStatus.UNSANITARY, enclosure.getCleanlinessDegree());
     }
 
     @Test
     void cleanEnclosure() {
-        enclosure.setCleanlinessDegree(Enclosure.cleanlinessStatus.dirty);
+        enclosure.setCleanlinessDegree(Enclosure.CleanlinessStatus.DIRTY);
         enclosure.clean();
-        assertEquals(Enclosure.cleanlinessStatus.spotless, enclosure.getCleanlinessDegree());
-        enclosure.setCleanlinessDegree(Enclosure.cleanlinessStatus.spotless);
+        assertEquals(Enclosure.CleanlinessStatus.SPOTLESS, enclosure.getCleanlinessDegree());
+        enclosure.setCleanlinessDegree(Enclosure.CleanlinessStatus.SPOTLESS);
         enclosure.clean();
-        assertEquals(Enclosure.cleanlinessStatus.spotless, enclosure.getCleanlinessDegree());
+        assertEquals(Enclosure.CleanlinessStatus.SPOTLESS, enclosure.getCleanlinessDegree());
     }
 
     @Test

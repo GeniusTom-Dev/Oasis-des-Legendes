@@ -3,8 +3,8 @@ package fr.tmm.modele.creature;
 import fr.tmm.modele.creature.listener.CreatureDeathListener;
 
 public abstract class Viviparous extends Creature {
-    public Viviparous(String nomEspece, String sexe, double poids, double taille, int age, CreatureDeathListener listener) {
-        super(nomEspece, sexe, poids, taille, age, listener);
+    public Viviparous(String nomEspece, String sexe, double poids, double taille, int age) {
+        super(nomEspece, sexe, poids, taille, age);
     }
 
     public String calve(int nbChild) {

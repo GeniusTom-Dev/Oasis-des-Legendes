@@ -16,7 +16,7 @@ class AviaryTest {
     @BeforeEach
     void init() {
         this.aviary = new Aviary("Aviary", 50.0, 3);
-        this.dragon1 = new Dragon("dragon", "m", 5, 5, 5, null);
+        this.dragon1 = new Dragon("dragon", "m", 5, 5, 5);
     }
 
     @Test
@@ -47,7 +47,7 @@ class AviaryTest {
 
     @Test
     void putIncompatibleCreatureInAviary() {
-        Mermaid mermaid = new Mermaid("mermaid", "m", 5, 5, 5, null);
+        Mermaid mermaid = new Mermaid("mermaid", "m", 5, 5, 5);
         this.aviary.addCreature(mermaid);
         assertEquals(aviary.getCreaturesPresent().size(), 0);
     }
@@ -60,7 +60,7 @@ class AviaryTest {
 
     @Test
     void addIncompatibleCreature() {
-        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5, null);
+        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5);
         aviary.addCreature(this.dragon1);
         aviary.addCreature(phenix);
         assertEquals(aviary.getCreaturesPresent().size(), 1);
@@ -69,13 +69,13 @@ class AviaryTest {
 
     @Test
     void addMoreThanMaxCapacity() {
-        Dragon dragon2 = new Dragon("cui", "m", 5, 5, 5, null);
-        Dragon dragon3 = new Dragon("kje", "m", 5, 5, 5, null);
+        Dragon dragon2 = new Dragon("cui", "m", 5, 5, 5);
+        Dragon dragon3 = new Dragon("kje", "m", 5, 5, 5);
         aviary.addCreature(this.dragon1);
         aviary.addCreature(dragon2);
         aviary.addCreature(dragon3);
         assertEquals(aviary.getCreaturesPresent().size(), 3);
-        aviary.addCreature(new Dragon("Dragon", "male", 5, 5, 5, null));
+        aviary.addCreature(new Dragon("Dragon", "male", 5, 5, 5));
         assertEquals(aviary.getCreaturesPresent().size(), 3);
     }
 

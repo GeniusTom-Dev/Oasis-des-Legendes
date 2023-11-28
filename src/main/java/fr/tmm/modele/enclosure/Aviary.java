@@ -3,14 +3,19 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class Aviary extends Enclosure {
     private RoofState roofState;
 
     public enum RoofState {
-        BROKEN, DAMAGED, GOOD, INTACT
+        BROKEN(50), // 50% chance of a creature escaping
+        DAMAGED(20), // 20% chance of a creature escaping
+        GOOD(0),
+        INTACT(0);
+        private int riskOfEvasion;
+
+        RoofState(int i) {
+            this.riskOfEvasion = i;
+        }
     }
 
     public Aviary(String name, double surfaceArea, int maxCapacity) {
