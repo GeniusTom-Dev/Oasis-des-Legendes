@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fr.tmm.controlers.EnclosureController" prefWidth="1280" prefHeight="720"
+            fx:controller="fr.tmm.controlers.EnclosuresController" prefWidth="1280" prefHeight="720"
             stylesheets="@/styles/view/enclosures.css" fx:id="borderPane" styleClass="root">
 
     <top>
@@ -28,19 +28,11 @@
 
     <center>
         <VBox prefWidth="900" maxWidth="900" maxHeight="500">
-            <HBox minHeight="250" maxHeight="250" alignment="CENTER" spacing="15">
-                <Button text="Name n°1" fx:id="enclosure0"/>
-                <Button text="Name n°2" fx:id="enclosure1"/>
-                <Button text="Name n°3" fx:id="enclosure2"/>
-                <Button text="Name n°4" fx:id="enclosure3"/>
-                <Button text="Name n°5" fx:id="enclosure4"/>
+            <HBox minHeight="250" maxHeight="250" alignment="CENTER" spacing="15" fx:id="enclosuresLine1">
+
             </HBox>
-            <HBox minHeight="250" maxHeight="250" alignment="CENTER" spacing="15">
-                <Button text="Name n°6" fx:id="enclosure5"/>
-                <Button text="Name n°7" fx:id="enclosure6"/>
-                <Button text="Name n°8" fx:id="enclosure7"/>
-                <Button text="Name n°9" fx:id="enclosure8"/>
-                <Button text="Name n°10" fx:id="enclosure9"/>
+            <HBox minHeight="250" maxHeight="250" alignment="CENTER" spacing="15" fx:id="enclosuresLine2">
+
             </HBox>
         </VBox>
     </center>

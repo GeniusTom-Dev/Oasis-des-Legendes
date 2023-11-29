@@ -1,0 +1,24 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.tmm.controlers.EnclosureController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/enclosures.css" fx:id="borderPane" styleClass="root">
+
+    <top>
+        <HBox alignment="CENTER">
+            <HBox styleClass="navbar" alignment="CENTER">
+                <Text fill="white" fx:id="title">
+                    <font>
+                        <Font size="24" />
+                    </font>
+                    Nom de l'enclo
+                </Text>
+            </HBox>
+        </HBox>
+    </top>
+
+
+
+</BorderPane>

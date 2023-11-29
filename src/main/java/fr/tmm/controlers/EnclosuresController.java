@@ -1,16 +1,50 @@
 package fr.tmm.controlers;
 
+import fr.tmm.modele.Zoo;
+import fr.tmm.modele.enclosure.Enclosure;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
-public class EnclosuresController {
-    public Button enclosure0;
-    public Button enclosure1;
-    public Button enclosure2;
-    public Button enclosure3;
-    public Button enclosure4;
-    public Button enclosure5;
-    public Button enclosure6;
-    public Button enclosure7;
-    public Button enclosure8;
-    public Button enclosure9;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import static fr.tmm.App.setScene;
+
+public class EnclosuresController implements Initializable {
+    @FXML
+    public HBox enclosuresLine1;
+    @FXML
+    public HBox enclosuresLine2;
+
+    public void openEnclosure(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        String id = source.getId().replace("enclosure", "");
+        EnclosureController enclosureController = (EnclosureController) setScene("layout/enclosure.fxml", "Enclo");
+        assert enclosureController != null;
+        enclosureController.setIndexEnclosure(Integer.parseInt(id));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Zoo zoo = Zoo.getInstance();
+        ArrayList<Enclosure> enclosures = zoo.getEnclosures();
+        for (int i = 0; i < enclosures.size(); i++) {
+            System.out.println(i);
+            System.out.println(enclosures.get(i));
+            Button button = new Button(enclosures.get(i).getName());
+            button.setId("enclosure" + i);
+            button.setOnAction(this::openEnclosure);
+
+            if(enclosuresLine1.getChildren().size() < 5) {
+                enclosuresLine1.getChildren().add(button);
+            } else {
+                enclosuresLine2.getChildren().add(button);
+            }
+        }
+    }
 }

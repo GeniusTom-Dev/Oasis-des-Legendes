@@ -19,7 +19,7 @@ public class App extends Application {
 
     private static Stage appStage;
 
-    private Zoo zoo;
+    public static Zoo zoo;
 
     /**
      * La méthode principale qui lance l'application.
@@ -37,6 +37,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        zoo = Zoo.getInstance();
         appStage = stage;
         stage.setResizable(false);
         stage.setTitle("Oasis des légendes");
