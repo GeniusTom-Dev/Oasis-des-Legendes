@@ -4,11 +4,13 @@ import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.creature.species.*;
+import fr.tmm.modele.enclosure.Aviary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
+import java.security.Permission;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,6 +96,19 @@ class CreatureTest {
         assertTrue(creature.isAlive());
         creature.getHealthindicator().decrement(1);
         assertFalse(creature.isAlive());
+    }
+
+    @Test
+    void reincarnation() {
+        Phenix phenix = new Phenix("Phenix","m",50,50,50);
+        Dragon dragon = new Dragon("Dragon", "m",50,50,50);
+        phenix.die();
+        dragon.die();
+        assertTrue(phenix.isAlive());
+        assertTrue(dragon.isAlive());
+        assertTrue(phenix.getAge() == 0);
+        assertTrue(dragon.getAge() == 0);
+
     }
 
     // --- Health ---

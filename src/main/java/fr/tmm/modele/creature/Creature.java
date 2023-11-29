@@ -6,21 +6,21 @@ import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
 public abstract class Creature implements Runnable {
-    private String name;
-    private String type;
-    private String sex;
-    private double weight;
-    private double height;
-    private int age;
-    private SatietyIndicator satiety;
-    private EnergyIndicator energy; // contain a method isAsleep()
-    private HealthIndicator health; // contain a method isSick and isAlive
+    protected String name;
+    protected String type;
+    protected String sex;
+    protected double weight;
+    protected double height;
+    protected int age;
+    protected SatietyIndicator satiety;
+    protected EnergyIndicator energy; // contain a method isAsleep()
+    protected HealthIndicator health; // contain a method isSick and isAlive
 
     public void setListener(CreatureDeathListener listener) {
         this.listener = listener;
     }
 
-    private CreatureDeathListener listener;
+    protected CreatureDeathListener listener;
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
@@ -45,6 +45,8 @@ public abstract class Creature implements Runnable {
             this.energy.decrement(1);
             this.satiety.decrement(1);
             // une chance de faire du bruit
+            // perdre de la vie si il est malade
+            // perdre de la vie si il est entrain de mourir de faim
             if (cmp == 5) {
                 ++this.age;
                 cmp = 0;
@@ -181,4 +183,6 @@ public abstract class Creature implements Runnable {
     public boolean isAlive() {
         return this.health.isAlive();
     }
+
+    public boolean isSick() {return this.health.isSick();}
 }

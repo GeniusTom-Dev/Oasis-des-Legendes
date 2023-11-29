@@ -1,4 +1,4 @@
-package fr.tmm.modele.creature.species;
+package fr.tmm.modele.creature.reproduction;
 
 public class Gestation {
     public static int DRAGON = 100;

@@ -2,6 +2,9 @@ package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
+import fr.tmm.modele.utils.Utils;
+
+import java.util.ArrayList;
 
 public class Aviary extends Enclosure {
     private RoofState roofState;
@@ -31,6 +34,20 @@ public class Aviary extends Enclosure {
         } else {
             System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
                     " car ce n'est pas une créature volante.");
+        }
+    }
+
+    public void chanceOfEscapingDependingRoofState() {
+        if (this.roofState.riskOfEvasion != 0) {
+            ArrayList<Creature> escapedCreature = new ArrayList<>();
+            for (Creature creature : this.getCreaturesPresent()) {
+                if (Utils.isBadEventHappening(this.roofState.riskOfEvasion)) {
+                    escapedCreature.add(creature);
+                }
+            }
+            for (Creature creature: escapedCreature) {
+                this.removeCreature(creature);
+            }
         }
     }
 

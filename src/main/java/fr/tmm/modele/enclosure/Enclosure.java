@@ -2,6 +2,7 @@ package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,11 @@ public class Enclosure implements CreatureDeathListener {
 
     public void makeCreatureSickDependingOfCleanliness() {
         if (this.cleanliness.riskOfGettingSick != 0) {
-            // TODO
+            for (Creature creature : this.getCreaturesPresent()) {
+                if (Utils.isBadEventHappening(this.cleanliness.riskOfGettingSick)) {
+                    creature.getHealthindicator().setSick(true);
+                }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Dragon;
 import fr.tmm.modele.creature.species.Nymph;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,12 +59,13 @@ class EnclosureTest {
 
     @Test
     void removeDeadCreature() {
-        enclosure.addCreature(dragon1);
-        enclosure.addCreature(dragon2);
+        Nymph nymph2 = new Nymph("Nymph2", "f",50,50,50);
+        enclosure.addCreature(nymph);
+        enclosure.addCreature(nymph2);
         assertEquals(2, enclosure.getCreaturesPresent().size());
-        this.dragon1.die();
+        this.nymph.die();
         assertEquals(1, enclosure.getCreaturesPresent().size());
-        assertEquals("Dragon2", enclosure.getCreaturesPresent().get(0).getName());
+        assertEquals("Nymph2", enclosure.getCreaturesPresent().get(0).getName());
     }
 
     @Test
@@ -102,7 +104,33 @@ class EnclosureTest {
 
     @Test
     void enclosureIsDelabred() {
-        // TO DO -> animal get sick
+        Enclosure enclos2 = new Enclosure("Enclos",50,5);
+        enclos2.setCleanlinessDegree(Enclosure.CleanlinessStatus.UNSANITARY);
+        enclos2.addCreature(this.dragon1);
+        enclos2.addCreature(this.dragon2);
+        enclos2.addCreature(this.dragon3);
+        enclos2.addCreature(new Dragon("Dragon4", "male", 50, 50, 50));
+        enclos2.addCreature(new Dragon("Dragon5", "male", 50, 50, 50));
+        int cmp = 0;
+        enclos2.makeCreatureSickDependingOfCleanliness();
+        for (Creature creature:enclos2.getCreaturesPresent()) {
+            if (creature.isSick()) ++cmp;
+        }
+        assertTrue(cmp > 0);
+    }
+
+    @Test
+    void enclosureIsSpotless() {
+        enclosure.setCleanlinessDegree(Enclosure.CleanlinessStatus.SPOTLESS);
+        enclosure.addCreature(this.dragon1);
+        enclosure.addCreature(this.dragon2);
+        enclosure.addCreature(this.dragon3);
+        int cmp = 0;
+        enclosure.makeCreatureSickDependingOfCleanliness();
+        for (Creature creature:enclosure.getCreaturesPresent()) {
+            if (creature.isSick()) ++cmp;
+        }
+        assertEquals(0, cmp);
     }
 
 }
