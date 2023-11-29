@@ -2,6 +2,9 @@ package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
+import fr.tmm.modele.utils.Utils;
+
+import java.util.ArrayList;
 
 /*import java.util.Timer;
 import java.util.TimerTask;*/
@@ -12,7 +15,16 @@ public class Aquarium extends Enclosure {
     private StateLevel waterLevel;
 
     public enum StateLevel {
-        CRITICAL, BAD, GOOD, EXCELLENT
+        CRITICAL(50), BAD(10), GOOD(0), EXCELLENT(0);
+
+        private int riskOfDying;
+        StateLevel(int i) {
+            this.riskOfDying = i;
+        }
+
+        public int getRiskOfDying() {
+            return riskOfDying;
+        }
     }
 
     public Aquarium(String name, double surfaceArea, int maxCapacity, double waterDepth, int salinityLevel) {
@@ -27,6 +39,20 @@ public class Aquarium extends Enclosure {
     public void addCreature(Creature creature) {
         if (creature instanceof Swimmer) {
             super.addCreature(creature);
+        }
+    }
+
+    public void killCreatureDependingOfSalinityAndWaterLevel() {
+        if (this.salinityLevel.riskOfDying != 0 || this.waterLevel.riskOfDying != 0) {
+            ArrayList<Creature> deadCreatures = new ArrayList<>();
+            for (Creature creature : this.getCreaturesPresent()) {
+                if (Utils.isBadEventHappening(this.salinityLevel.riskOfDying) || Utils.isBadEventHappening(this.waterLevel.riskOfDying)) {
+                    deadCreatures.add(creature);
+                }
+            }
+            for (Creature creature: deadCreatures) {
+                creature.die();
+            }
         }
     }
 

@@ -14,7 +14,14 @@ public class Phenix extends Oviparous implements Flyer, Reincarnate {
 
     @Override
     public void reincarnate() {
+        // TODO -> changer la taille de la créature
+        this.health.setValue(100);
+        this.age = 0;
+    }
 
+    @Override
+    public void die() {
+        this.reincarnate();
     }
 
     @Override

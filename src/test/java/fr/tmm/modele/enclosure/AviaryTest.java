@@ -6,6 +6,8 @@ import fr.tmm.modele.creature.species.Phenix;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.accessibility.AccessibleValue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AviaryTest {
@@ -85,5 +87,33 @@ class AviaryTest {
         assertEquals(1, aviary.getCreaturesPresent().size());
         aviary.removeCreature(dragon1);
         assertEquals(0, aviary.getCreaturesPresent().size());
+    }
+
+    @Test
+    void roofDamaged() {
+        Aviary aviary2 = new Aviary("Voilire",50,5);
+        aviary2.setRoofState(Aviary.RoofState.BROKEN);
+        aviary2.addCreature(dragon1);
+        aviary2.addCreature(new Dragon("Dragon 2", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 3", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 4", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 5", "m",50,50,50));
+        assertEquals(5, aviary2.getCreaturesPresent().size());
+        aviary2.chanceOfEscapingDependingRoofState();
+        assertTrue(aviary2.creaturesPresent.size() < 5);
+    }
+
+    @Test
+    void roofIntact() {
+        Aviary aviary2 = new Aviary("Voilire",50,5);
+        aviary2.setRoofState(Aviary.RoofState.INTACT);
+        aviary2.addCreature(dragon1);
+        aviary2.addCreature(new Dragon("Dragon 2", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 3", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 4", "m",50,50,50));
+        aviary2.addCreature(new Dragon("Dragon 5", "m",50,50,50));
+        assertEquals(5, aviary2.getCreaturesPresent().size());
+        aviary2.chanceOfEscapingDependingRoofState();
+        assertEquals(5, aviary2.creaturesPresent.size());
     }
 }

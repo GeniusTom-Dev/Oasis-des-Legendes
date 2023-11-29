@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AquariumTest {
+class
+
+AquariumTest {
 
     Aquarium aquarium;
     Dragon dragon1;
@@ -59,12 +61,62 @@ class AquariumTest {
 
     @Test
     void SalinityLevelIsCritical() {
-        // TO DO
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        aquarium2.setSalinityLevel(Aquarium.StateLevel.CRITICAL);
+        aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.addCreature(new Megalodon("Megalodon 1", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Dragon 2", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Dragon 3", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Dragon 4", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Dragon 5", "m",50,50,50));
+        assertEquals(5, aquarium2.getCreaturesPresent().size());
+        aquarium2.killCreatureDependingOfSalinityAndWaterLevel();
+        assertTrue(aquarium2.creaturesPresent.size() < 5);
+    }
+
+    @Test
+    void SalinityLevelIsExcellent() {
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.addCreature(new Megalodon("Megalodon 1", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 2", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 3", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 4", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 5", "m",50,50,50));
+        assertEquals(5, aquarium2.getCreaturesPresent().size());
+        aquarium2.killCreatureDependingOfSalinityAndWaterLevel();
+        assertEquals(5, aquarium2.creaturesPresent.size());
     }
 
     @Test
     void WaterLevelIsCritical() {
-        // TO DO
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        aquarium2.setWaterLevel(Aquarium.StateLevel.CRITICAL);
+        aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.addCreature(new Megalodon("Megalodon 1","m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 2", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 3", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 4", "m",50,50,50));
+        aquarium2.addCreature(new Megalodon("Megalodon 5", "m",50,50,50));
+        assertEquals(5, aquarium2.getCreaturesPresent().size());
+        aquarium2.killCreatureDependingOfSalinityAndWaterLevel();
+        assertTrue(aquarium2.creaturesPresent.size() < 5);
+    }
+
+    @Test
+    void WaterLevelIsExcellent() {
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
+        aquarium2.addCreature(dragon1);
+        aquarium2.addCreature(new Dragon("Dragon 2", "m",50,50,50));
+        aquarium2.addCreature(new Dragon("Dragon 3", "m",50,50,50));
+        aquarium2.addCreature(new Dragon("Dragon 4", "m",50,50,50));
+        aquarium2.addCreature(new Dragon("Dragon 5", "m",50,50,50));
+        assertEquals(5, aquarium2.getCreaturesPresent().size());
+        aquarium2.killCreatureDependingOfSalinityAndWaterLevel();
+        assertEquals(5, aquarium2.creaturesPresent.size());
     }
 
 

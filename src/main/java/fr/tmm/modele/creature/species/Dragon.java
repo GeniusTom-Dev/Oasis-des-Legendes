@@ -15,6 +15,15 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincar
 
     @Override
     public void reincarnate() {
+
+        // TODO -> changer la taille de la créature
+        this.health.setValue(100);
+        this.age = 0;
+    }
+
+    @Override
+    public void die() {
+        this.reincarnate();
     }
 
     @Override
