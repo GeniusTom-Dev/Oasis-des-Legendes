@@ -15,7 +15,7 @@ public class Zoo {
     private String name;
     private ZooMaster zooMaster;
     final private int NB_MAX_ENCLOSURE = 10;
-    private ArrayList<Enclosure> enclosures;
+    private ArrayList<Enclosure> enclosures = new ArrayList<>();
     private static Zoo INSTANCE;
 
     private Zoo() {
@@ -30,7 +30,7 @@ public class Zoo {
         return INSTANCE;
     }
 
-    private void temporaryInit() {
+    public void temporaryInit() {
         this.zooMaster = new ZooMaster("Julo", "m", 10, 10, 19);
         this.name = "Zoo de Test";
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
@@ -42,9 +42,9 @@ public class Zoo {
         aquarium1.addCreature(new Megalodon("Magalodon 1", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 2", "m", 10, 10, 10));
         voiliere1.addCreature(new Phenix("Phenix 1", "m", 10, 10, 10));
-        this.INSTANCE.addAnEnclosure(enclos1);
-        this.INSTANCE.addAnEnclosure(aquarium1);
-        this.INSTANCE.addAnEnclosure(voiliere1);
+        this.addAnEnclosure(enclos1);
+        this.addAnEnclosure(aquarium1);
+        this.addAnEnclosure(voiliere1);
     }
 
     // NAME
