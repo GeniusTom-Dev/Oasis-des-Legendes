@@ -5,7 +5,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.*;
 
-public class importSave {
+public class ImportSave {
 
     public static void main(String[] args) throws FileNotFoundException {
         // Lire le fichier

@@ -18,9 +18,7 @@ public class Zoo {
     private ArrayList<Enclosure> enclosures = new ArrayList<>();
     private static Zoo INSTANCE;
 
-    private Zoo() {
-        temporaryInit();
-    }
+    private Zoo() {}
 
     public static Zoo getInstance() {
         if (INSTANCE == null) {
@@ -93,5 +91,9 @@ public class Zoo {
             creatures.addAll(enclo.getCreaturesPresent());
         }
         return creatures;
+    }
+
+    public void setZooMaster(ZooMaster zooMaster) {
+        this.zooMaster = zooMaster;
     }
 }
