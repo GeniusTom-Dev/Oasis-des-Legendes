@@ -1,16 +1,18 @@
 package fr.tmm.modele.creature;
 
 import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.reproduction.BabySize;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
+import fr.tmm.modele.utils.Utils;
 
 public abstract class Creature implements Runnable {
     protected String name;
     protected String type;
     protected String sex;
-    protected double weight;
-    protected double height;
+    protected double weight; // kg
+    protected double height; // cm
     protected int age;
     protected SatietyIndicator satiety;
     protected EnergyIndicator energy; // contain a method isAsleep()
@@ -38,15 +40,15 @@ public abstract class Creature implements Runnable {
         listener.onCreatureDeath(this);
     }
 
-    /*public void run() {
+    public void run() {
         int cmp = 0;
         try {
             Thread.sleep(5000);
             this.energy.decrement(1);
             this.satiety.decrement(1);
             // une chance de faire du bruit
-            // perdre de la vie si il est malade
-            // perdre de la vie si il est entrain de mourir de faim
+            if (this.isSick()) this.health.decrement(2);
+            if (this.isStarving()) this.health.decrement(2);
             if (cmp == 5) {
                 ++this.age;
                 cmp = 0;
@@ -56,11 +58,13 @@ public abstract class Creature implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     public String makeNoise() {
         return this.name + " émet un son puissant !";
     }
+
+    // --- Nom, Age, Taille, Poid ---
 
     public String getName() {
         return name;

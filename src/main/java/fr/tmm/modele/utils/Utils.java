@@ -12,4 +12,10 @@ public class Utils {
         }
         return false;
     }
+
+    static public int randomIntInInterval(int min, int max) {
+        Random random = new Random();
+        int nbRandom = random.nextInt((max - min) - 1) + min;
+        return nbRandom;
+    }
 }

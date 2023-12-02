@@ -5,6 +5,7 @@ import fr.tmm.modele.creature.Reincarnate;
 import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
+import fr.tmm.modele.creature.reproduction.BabySize;
 
 public class Phenix extends Oviparous implements Flyer, Reincarnate {
 
@@ -14,9 +15,11 @@ public class Phenix extends Oviparous implements Flyer, Reincarnate {
 
     @Override
     public void reincarnate() {
-        // TODO -> changer la taille de la créature
-        this.health.setValue(100);
         this.age = 0;
+        this.weight = BabySize.Weight.getMin(this.type);
+        this.height = BabySize.Height.getMin(this.type);
+        this.health.setValue(100);
+        this.health.setSick(false);
     }
 
     @Override

@@ -24,7 +24,6 @@ public class ImportSave {
         if (inputPath == null) {
             path = "src/main/java/fr/tmm/save/save.json";
         }
-
         // TODO
     }
 }
