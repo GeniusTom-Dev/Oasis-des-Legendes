@@ -31,7 +31,7 @@ class exportSaveTest {
         enclos1.addCreature(new Unicorn("Licorne 1", "m", 10, 10, 10));
         enclos1.addCreature(new Unicorn("Licorne 2", "m", 10, 10, 10));
         zoo.addAnEnclosure(enclos1);
-        ExportSave.export(this.zoo, "src/test/java/fr/tmm/save/actual1.json");
+        ExportSave.exportSave(this.zoo, "src/test/java/fr/tmm/save/actual1.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual1.json"));
         byte[] file1Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/expected1.json"));
 
@@ -47,7 +47,7 @@ class exportSaveTest {
         zoo.setEnclosures(new ArrayList<Enclosure>());
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
         zoo.addAnEnclosure(enclos1);
-        ExportSave.export(this.zoo, "src/test/java/fr/tmm/save/actual2.json");
+        ExportSave.exportSave(this.zoo, "src/test/java/fr/tmm/save/actual2.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual2.json"));
         byte[] file1Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/expected2.json"));
 
@@ -61,7 +61,7 @@ class exportSaveTest {
         zoo.setZooMaster( new ZooMaster("Julot", "m", 10, 10, 19));
         zoo.setName("Zoo de Test");
         zoo.setEnclosures(new ArrayList<Enclosure>());
-        ExportSave.export(this.zoo, "src/test/java/fr/tmm/save/actual3.json");
+        ExportSave.exportSave(this.zoo, "src/test/java/fr/tmm/save/actual3.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual3.json"));
         byte[] file1Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/expected3.json"));
 

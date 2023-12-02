@@ -1,5 +1,8 @@
 package fr.tmm.save;
 
+import fr.tmm.modele.Zoo;
+import org.json.JSONException;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -14,5 +17,14 @@ public class ImportSave {
         JsonObject test = reader.readObject();
         reader.close();
         System.out.println("Id : " + test.getInt("id"));
+    }
+
+    public static void importSave(Zoo zoo, String inputPath) throws FileNotFoundException, JSONException {
+        String path = inputPath;
+        if (inputPath == null) {
+            path = "src/main/java/fr/tmm/save/save.json";
+        }
+
+        // TODO
     }
 }

@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class ExportSave {
 
@@ -33,10 +32,10 @@ public class ExportSave {
         zoo.addAnEnclosure(enclos1);
         zoo.addAnEnclosure(aquarium1);
         zoo.addAnEnclosure(voiliere1);
-        export(zoo,null);
+        exportSave(zoo,null);
     }
 
-    public static void export(Zoo zoo, String outputPath) throws FileNotFoundException, JSONException {
+    public static void exportSave(Zoo zoo, String outputPath) throws FileNotFoundException, JSONException {
         String path = outputPath;
         if (outputPath == null) {
             path = "src/main/java/fr/tmm/save/save.json";
