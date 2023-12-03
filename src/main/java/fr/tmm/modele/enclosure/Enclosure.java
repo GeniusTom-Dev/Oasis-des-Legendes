@@ -3,6 +3,8 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.methodOfMovement.Flyer;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.creature.reproduction.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.creature.species.Dragon;
@@ -88,18 +90,26 @@ public class Enclosure implements CreatureListener {
 
     // Méthode pour ajouter une créature à l'enclos
     public boolean addCreature(Creature creature) {
-        if (creature != null && creaturesPresent.size() < maxCapacity) {
+        if (creature instanceof Walker) {
+            return addCreatureThatMatchesEnclosureType(creature);
+        }
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
+                " car ce n'est pas une créature terrestre.");
+        return false;
+    }
+
+    protected boolean addCreatureThatMatchesEnclosureType(Creature creature) {
+        if (creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
                 creaturesPresent.add(creature);
                 creature.setListener(this);
             } else {
-                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
+                Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
                         " car il contient déjà des créatures de type différent.");
                 return false;
             }
         } else {
-            System.out.println("L'enclos est plein ou la créature est invalide.");
             return false;
         }
         return true;

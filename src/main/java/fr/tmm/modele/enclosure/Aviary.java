@@ -3,6 +3,7 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
@@ -30,12 +31,11 @@ public class Aviary extends Enclosure {
     @Override
     public boolean addCreature(Creature creature) {
         if (creature instanceof Flyer) {
-            return super.addCreature(creature);
-        } else {
-            System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
-                    " car ce n'est pas une créature volante.");
-            return false;
+            return super.addCreatureThatMatchesEnclosureType(creature);
         }
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à la voilière " + name +
+                    " car ce n'est pas une créature volantes.");
+        return false;
     }
 
     public void chanceOfEscapingDependingRoofState() {

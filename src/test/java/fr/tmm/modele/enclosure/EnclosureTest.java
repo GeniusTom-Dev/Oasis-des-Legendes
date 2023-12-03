@@ -2,6 +2,7 @@ package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Dragon;
+import fr.tmm.modele.creature.species.Megalodon;
 import fr.tmm.modele.creature.species.Nymph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,11 +33,17 @@ class EnclosureTest {
     }
 
     @Test
-    void addIncompatibleCreature() {
+    void addTwoDifferentCreature() {
         enclosure.addCreature(this.dragon1);
         enclosure.addCreature(this.nymph);
         assertEquals(enclosure.getCreaturesPresent().size(), 1);
         assertEquals("Dragon", enclosure.getCreaturesPresent().get(0).getType());
+    }
+
+    @Test
+    void addIncompatibleCreature() {
+        enclosure.addCreature(new Megalodon("Mega", "m",50,50,50));
+        assertEquals(this.enclosure.getCreaturesPresent().size(), 0);
     }
 
     @Test

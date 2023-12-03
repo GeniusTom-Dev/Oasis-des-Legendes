@@ -1,7 +1,9 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
@@ -37,8 +39,10 @@ public class Aquarium extends Enclosure {
     @Override
     public boolean addCreature(Creature creature) {
         if (creature instanceof Swimmer) {
-            return super.addCreature(creature);
+            return this.addCreatureThatMatchesEnclosureType(creature);
         }
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'aquarium " + name + " car " +
+                "ce n'est pas une créature aquatique.");
         return false;
     }
 
