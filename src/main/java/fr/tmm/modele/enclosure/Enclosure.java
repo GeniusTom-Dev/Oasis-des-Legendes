@@ -4,7 +4,15 @@ import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.utils.Utils;
 
+import fr.tmm.modele.creature.reproduction.BabySize;
+import fr.tmm.modele.creature.reproduction.Gestation;
+import fr.tmm.modele.creature.reproduction.Incubation;
+import fr.tmm.modele.creature.Viviparous;
+import fr.tmm.modele.creature.Oviparous;
+
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Enclosure implements CreatureDeathListener {
     protected String name;
@@ -119,6 +127,106 @@ public class Enclosure implements CreatureDeathListener {
             System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
         }
     }
+
+    /*
+    public void startReproductionThread() {
+        Thread reproductionThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000); // ajustez la fréquence selon vos besoins
+
+                    // Vérifier si l'enclos a atteint sa capacité maximale
+                    if (creaturesPresent.size() < maxCapacity) {
+                        reproduce();
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        reproductionThread.start();
+    }
+
+    private void reproduce() {
+        // Sélectionner un mâle et une femelle aléatoirement
+        Creature male = getRandomMale();
+        Creature female = getRandomFemale();
+
+        if (male != null && female != null) {
+            // Faire se reproduire le mâle et la femelle
+            // Appeler la méthode spécifique pour la reproduction en fonction du type de créature
+            Creature baby = reproduceCreatures(male, female);
+            addCreature(baby);
+        }
+    }
+
+    private Creature getRandomMale() {
+        ArrayList<Creature> males = getCreaturesBySex("male");
+        return getRandomCreature(males);
+    }
+
+    private Creature getRandomFemale() {
+        ArrayList<Creature> females = getCreaturesBySex("female");
+        return getRandomCreature(females);
+    }
+
+    private Creature getRandomCreature(ArrayList<Creature> creatures) {
+        if (creatures.isEmpty()) {
+            return null;
+        }
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(creatures.size());
+        return creatures.get(randomIndex);
+    }
+
+    private ArrayList<Creature> getCreaturesBySex(String sex) {
+        ArrayList<Creature> creaturesBySex = new ArrayList<>();
+        for (Creature creature : creaturesPresent) {
+            if (creature.getSex().equalsIgnoreCase(sex)) {
+                creaturesBySex.add(creature);
+            }
+        }
+        return creaturesBySex;
+    }
+
+    private Creature reproduceCreatures(Creature male, Creature female) {
+        // Logique spécifique pour la reproduction d'ovipares
+        if (male instanceof Oviparous && female instanceof Oviparous) {
+            ((Oviparous) female).layEgg(1);
+
+            // Utiliser les informations de BabySize pour déterminer la taille du nouveau-né
+            double babySize = determineBabySize(female.getType());
+            int incubationPeriod = determineIncubationPeriod(female.getType());
+
+        }
+
+        // Logique spécifique pour la reproduction de vivipares
+        else if (male instanceof Viviparous && female instanceof Viviparous) {
+            ((Viviparous) female).calve(1);
+
+            // Utiliser les informations de BabySize et Gestation pour déterminer la taille du nouveau-né et la période de gestation
+            double babySize = determineBabySize(female.getType());
+            int gestationPeriod = determineGestationPeriod(female.getType());
+
+        }
+    }
+
+    private double determineBabySize(String creatureType) {
+        return BabySize.getMin(creatureType) + Math.random() * (BabySize.getMax(creatureType) - BabySize.getMin(creatureType));
+    }
+
+    private int determineGestationPeriod(String creatureType) {
+        return Gestation.getClassDuration(creatureType);
+    }
+
+    private int determineIncubationPeriod(String creatureType) {
+        return Incubation.getClassDuration(creatureType);
+    }
+     */
+
 
     // --- GETTER ---
 
