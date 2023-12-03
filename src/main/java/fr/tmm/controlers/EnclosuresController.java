@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -20,6 +21,9 @@ public class EnclosuresController implements Initializable {
     public HBox enclosuresLine1;
     @FXML
     public HBox enclosuresLine2;
+
+    @FXML
+    public FlowPane enclosuresLine;
 
     public void openEnclosure(ActionEvent event) {
         Node source = (Node) event.getSource();
@@ -38,11 +42,17 @@ public class EnclosuresController implements Initializable {
             button.setId("enclosure" + i);
             button.setOnAction(this::openEnclosure);
 
-            if(enclosuresLine1.getChildren().size() < 5) {
-                enclosuresLine1.getChildren().add(button);
-            } else {
-                enclosuresLine2.getChildren().add(button);
-            }
+            enclosuresLine.getChildren().add(button);
+
+//            if(enclosuresLine1.getChildren().size() < 5) {
+//                enclosuresLine1.getChildren().add(button);
+//            } else {
+//                enclosuresLine2.getChildren().add(button);
+//            }
         }
+    }
+
+    public void backButton(ActionEvent actionEvent) {
+        HomeController homeController = (HomeController) setScene("layout/home.fxml", "Enclo");
     }
 }

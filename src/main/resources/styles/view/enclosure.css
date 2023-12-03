@@ -38,6 +38,13 @@
     -fx-background-color: transparent;
 }
 
-.box VBox Button {
-    -fx-background-color: red;
+.buttonList{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: white;
+    -fx-border-radius: 10;
+    -fx-text-fill: white;
+    -fx-min-width: 350;
+    -fx-min-height: 50;
 }
