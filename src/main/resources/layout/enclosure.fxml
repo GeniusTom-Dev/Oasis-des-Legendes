@@ -2,9 +2,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.tmm.controlers.EnclosureController" prefWidth="1280" prefHeight="720"
-            stylesheets="@/styles/view/enclosures.css" fx:id="borderPane" styleClass="root">
+            stylesheets="@/styles/view/enclosure.css" fx:id="borderPane" styleClass="root">
 
     <top>
         <HBox alignment="CENTER">
@@ -19,6 +22,61 @@
         </HBox>
     </top>
 
+    <center>
+        <HBox maxWidth="900" maxHeight="500" alignment="CENTER" spacing="50">
+            <VBox styleClass="box"></VBox>
+            <ScrollPane styleClass="box">
+                <VBox style="-fx-background-color: transparent;">
+                    <Button style="-fx-background-color: transparent;"></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+                    <Button></Button>
+
+                </VBox>
+            </ScrollPane>
+        </HBox>
+    </center>
 
 
 </BorderPane>

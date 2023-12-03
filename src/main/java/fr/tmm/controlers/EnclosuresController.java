@@ -34,8 +34,6 @@ public class EnclosuresController implements Initializable {
         Zoo zoo = Zoo.getInstance();
         ArrayList<Enclosure> enclosures = zoo.getEnclosures();
         for (int i = 0; i < enclosures.size(); i++) {
-            System.out.println(i);
-            System.out.println(enclosures.get(i));
             Button button = new Button(enclosures.get(i).getName());
             button.setId("enclosure" + i);
             button.setOnAction(this::openEnclosure);

@@ -1,0 +1,43 @@
+@import "../base.css";
+@import "../component/navbar.css";
+
+.box{
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, #5d6e6f, #121c24);
+    -fx-background-radius: 50;
+    -fx-border-width: 5;
+    -fx-border-color: linear-gradient(#565e62, #739d93);
+    -fx-border-radius: 50;
+    -fx-text-fill: white;
+    -fx-min-width: 400;
+}
+
+/* Style général du ScrollPane */
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-padding: 5px;
+}
+
+/* Style de la barre de défilement */
+.scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+/* Style de la voie de la barre de défilement */
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+/* Style du bouton de défilement */
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: transparent;
+}
+
+/* Style des boutons de la barre de défilement */
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.box VBox Button {
+    -fx-background-color: red;
+}
