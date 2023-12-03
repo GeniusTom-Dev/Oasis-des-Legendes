@@ -28,12 +28,13 @@ public class Aviary extends Enclosure {
     }
 
     @Override
-    public void addCreature(Creature creature) {
+    public boolean addCreature(Creature creature) {
         if (creature instanceof Flyer) {
-            super.addCreature(creature);
+            return super.addCreature(creature);
         } else {
             System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
                     " car ce n'est pas une créature volante.");
+            return false;
         }
     }
 

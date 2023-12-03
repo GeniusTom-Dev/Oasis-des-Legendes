@@ -1,21 +1,44 @@
 package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.Creature;
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.reproduction.BabySize;
+import fr.tmm.modele.creature.reproduction.Egg;
+import fr.tmm.modele.creature.species.Dragon;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
 
-public class Enclosure implements CreatureDeathListener {
+public class Enclosure implements CreatureListener {
     protected String name;
     protected double surfaceArea;
     protected int maxCapacity;
-    protected ArrayList<Creature> creaturesPresent;
+    protected ArrayList<Creature> creaturesPresent = new ArrayList<>();
+
+    protected ArrayList<Egg> eggWaitingToHatch = new ArrayList<>();
     protected CleanlinessStatus cleanliness;
 
     @Override
     public void onCreatureDeath(Creature deadCreature) {
         this.creaturesPresent.remove(deadCreature);
+    }
+
+    @Override
+    public void onEggHatching(Egg egg) {
+        this.eggWaitingToHatch.remove(egg);
+        this.onCreatureBirth(egg.getType());
+    }
+
+    @Override
+    public void onCreatureBirth(String type) {
+        // TMP - a changer
+        this.creaturesPresent.add(new Dragon("egghatched", "m",50,50,0));
+        // TODO -> laisser vide mais override la fct pour chaque espece
+    }
+
+    @Override
+    public void onEggLaying(Egg egg) {
+        this.eggWaitingToHatch.add(egg);
     }
 
     public enum CleanlinessStatus {
@@ -39,7 +62,6 @@ public class Enclosure implements CreatureDeathListener {
         this.name = name;
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
-        this.creaturesPresent = new ArrayList<>();
         this.cleanliness = CleanlinessStatus.SPOTLESS;
     }
 
@@ -54,7 +76,7 @@ public class Enclosure implements CreatureDeathListener {
     }
 
     // Méthode pour ajouter une créature à l'enclos
-    public void addCreature(Creature creature) {
+    public boolean addCreature(Creature creature) {
         if (creature != null && creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
@@ -64,10 +86,13 @@ public class Enclosure implements CreatureDeathListener {
             } else {
                 System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
                         " car il contient déjà des créatures de type différent.");
+                return false;
             }
         } else {
             System.out.println("L'enclos est plein ou la créature est invalide.");
+            return false;
         }
+        return true;
     }
 
     // Méthode pour enlever une créature de l'enclos
@@ -151,6 +176,10 @@ public class Enclosure implements CreatureDeathListener {
 
     public void setCleanlinessDegree(CleanlinessStatus cleanlinessDegree) {
         this.cleanliness = cleanlinessDegree;
+    }
+
+    public ArrayList<Egg> getEggWaitingToHatch() {
+        return eggWaitingToHatch;
     }
 
 }

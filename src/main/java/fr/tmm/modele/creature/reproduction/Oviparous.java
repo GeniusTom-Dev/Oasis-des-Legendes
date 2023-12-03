@@ -1,6 +1,6 @@
-package fr.tmm.modele.creature;
+package fr.tmm.modele.creature.reproduction;
 
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.Creature;
 
 public abstract class Oviparous extends Creature {
 
@@ -13,6 +13,9 @@ public abstract class Oviparous extends Creature {
             if (this.getSex().equals("Femelle")) {
                 String strEgg = nbEgg > 1 ? " œufs" : "œuf";
                 System.out.println(this.getName() + ", la femelle " + this.getType() + " vient de pondre " + nbEgg + strEgg);
+                for (int i = 0; i < nbEgg; i++) {
+                    this.listener.onEggLaying(new Egg(this));
+                }
             } else {
                 throw new Exception("Les mâles ne pondent pas d'œufs");
             }

@@ -28,7 +28,7 @@ public class ExportSave {
         enclos1.addCreature(new Unicorn("Licorne 3", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 1", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 2", "m", 10, 10, 10));
-        voiliere1.addCreature(new Phenix("Phenix 1", "m", 10, 10, 10));
+        voiliere1.addCreature(new Phoenix("Phenix 1", "m", 10, 10, 10));
         zoo.addAnEnclosure(enclos1);
         zoo.addAnEnclosure(aquarium1);
         zoo.addAnEnclosure(voiliere1);

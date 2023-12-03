@@ -10,10 +10,22 @@ public class ZooMaster extends Human {
     }
 
     public boolean transferer(Creature creature, Enclosure source, Enclosure dest) {
-        // TODO
-        // si le transfert a pu etre realiser -> return true
-        // sinon si il n'a pas pu etre realiser car la creature n'existe pas, n'est pas presente dans l'enclo source,
-        // l'enclo dest n'est pas du bon type, l'enclos dest est plein -> return false
+        if (creature == null || source == null || dest == null) {
+            throw new IllegalArgumentException("One of the parameter is null");
+        } else if (!source.getCreaturesPresent().contains(creature)) {
+            throw new RuntimeException("The creature is not present is the source enclosure");
+        } else if (dest.addCreature(creature)) {
+            source.removeCreature(creature);
+            return true;
+        }
         return false;
+    }
+
+    public void cleanEnclosure(Enclosure enclos) {
+        enclos.clean();
+    }
+
+    public void feedCreature(Enclosure enclos) {
+        enclos.feedCreatures();
     }
 }

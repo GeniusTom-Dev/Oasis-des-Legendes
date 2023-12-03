@@ -1,7 +1,6 @@
 package fr.tmm.modele.creature.species;
 
-import fr.tmm.modele.creature.Oviparous;
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.reproduction.Oviparous;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 
 public class Kraken extends Oviparous implements Swimmer {
@@ -10,7 +9,5 @@ public class Kraken extends Oviparous implements Swimmer {
     }
 
     @Override
-    public void run() {
-
-    }
+    public void run() {super.run();}
 }

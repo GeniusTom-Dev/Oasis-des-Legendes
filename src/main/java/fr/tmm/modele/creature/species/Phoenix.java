@@ -1,15 +1,13 @@
 package fr.tmm.modele.creature.species;
 
-import fr.tmm.modele.creature.Oviparous;
+import fr.tmm.modele.creature.reproduction.Oviparous;
 import fr.tmm.modele.creature.Reincarnate;
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
-import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 import fr.tmm.modele.creature.reproduction.BabySize;
 
-public class Phenix extends Oviparous implements Flyer, Reincarnate {
+public class Phoenix extends Oviparous implements Flyer, Reincarnate {
 
-    public Phenix(String name, String sex, double weight, double height, int age) {
+    public Phoenix(String name, String sex, double weight, double height, int age) {
         super(name, sex, weight, height, age);
     }
 
@@ -28,7 +26,5 @@ public class Phenix extends Oviparous implements Flyer, Reincarnate {
     }
 
     @Override
-    public void run() {
-
-    }
+    public void run() {super.run();}
 }

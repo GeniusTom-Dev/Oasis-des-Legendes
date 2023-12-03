@@ -36,10 +36,12 @@ public class Aquarium extends Enclosure {
         scheduleCriticalCheck();*/
     }
 
-    public void addCreature(Creature creature) {
+    @Override
+    public boolean addCreature(Creature creature) {
         if (creature instanceof Swimmer) {
-            super.addCreature(creature);
+            return super.addCreature(creature);
         }
+        return false;
     }
 
     public void killCreatureDependingOfSalinityAndWaterLevel() {

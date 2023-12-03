@@ -1,6 +1,6 @@
-package fr.tmm.modele.creature;
+package fr.tmm.modele.creature.reproduction;
 
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.Creature;
 
 public abstract class Viviparous extends Creature {
     public Viviparous(String nomEspece, String sexe, double poids, double taille, int age) {

@@ -1,11 +1,9 @@
 package fr.tmm.modele.creature;
 
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
-import fr.tmm.modele.creature.reproduction.BabySize;
+import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
-import fr.tmm.modele.utils.Utils;
 
 public abstract class Creature implements Runnable {
     protected String name;
@@ -17,12 +15,7 @@ public abstract class Creature implements Runnable {
     protected SatietyIndicator satiety;
     protected EnergyIndicator energy; // contain a method isAsleep()
     protected HealthIndicator health; // contain a method isSick and isAlive
-
-    public void setListener(CreatureDeathListener listener) {
-        this.listener = listener;
-    }
-
-    protected CreatureDeathListener listener;
+    protected CreatureListener listener;
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
@@ -34,30 +27,37 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
+        Thread t = new Thread(this);
+        t.start();
     }
 
     public void die() {
-        listener.onCreatureDeath(this);
+        if (this.listener != null) listener.onCreatureDeath(this);
     }
 
-    public void run() {
+    public void run() {;
         int cmp = 0;
-        try {
-            Thread.sleep(5000);
-            this.energy.decrement(1);
-            this.satiety.decrement(1);
-            // une chance de faire du bruit
-            if (this.isSick()) this.health.decrement(2);
-            if (this.isStarving()) this.health.decrement(2);
-            if (cmp == 5) {
-                ++this.age;
-                cmp = 0;
-            } else {
+        while (isAlive()) {
+            try {
+                System.out.println(name + " tour : " + cmp);
+                Thread.sleep(5000);
+                this.energy.decrement(1);
+                this.satiety.decrement(1);
+                // une chance de faire du bruit
+                if (this.isSick()) this.health.decrement(2);
+                if (this.isStarving()) starve();
                 ++cmp;
+                if (cmp == 5) {
+                    System.out.println(name + " age : " + age);
+                    this.aging();
+                    System.out.println(name + " age : " + age);
+                    cmp = 0;
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
+        this.die();
     }
 
     public String makeNoise() {
@@ -182,6 +182,9 @@ public abstract class Creature implements Runnable {
 
     public void aging() {
         ++this.age;
+        if (this.age == 100) {
+            this.health.setValue(0);
+        }
     }
 
     public boolean isAlive() {
@@ -189,4 +192,13 @@ public abstract class Creature implements Runnable {
     }
 
     public boolean isSick() {return this.health.isSick();}
+
+    public void setListener(CreatureListener listener) {
+        this.listener = listener;
+    }
+
+    public CreatureListener getListener() {
+        return listener;
+    }
+
 }

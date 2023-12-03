@@ -2,7 +2,7 @@ package fr.tmm.modele;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Megalodon;
-import fr.tmm.modele.creature.species.Phenix;
+import fr.tmm.modele.creature.species.Phoenix;
 import fr.tmm.modele.creature.species.Unicorn;
 import fr.tmm.modele.enclosure.Aquarium;
 import fr.tmm.modele.enclosure.Aviary;
@@ -39,7 +39,7 @@ public class Zoo {
         enclos1.addCreature(new Unicorn("Licorne 3", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 1", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 2", "m", 10, 10, 10));
-        voiliere1.addCreature(new Phenix("Phenix 1", "m", 10, 10, 10));
+        voiliere1.addCreature(new Phoenix("Phenix 1", "m", 10, 10, 10));
         this.addAnEnclosure(enclos1);
         this.addAnEnclosure(aquarium1);
         this.addAnEnclosure(voiliere1);

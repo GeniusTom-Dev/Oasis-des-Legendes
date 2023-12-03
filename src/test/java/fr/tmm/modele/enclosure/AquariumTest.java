@@ -135,9 +135,9 @@ AquariumTest {
 
     @Test
     void addIncompatibleCreature() {
-        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5);
+        Phoenix phoenix = new Phoenix("phenix", "m", 5, 5, 5);
         aquarium.addCreature(this.dragon1);
-        aquarium.addCreature(phenix);
+        aquarium.addCreature(phoenix);
         assertEquals(aquarium.getCreaturesPresent().size(), 1);
         assertEquals("Dragon", aquarium.getCreaturesPresent().get(0).getType());
     }

@@ -2,11 +2,9 @@ package fr.tmm.modele.enclosure;
 
 import fr.tmm.modele.creature.species.Dragon;
 import fr.tmm.modele.creature.species.Mermaid;
-import fr.tmm.modele.creature.species.Phenix;
+import fr.tmm.modele.creature.species.Phoenix;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.accessibility.AccessibleValue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,9 +60,9 @@ class AviaryTest {
 
     @Test
     void addIncompatibleCreature() {
-        Phenix phenix = new Phenix("phenix", "m", 5, 5, 5);
+        Phoenix phoenix = new Phoenix("phenix", "m", 5, 5, 5);
         aviary.addCreature(this.dragon1);
-        aviary.addCreature(phenix);
+        aviary.addCreature(phoenix);
         assertEquals(aviary.getCreaturesPresent().size(), 1);
         assertEquals("Dragon", aviary.getCreaturesPresent().get(0).getType());
     }
