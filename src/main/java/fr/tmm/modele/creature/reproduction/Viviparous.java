@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature.reproduction;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 
 public abstract class Viviparous extends Creature {
@@ -11,7 +12,7 @@ public abstract class Viviparous extends Creature {
         try {
             if (this.getSex().equals("Femelle")) {
                 String strChild = nbChild > 1 ? " enfants." : "enfant.";
-                System.out.println(this.getName() + ", la femelle " + this.getType() + " vient de mettre bas " + nbChild + strChild);
+                Log.getInstance().addLog(this.getName() + ", une femelle " + this.getType() + ", vient de mettre bas " + nbChild + strChild);
             } else {
                 throw new Exception("Les mâles ne peuvent pas mettre bas");
             }

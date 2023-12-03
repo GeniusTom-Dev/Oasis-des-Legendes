@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature.reproduction;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 
 public abstract class Oviparous extends Creature {
@@ -11,8 +12,8 @@ public abstract class Oviparous extends Creature {
     public String layEgg(int nbEgg) {
         try {
             if (this.getSex().equals("Femelle")) {
-                String strEgg = nbEgg > 1 ? " œufs" : "œuf";
-                System.out.println(this.getName() + ", la femelle " + this.getType() + " vient de pondre " + nbEgg + strEgg);
+                String strEgg = nbEgg > 1 ? " œufs." : "œuf.";
+                Log.getInstance().addLog(this.getName() + ", une femelle " + this.getType() + ", vient de pondre " + nbEgg + strEgg);
                 for (int i = 0; i < nbEgg; i++) {
                     this.listener.onEggLaying(new Egg(this));
                 }

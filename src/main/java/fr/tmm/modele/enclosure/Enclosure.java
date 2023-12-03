@@ -1,5 +1,6 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.creature.reproduction.BabySize;
@@ -10,8 +11,8 @@ import fr.tmm.modele.utils.Utils;
 import fr.tmm.modele.creature.reproduction.BabySize;
 import fr.tmm.modele.creature.reproduction.Gestation;
 import fr.tmm.modele.creature.reproduction.Incubation;
-import fr.tmm.modele.creature.Viviparous;
-import fr.tmm.modele.creature.Oviparous;
+import fr.tmm.modele.creature.reproduction.Viviparous;
+import fr.tmm.modele.creature.reproduction.Oviparous;
 
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Enclosure implements CreatureListener {
 
     @Override
     public void onEggHatching(Egg egg) {
+        Log.getInstance().addLog("Un oeuf de " + egg.getType() + " a éclos dans l'enclos " + name + ".");
         this.eggWaitingToHatch.remove(egg);
         this.onCreatureBirth(egg.getType());
     }
@@ -78,6 +80,7 @@ public class Enclosure implements CreatureListener {
             for (Creature creature : this.getCreaturesPresent()) {
                 if (Utils.isBadEventHappening(this.cleanliness.riskOfGettingSick)) {
                     creature.getHealthindicator().setSick(true);
+                    Log.getInstance().addLog(creature.getName() + " est tombé malade.");
                 }
             }
         }
@@ -90,7 +93,6 @@ public class Enclosure implements CreatureListener {
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
                 creaturesPresent.add(creature);
                 creature.setListener(this);
-                System.out.println(creature.getName() + " a été ajouté à l'enclos " + name + ".");
             } else {
                 System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
                         " car il contient déjà des créatures de type différent.");
@@ -105,10 +107,8 @@ public class Enclosure implements CreatureListener {
 
     // Méthode pour enlever une créature de l'enclos
     public void removeCreature(Creature creature) {
-        if (creaturesPresent.remove(creature)) {
-            System.out.println(creature.getName() + " a été retiré de l'enclos " + name + ".");
-        } else {
-            System.out.println(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
+        if (!creaturesPresent.remove(creature)) {
+            throw new IllegalArgumentException(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
         }
     }
 
@@ -117,17 +117,18 @@ public class Enclosure implements CreatureListener {
         for (Creature creature : this.getCreaturesPresent()) {
             creature.eat();
         }
-        System.out.println("Les créatures de l'enclos " + name + " sont nourries.");
+        Log.getInstance().addLog("Les créatures de l'enclos " + name + " ont été nourries.");
     }
 
     // Méthode pour entretenir l'enclos
     public void clean() {
         setCleanlinessDegree(CleanlinessStatus.SPOTLESS);
-        System.out.println("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
+        Log.getInstance().addLog("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
     }
 
     public void getDirtier() {
         this.cleanliness = getWorseState();
+        Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
     }
 
     private CleanlinessStatus getWorseState() {

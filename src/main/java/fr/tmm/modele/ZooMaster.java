@@ -16,6 +16,7 @@ public class ZooMaster extends Human {
             throw new RuntimeException("The creature is not present is the source enclosure");
         } else if (dest.addCreature(creature)) {
             source.removeCreature(creature);
+            Log.getInstance().addLog(creature.getName() + " a été transféré de l'enclos " + source.getName() + " à l'enclos " + dest.getName() + ".");
             return true;
         }
         return false;

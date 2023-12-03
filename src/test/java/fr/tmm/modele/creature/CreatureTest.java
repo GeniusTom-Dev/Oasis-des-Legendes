@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.species.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -120,7 +121,8 @@ class CreatureTest {
 
     @Test
     void makeNoise() {
-        assertEquals("Creature émet un son puissant !", this.creature.makeNoise());
+        this.creature.makeNoise();
+        assertEquals("Creature émet un son puissant !", Log.getInstance().getLastLog());
     }
 
 }

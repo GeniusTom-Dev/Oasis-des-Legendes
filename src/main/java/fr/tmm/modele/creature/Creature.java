@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
@@ -32,6 +33,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void die() {
+        Log.getInstance().addLog(name + " est mort.");
         if (this.listener != null) listener.onCreatureDeath(this);
     }
 
@@ -39,7 +41,6 @@ public abstract class Creature implements Runnable {
         int cmp = 0;
         while (isAlive()) {
             try {
-                System.out.println(name + " tour : " + cmp);
                 Thread.sleep(5000);
                 this.energy.decrement(1);
                 this.satiety.decrement(1);
@@ -48,9 +49,7 @@ public abstract class Creature implements Runnable {
                 if (this.isStarving()) starve();
                 ++cmp;
                 if (cmp == 5) {
-                    System.out.println(name + " age : " + age);
                     this.aging();
-                    System.out.println(name + " age : " + age);
                     cmp = 0;
                 }
             } catch (InterruptedException e) {
@@ -60,8 +59,8 @@ public abstract class Creature implements Runnable {
         this.die();
     }
 
-    public String makeNoise() {
-        return this.name + " émet un son puissant !";
+    public void makeNoise(){
+        Log.getInstance().addLog(this.name + " émet un son puissant !");
     }
 
     // --- Nom, Age, Taille, Poid ---
@@ -129,6 +128,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void starve() {
+        Log.getInstance().addLog(name + " est entrain de mourir de faim.");
         this.health.decrement(10);
     }
 

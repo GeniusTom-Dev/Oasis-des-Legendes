@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature.species;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.reproduction.Oviparous;
 import fr.tmm.modele.creature.Reincarnate;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
@@ -20,6 +21,7 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincar
         this.height = BabySize.Height.getMin(this.type);
         this.health.setValue(100);
         this.health.setSick(false);
+        Log.getInstance().addLog(name + " a ressuscité.");
     }
 
     @Override
