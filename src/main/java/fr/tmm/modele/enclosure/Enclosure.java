@@ -153,7 +153,7 @@ public class Enclosure implements CreatureListener {
         }
     }
 
-    /*
+
     public void startReproductionThread() {
         Thread reproductionThread = new Thread(() -> {
             while (true) {
@@ -162,7 +162,7 @@ public class Enclosure implements CreatureListener {
 
                     // Vérifier si l'enclos a atteint sa capacité maximale
                     if (creaturesPresent.size() < maxCapacity) {
-                        reproduce();
+                        // reproduce();
                     }
 
                 } catch (InterruptedException e) {
@@ -174,7 +174,7 @@ public class Enclosure implements CreatureListener {
         reproductionThread.start();
     }
 
-    private void reproduce() {
+   /* private void reproduce() {
         // Sélectionner un mâle et une femelle aléatoirement
         Creature male = getRandomMale();
         Creature female = getRandomFemale();
@@ -249,8 +249,8 @@ public class Enclosure implements CreatureListener {
 
     private int determineIncubationPeriod(String creatureType) {
         return Incubation.getClassDuration(creatureType);
-    }
-     */
+    }*/
+
 
 
     // --- GETTER ---
