@@ -19,8 +19,8 @@ class ZooMasterTest {
     @BeforeEach
     void init() {
         this.mermaid = new Mermaid("Mermaid", "f",50,50,10);
-        this.dest = new Aquarium("Dest", 50,50,5,5);
-        this.source = new Aquarium("Source",50,50,5,5);
+        this.dest = new Aquarium("Dest", 50,50);
+        this.source = new Aquarium("Source",50,50);
         this.source.addCreature(mermaid);
         this.zoo = Zoo.getInstance();
         this.zooMaster = new ZooMaster("Mathieu", "m", 75,1.76,19);

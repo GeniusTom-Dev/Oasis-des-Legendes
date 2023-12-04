@@ -15,7 +15,7 @@ AquariumTest {
 
     @BeforeEach
     void init() {
-        this.aquarium = new Aquarium("Aquarium", 50.0, 3, 50, 5);
+        this.aquarium = new Aquarium("Aquarium", 50.0, 3);
         this.dragon1 = new Dragon("dragon", "m", 5, 5, 5);
     }
 
@@ -61,7 +61,7 @@ AquariumTest {
 
     @Test
     void SalinityLevelIsCritical() {
-        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5);
         aquarium2.setSalinityLevel(Aquarium.StateLevel.CRITICAL);
         aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.addCreature(new Megalodon("Megalodon 1", "m",50,50,50));
@@ -76,7 +76,7 @@ AquariumTest {
 
     @Test
     void SalinityLevelIsExcellent() {
-        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5);
         aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.addCreature(new Megalodon("Megalodon 1", "m",50,50,50));
@@ -91,7 +91,7 @@ AquariumTest {
 
     @Test
     void WaterLevelIsCritical() {
-        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5);
         aquarium2.setWaterLevel(Aquarium.StateLevel.CRITICAL);
         aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.addCreature(new Megalodon("Megalodon 1","m",50,50,50));
@@ -106,7 +106,7 @@ AquariumTest {
 
     @Test
     void WaterLevelIsExcellent() {
-        Aquarium aquarium2 = new Aquarium("Aquarium",50,5,5,5);
+        Aquarium aquarium2 = new Aquarium("Aquarium",50,5);
         aquarium2.setWaterLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.setSalinityLevel(Aquarium.StateLevel.EXCELLENT);
         aquarium2.addCreature(dragon1);

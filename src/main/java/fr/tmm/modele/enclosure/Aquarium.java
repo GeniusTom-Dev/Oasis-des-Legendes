@@ -3,13 +3,11 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
-import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
 
 public class Aquarium extends Enclosure {
-    private double waterDepth;
     private StateLevel salinityLevel;
     private StateLevel waterLevel;
 
@@ -27,9 +25,8 @@ public class Aquarium extends Enclosure {
         }
     }
 
-    public Aquarium(String name, double surfaceArea, int maxCapacity, double waterDepth, int salinityLevel) {
+    public Aquarium(String name, double surfaceArea, int maxCapacity) {
         super(name, surfaceArea, maxCapacity);
-        this.waterDepth = waterDepth;
         this.salinityLevel = StateLevel.EXCELLENT;
         this.waterLevel = StateLevel.EXCELLENT;
     }

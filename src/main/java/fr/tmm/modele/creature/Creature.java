@@ -37,7 +37,7 @@ public abstract class Creature implements Runnable {
         if (this.listener != null) listener.onCreatureDeath(this);
     }
 
-    public void run() {;
+    public void run() {
         int cmp = 0;
         while (isAlive()) {
             try {
@@ -103,10 +103,6 @@ public abstract class Creature implements Runnable {
 
     // --- Satiety ---
 
-    public String displaySatietyLevel() {
-        return satiety.toString();
-    }
-
     public void setSatiety(int satiety) {
         this.satiety.setValue(satiety);
     }
@@ -134,10 +130,6 @@ public abstract class Creature implements Runnable {
 
     // --- Energy ---
 
-    public String displayEnergyLevel() {
-        return this.energy.toString();
-    }
-
     public void setEnergy(int energy) {
         this.energy.setValue(energy);
     }
@@ -159,10 +151,6 @@ public abstract class Creature implements Runnable {
     }
 
     // --- Health ---
-
-    public String displayHealthLevel() {
-        return this.health.toString();
-    }
 
     public void setHealth(int health) {
         this.health.setValue(health);

@@ -9,7 +9,7 @@ public class Lycanthrope extends Viviparous implements Walker {
 
     private AgeCategorie ageCategorie;
     private enum AgeCategorie {
-        JEUNE, ADULTE, VIEUX;
+        JEUNE, ADULTE, VIEUX
     }
     private int force; // nb de 0 à 10
     private int dominationFactor; // nb de gens dominé sur nb de gens qui domine
