@@ -9,7 +9,7 @@ Projet réalisé dans le cadre du cour de qualité de développement en 2eme ann
 
 <h1 align="center">
   <br>
-  METTRE LOGO APRES MERGE SUR MAIN
+  <img src="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/logo.png">
   <br>
   Oasis des Légendes
   <br>
