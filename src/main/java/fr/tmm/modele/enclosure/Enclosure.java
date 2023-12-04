@@ -41,12 +41,37 @@ public class Enclosure implements CreatureListener {
         this.onCreatureBirth(egg.getType());
     }
 
+
     @Override
     public void onCreatureBirth(String type) {
         // TMP - a changer
         this.creaturesPresent.add(new Dragon("egghatched", "m",50,50,0));
         // TODO -> laisser vide mais override la fct pour chaque espece
     }
+
+
+    /*
+    @Override
+    public void onCreatureBirth(String type) {
+        Creature baby;
+        // Utiliser les informations de BabySize pour déterminer la taille du nouveau-né
+        double babyWeight = determineBabyWeightSize(female.getType());
+        double babyHeight = determineBabyHeightSize(female.getType());
+
+        // Créer un bébé avec des valeurs aléatoires de largeur et hauteur
+        this.creaturesPresent.add(new Creature("egghatched", "m",babyWeight,babyHeight,0));
+    }
+
+    private double determineBabyWeightSize(String creatureType) {
+        return BabySize.Weight.getMin(creatureType) + Math.random() * (BabySize.Weight.getMax(creatureType) - BabySize.Weight.getMin(creatureType));
+    }
+
+    private double determineBabyHeightSize(String creatureType) {
+        return BabySize.Height.getMin(creatureType) + Math.random() * (BabySize.Height.getMax(creatureType) - BabySize.Height.getMin(creatureType));
+    }
+
+     */
+
 
     @Override
     public void onEggLaying(Egg egg) {
