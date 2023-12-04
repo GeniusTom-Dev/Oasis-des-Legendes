@@ -8,6 +8,5 @@ public interface CreatureListener {
     void onCreatureDeath(Creature creature);
     void onEggHatching(Egg egg);
     void onCreatureBirth(String type);
-
     void onEggLaying(Egg egg);
 }

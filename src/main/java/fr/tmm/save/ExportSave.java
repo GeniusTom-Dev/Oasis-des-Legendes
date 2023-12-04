@@ -101,6 +101,8 @@ public class ExportSave {
         creatureDetail.put("satiety", creature.getSatiety());
         creatureDetail.put("energy", creature.getEnergy());
         creatureDetail.put("health", creature.getHealth());
+        creatureDetail.put("isSick", creature.isSick());
+        creatureDetail.put("isAsleep", creature.isAsleep());
         return creatureDetail;
     }
 }

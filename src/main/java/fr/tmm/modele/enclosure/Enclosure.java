@@ -151,6 +151,7 @@ public class Enclosure implements CreatureListener {
         return cleanliness;
     }
 
+/*
     // Méthode pour afficher les caractéristiques de l'enclos
     public void showCaracteristics() {
         System.out.println("Caractéristiques de l'enclos " + name + ":");
@@ -163,6 +164,7 @@ public class Enclosure implements CreatureListener {
             System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
         }
     }
+*/
 
 
     public void startReproductionThread() {

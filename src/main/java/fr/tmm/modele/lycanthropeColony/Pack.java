@@ -8,9 +8,15 @@ import java.util.Collection;
 public class Pack {
 
     private Collection<Lycanthrope> lycanthropes;
-    private Pair<Lycanthrope, Lycanthrope> coupleAlpha;
+    private Lycanthrope[] coupleAlpha = new Lycanthrope[2];
 
-    public Pack() {
+    public Pack(Lycanthrope maleAlpha, Lycanthrope femaleAlpha) {
+/*
+        this.coupleAlpha.
+*/
+    }
 
+    public Collection<Lycanthrope> getLycanthropes() {
+        return this.lycanthropes;
     }
 }

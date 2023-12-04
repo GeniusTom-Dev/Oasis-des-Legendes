@@ -9,6 +9,10 @@ public class EnergyIndicator extends Indicator {
         this.isAsleep = false;
     }
 
+    /**
+     * Decrement by a certain amount the indicator value
+     * @param amount
+     */
     @Override
     public void decrement(int amount) {
         super.decrement(amount);
@@ -17,6 +21,10 @@ public class EnergyIndicator extends Indicator {
         }
     }
 
+    /**
+     * Increment by a certain amount the indicator value
+     * @param amount
+     */
     @Override
     public void increment(int amount) {
         super.increment(amount);
@@ -25,6 +33,10 @@ public class EnergyIndicator extends Indicator {
         }
     }
 
+    /**
+     * Set the indicator value
+     * @param value
+     */
     @Override
     public void setValue(int value) {
         super.setValue(value);
@@ -35,14 +47,24 @@ public class EnergyIndicator extends Indicator {
         }
     }
 
+    /**
+     * Make the creature fall asleep
+     */
     private void fallAsleep() {
         this.isAsleep = true;
     }
 
+    /**
+     * Wake up the creature
+     */
     private void wakeUp() {
         this.isAsleep = false;
     }
 
+    /**
+     * Check if the creature is asleep
+     * @return true if the creature is asleep
+     */
     public boolean isAsleep() {
         return this.isAsleep;
     }
