@@ -29,11 +29,39 @@ public class Enclosure implements CreatureListener {
     protected ArrayList<Egg> eggWaitingToHatch = new ArrayList<>();
     protected CleanlinessStatus cleanliness;
 
+    /**
+     * Enumeration representing the cleanliness state of the enclosure
+     */
+    public enum CleanlinessStatus {
+        UNSANITARY(75), // cratures have 75% chance of getting sick
+        DIRTY(25),
+        CLEAN(5),
+        SPOTLESS(0);
+
+        public int getRiskOfGettingSick() {
+            return riskOfGettingSick;
+        }
+
+        private int riskOfGettingSick;
+
+        CleanlinessStatus(int i) {
+            this.riskOfGettingSick = i;
+        }
+    }
+
+    /**
+     * Remove a dead creature from the enclosure
+     * @param deadCreature
+     */
     @Override
     public void onCreatureDeath(Creature deadCreature) {
         this.creaturesPresent.remove(deadCreature);
     }
 
+    /**
+     * Add the newborn to the creature list after the hatching of an egg
+     * @param egg
+     */
     @Override
     public void onEggHatching(Egg egg) {
         Log.getInstance().addLog("Un oeuf de " + egg.getType() + " a éclos dans l'enclos " + name + ".");
@@ -41,7 +69,10 @@ public class Enclosure implements CreatureListener {
         this.onCreatureBirth(egg.getType());
     }
 
-
+    /**
+     * Add a newbord to the creature list after that a female has calved
+     * @param type
+     */
     @Override
     public void onCreatureBirth(String type) {
         // TMP - a changer
@@ -72,27 +103,13 @@ public class Enclosure implements CreatureListener {
 
      */
 
-
+    /**
+     * Add an egg to the eggs enclosure after that a female has layed eggs
+     * @param egg
+     */
     @Override
     public void onEggLaying(Egg egg) {
         this.eggWaitingToHatch.add(egg);
-    }
-
-    public enum CleanlinessStatus {
-        UNSANITARY(75), // cratures have 75% chance of getting sick
-        DIRTY(25),
-        CLEAN(5),
-        SPOTLESS(0);
-
-        public int getRiskOfGettingSick() {
-            return riskOfGettingSick;
-        }
-
-        private int riskOfGettingSick;
-
-        CleanlinessStatus(int i) {
-            this.riskOfGettingSick = i;
-        }
     }
 
     public Enclosure(String name, double area, int maxCapacity) {
@@ -102,6 +119,9 @@ public class Enclosure implements CreatureListener {
         this.cleanliness = CleanlinessStatus.SPOTLESS;
     }
 
+    /**
+     * Make some creature sick depending of the cleanliness state of the enclosure
+     */
     public void makeCreatureSickDependingOfCleanliness() {
         if (this.cleanliness.riskOfGettingSick != 0) {
             for (Creature creature : this.getCreaturesPresent()) {
@@ -113,7 +133,11 @@ public class Enclosure implements CreatureListener {
         }
     }
 
-    // Méthode pour ajouter une créature à l'enclos
+    /**
+     * Check that a creature is a walker and can be added to an enclosure
+     * @param creature : the creature who is going to be checked
+     * @return true if the creature is a walker
+     */
     public boolean addCreature(Creature creature) {
         if (creature instanceof Walker) {
             return addCreatureThatMatchesEnclosureType(creature);
@@ -123,6 +147,11 @@ public class Enclosure implements CreatureListener {
         return false;
     }
 
+    /**
+     * Check that a creature
+     * @param creature
+     * @return
+     */
     protected boolean addCreatureThatMatchesEnclosureType(Creature creature) {
         if (creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
@@ -140,14 +169,19 @@ public class Enclosure implements CreatureListener {
         return true;
     }
 
-    // Méthode pour enlever une créature de l'enclos
+    /**
+     * Remove a creature from the enclosure
+     * @param creature : the creature to remove
+     */
     public void removeCreature(Creature creature) {
         if (!creaturesPresent.remove(creature)) {
             throw new IllegalArgumentException(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
         }
     }
 
-    // Méthode pour nourrir les créatures de l'enclos
+    /**
+     * Feed the creature of the enclosure
+     */
     public void feedCreatures() {
         for (Creature creature : this.getCreaturesPresent()) {
             creature.eat();
@@ -155,17 +189,26 @@ public class Enclosure implements CreatureListener {
         Log.getInstance().addLog("Les créatures de l'enclos " + name + " ont été nourries.");
     }
 
-    // Méthode pour entretenir l'enclos
+    /**
+     * Set the cleanliness to the enclosure to the maximal state
+     */
     public void clean() {
         setCleanlinessDegree(CleanlinessStatus.SPOTLESS);
         Log.getInstance().addLog("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
     }
 
+    /**
+     * Set the cleanliness of the enclosure to the level just under the current level
+     */
     public void getDirtier() {
         this.cleanliness = getWorseState();
         Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
     }
 
+    /**
+     * Get the cleanliness state just under the current one
+     * @return the cleanliness state just under the current one or the current one if the current one is the worst state possible
+     */
     private CleanlinessStatus getWorseState() {
         CleanlinessStatus[] statuses = CleanlinessStatus.values();
         for (int i = 0; i < statuses.length; i++) {

@@ -20,6 +20,10 @@ public class Zoo {
 
     private Zoo() {}
 
+    /**
+     * Get the unique instance of the class Zoo
+     * @return the instance
+     */
     public static Zoo getInstance() {
         if (INSTANCE == null) {
             // TODO -> demander les infos pour creer le maitre du zoo et le nom du zoo
@@ -28,6 +32,9 @@ public class Zoo {
         return INSTANCE;
     }
 
+    /**
+     * Simulate a zoo with enclosures and creatures
+     */
     public void temporaryInit() {
         this.zooMaster = new ZooMaster("Julo", "m", 10, 10, 19);
         this.name = "Zoo de Test";
@@ -77,14 +84,20 @@ public class Zoo {
         this.enclosures = enclosures;
     }
 
-    public int addAnEnclosure(Enclosure enclosure) {
+    /**
+     * Add an enclosure to the zoo
+     * @param enclosure
+     */
+    public void addAnEnclosure(Enclosure enclosure) {
         if (this.enclosures.size() < NB_MAX_ENCLOSURE) {
             this.enclosures.add(enclosure);
-            return 0;
         }
-        return -1;
     }
 
+    /**
+     * Get all the creature of the zoo
+     * @return an arrayList with all the creature of the zoo
+     */
     public ArrayList<Creature> getAllCreatures() {
         ArrayList<Creature> creatures = new ArrayList<>();
         for (Enclosure enclo : this.enclosures) {

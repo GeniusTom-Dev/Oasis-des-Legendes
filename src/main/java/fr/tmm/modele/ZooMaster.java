@@ -9,6 +9,13 @@ public class ZooMaster extends Human {
         super(name, sex, weight, height, age);
     }
 
+    /**
+     * Transfer a creature from an enclosure to another
+     * @param creature : the creature to moved
+     * @param source : the current enclosure of the creature
+     * @param dest : the future enclosure of the creature
+     * @return true if the transfert was successful
+     */
     public boolean transferer(Creature creature, Enclosure source, Enclosure dest) {
         if (creature == null || source == null || dest == null) {
             throw new IllegalArgumentException("One of the parameter is null");
@@ -22,10 +29,18 @@ public class ZooMaster extends Human {
         return false;
     }
 
+    /**
+     * Clean an enclosure
+     * @param enclos
+     */
     public void cleanEnclosure(Enclosure enclos) {
         enclos.clean();
     }
 
+    /**
+     * Feed the creature of an enclosure
+     * @param enclos
+     */
     public void feedCreature(Enclosure enclos) {
         enclos.feedCreatures();
     }

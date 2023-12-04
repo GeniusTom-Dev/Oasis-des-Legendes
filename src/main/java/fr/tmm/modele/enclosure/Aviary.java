@@ -3,7 +3,6 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
-import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
@@ -11,6 +10,9 @@ import java.util.ArrayList;
 public class Aviary extends Enclosure {
     private RoofState roofState;
 
+    /**
+     * Enumeration representing the state of the aviary roof
+     */
     public enum RoofState {
         BROKEN(50), // 50% chance of a creature escaping
         DAMAGED(20), // 20% chance of a creature escaping
@@ -28,6 +30,11 @@ public class Aviary extends Enclosure {
         this.roofState = RoofState.INTACT;
     }
 
+    /**
+     * Check that a creature is a swimmer and can be added to an enclosure
+     * @param creature : the creature who is going to be checked
+     * @return true if the creature is a swimmer
+     */
     @Override
     public boolean addCreature(Creature creature) {
         if (creature instanceof Flyer) {
@@ -38,6 +45,9 @@ public class Aviary extends Enclosure {
         return false;
     }
 
+    /**
+     * Allow some creature to escape depending of the roof state
+     */
     public void chanceOfEscapingDependingRoofState() {
         if (this.roofState.riskOfEvasion != 0) {
             ArrayList<Creature> escapedCreature = new ArrayList<>();
@@ -53,14 +63,24 @@ public class Aviary extends Enclosure {
         }
     }
 
+    /**
+     * Set the roof state to INTACT
+     */
     public void repareRoof() {
         this.roofState = RoofState.INTACT;
     }
 
+    /**
+     * Set the roof level to the level under
+     */
     public void damageRoof() {
         this.roofState = getWorseRoofState();
     }
 
+    /**
+     * Get the roof state just under the current one
+     * @return the roof state just under the current one or the current one if the current one is the worst state possible
+     */
     private RoofState getWorseRoofState() {
         RoofState[] statuses = RoofState.values();
         for (int i = 0; i < statuses.length; i++) {
@@ -71,10 +91,18 @@ public class Aviary extends Enclosure {
         return roofState;
     }
 
+    /**
+     * Get the roof state of the aviary
+     * @return the roof state of the aviary of type RoofState
+     */
     public RoofState getRoofState() {
         return this.roofState;
     }
 
+    /**
+     * Set the roof state value of the aviary
+     * @param newRoofState of type RoofState
+     */
     public void setRoofState(RoofState newRoofState) {
         this.roofState = newRoofState;
     }
