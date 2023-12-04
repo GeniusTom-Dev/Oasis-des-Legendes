@@ -4,6 +4,11 @@ import java.util.Random;
 
 public class Utils {
 
+    /**
+     * Calcul if a bad event is going to happend depending of a risk pourcentage
+     * @param riskPourcentage
+     * @return true if the bad event is going to happend
+     */
     static public boolean isBadEventHappening(int riskPourcentage) {
         Random random = new Random();
         int nbRandom = random.nextInt(101); // [0, 100]

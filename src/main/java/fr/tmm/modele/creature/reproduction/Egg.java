@@ -21,6 +21,9 @@ public class Egg implements Runnable {
         return this.type;
     }
 
+    /**
+     * Thread of the egg
+     */
     @Override
     public void run() {
         while (timeBeforeHatching > 0) {
