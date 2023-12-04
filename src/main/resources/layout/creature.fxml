@@ -2,12 +2,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.tmm.controlers.CreatureController" prefWidth="1280" prefHeight="720"
-            stylesheets="@/styles/view/enclosures.css" fx:id="borderPane" styleClass="root">
+            stylesheets="@/styles/view/creature.css" fx:id="borderPane" styleClass="root">
 
     <top>
         <HBox spacing="125">
@@ -29,6 +37,166 @@
         </HBox>
     </top>
 
+    <center>
+        <HBox maxWidth="900" maxHeight="500" alignment="CENTER" spacing="50">
+            <VBox styleClass="box">
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="24" />
+                        </font>
+                        Créature
+                    </Text>
+                </HBox>
+
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Nom :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Text fill="white" fx:id="creatureName">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Sexe :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Text fill="white" fx:id="creatureSex">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Poids :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Text fill="white" fx:id="creatureWeight">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Taille :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Text fill="white" fx:id="creatureHeight">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Age :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Text fill="white" fx:id="creatureAge">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Faim :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="20" alignment="CENTER">
+                        <ProgressBar fx:id="creatureSatietyBar" progress="0.42"/>
+
+                        <Text fill="white" fx:id="creatureSatiety" style="-fx-padding: 0 0 0 20 ">
+                            <font>
+                                <Font size="20"/>
+                            </font>
+                            42%
+                        </Text>
+                    </HBox>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Energie :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="20" alignment="CENTER">
+                        <ProgressBar fx:id="creatureEnergyBar" progress="0.42"/>
+
+                        <Text fill="white" fx:id="creatureEnergy" style="-fx-padding: 0 0 0 20 ">
+                            <font>
+                                <Font size="20"/>
+                            </font>
+                            42%
+                        </Text>
+                    </HBox>
+                </HBox>
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 20 0 20;">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Santé :
+                    </Text>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="20" alignment="CENTER">
+                        <ProgressBar fx:id="creatureHealthBar" progress="0.42"/>
+
+                        <Text fill="white" fx:id="creatureHealth" style="-fx-padding: 0 0 0 20 ">
+                            <font>
+                                <Font size="20"/>
+                            </font>
+                            42%
+                        </Text>
+                    </HBox>
+                </HBox>
+            </VBox>
+
+            <VBox styleClass="box">
+                <HBox minHeight="50" maxHeight="50" alignment="CENTER">
+                    <Text fill="white">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                        Type :
+                    </Text>
+                    <Text fill="white" fx:id="creatureType">
+                        <font>
+                            <Font size="20"/>
+                        </font>
+                    </Text>
+                </HBox>
+                <ImageView fitWidth="400" fitHeight="400" fx:id="creatureImg" styleClass="image"></ImageView>
+            </VBox>
+
+        </HBox>
+    </center>
 
 
 </BorderPane>
