@@ -44,7 +44,7 @@ Projet réalisé dans le cadre du cour de qualité de développement en 2eme ann
 ## Utilisation
 
 Pour cloner et utiliser l'application,  vous pouvez réaliser les commandes ci dessous depuis votre terminal:
-<a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes.wiki">Manuel</a>
+<a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki">Manuel</a>
 
 ```bash
 # Cloner le dossier
