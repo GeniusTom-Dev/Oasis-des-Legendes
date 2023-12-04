@@ -23,7 +23,7 @@ Label{
     -fx-max-width: 180;
 }
 
-.backButton {
+.actionButton {
     -fx-background-color: radial-gradient(center 50% 50%, radius 100%, #5d6e6f, #121c24);
     -fx-background-radius: 15;
     -fx-border-width: 5;

@@ -18,14 +18,15 @@
             stylesheets="@/styles/view/creature.css" fx:id="borderPane" styleClass="root">
 
     <top>
-        <HBox spacing="125">
-            <Button styleClass="backButton" alignment="CENTER" onAction="#backButton">
+        <HBox alignment="CENTER">
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#backButton">
                 <graphic>
                     <ImageView fitWidth="25" fitHeight="25">
                         <Image url="@/assets/icons/left-arrow.png"/>
                     </ImageView>
                 </graphic>
             </Button>
+            <Region HBox.hgrow="ALWAYS"/>
             <HBox styleClass="navbar" alignment="CENTER">
                 <Text fill="white" fx:id="title">
                     <font>
@@ -34,6 +35,14 @@
                     Nom de l'enclo
                 </Text>
             </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button styleClass="actionButton" alignment="CENTER">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/actionButton.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
         </HBox>
     </top>
 
@@ -194,8 +203,9 @@
                 </HBox>
                 <ImageView fitWidth="400" fitHeight="400" fx:id="creatureImg" styleClass="image"></ImageView>
             </VBox>
-
         </HBox>
+
+
     </center>
 
 

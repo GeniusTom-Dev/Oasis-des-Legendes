@@ -16,7 +16,7 @@
 
     <top>
         <HBox spacing="125">
-            <Button styleClass="backButton" alignment="CENTER" onAction="#backButton">
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#backButton">
                 <graphic>
                     <ImageView fitWidth="25" fitHeight="25">
                         <Image url="@/assets/icons/left-arrow.png"/>

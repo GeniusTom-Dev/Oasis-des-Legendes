@@ -69,4 +69,7 @@ public class EnclosureController {
     public void backButton(ActionEvent actionEvent) {
         EnclosuresController enclosuresController = (EnclosuresController) setScene("layout/enclosures.fxml", "Enclo");
     }
+
+    public void cleanButton(ActionEvent actionEvent) {
+    }
 }
