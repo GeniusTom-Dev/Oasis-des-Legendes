@@ -32,10 +32,17 @@ public class ExportSave {
         zoo.addAnEnclosure(enclos1);
         zoo.addAnEnclosure(aquarium1);
         zoo.addAnEnclosure(voiliere1);
-        exportSave(zoo,null);
+        exportSave(null);
     }
 
-    public static void exportSave(Zoo zoo, String outputPath) throws FileNotFoundException, JSONException {
+    /**
+     * Create a json file from a zoo
+     * @param outputPath : path of the json, if null, the path will be the default one
+     * @throws FileNotFoundException
+     * @throws JSONException
+     */
+    public static void exportSave(String outputPath) throws FileNotFoundException, JSONException {
+        Zoo zoo = Zoo.getInstance();
         String path = outputPath;
         if (outputPath == null) {
             path = "src/main/java/fr/tmm/save/save.json";
@@ -65,6 +72,12 @@ public class ExportSave {
         }
     }
 
+    /**
+     * Return a JSONObject with the current zoo master detail
+     * @param zoo : current zoo
+     * @return a JSONObject with the current zoo master detail
+     * @throws JSONException
+     */
     private static JSONObject getZooMasterDetail(Zoo zoo) throws JSONException {
         JSONObject zooMasterDetails = new JSONObject();
         zooMasterDetails.put("height", zoo.getZooMaster().getHeight());
@@ -75,6 +88,12 @@ public class ExportSave {
         return zooMasterDetails;
     }
 
+    /**
+     * Return a JSONObject with an enclosure details
+     * @param enclos : enclosure to get the details from
+     * @return a JSONObject with an enclosure details
+     * @throws JSONException
+     */
     private static JSONObject getEnclosureDetail(Enclosure enclos) throws JSONException {
         JSONObject encloDetails = new JSONObject();
         encloDetails.put("superficie", enclos.getSurfaceArea());
@@ -90,6 +109,12 @@ public class ExportSave {
         return encloDetails;
     }
 
+    /**
+     * Return a JSONObject with a creature detail
+     * @param creature : creature to get the detail from
+     * @return a JSONObject with a creature detail
+     * @throws JSONException
+     */
     private static JSONObject getCreatureDetail(Creature creature) throws JSONException {
         JSONObject creatureDetail = new JSONObject();
         creatureDetail.put("name", creature.getName());

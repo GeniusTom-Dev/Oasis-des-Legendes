@@ -2,7 +2,6 @@ package fr.tmm.modele;
 import fr.tmm.modele.creature.species.Mermaid;
 import fr.tmm.modele.enclosure.Aquarium;
 import fr.tmm.modele.enclosure.Aviary;
-import fr.tmm.modele.enclosure.Enclosure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

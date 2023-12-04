@@ -19,7 +19,13 @@ public class ImportSave {
         System.out.println("Id : " + test.getInt("id"));
     }
 
-    public static void importSave(Zoo zoo, String inputPath) throws FileNotFoundException, JSONException {
+    /**
+     * Create a zoo from a json file
+     * @param inputPath : path of the json file, if null, the path will be the default one
+     * @throws FileNotFoundException
+     * @throws JSONException
+     */
+    public static void importSave(String inputPath) throws FileNotFoundException, JSONException {
         String path = inputPath;
         if (inputPath == null) {
             path = "src/main/java/fr/tmm/save/save.json";

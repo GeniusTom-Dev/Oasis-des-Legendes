@@ -22,7 +22,7 @@ class ImportSaveTest {
 
     @Test
     void test1() throws FileNotFoundException, JSONException {
-        ImportSave.importSave(zoo, "src/test/java/fr/tmm/save/expected1.json");
+        ImportSave.importSave("src/test/java/fr/tmm/save/expected1.json");
         assertEquals(zoo.getZooMaster().getSex(), "m");
         assertEquals(zoo.getZooMaster().getName(), "Julot");
         assertEquals(zoo.getZooMaster().getWeight(), 10);
