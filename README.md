@@ -65,7 +65,7 @@ Vous pouvez [téléchargé](https://github.com/GeniusTom-Dev/Oasis-des-Legendes)
 Participants :
 - [Mathieu Leroux](http://github.com/Badlix)
 - [Tom Even](https://github.com/GeniusTom-Dev)
-- [Mathieu Leroux](http://github.com/Badlix)
+- [Maxime Jauras](https://github.com/JAURAS-Maxime-2225046a)
 - [Tom Even](https://github.com/GeniusTom-Dev)
 
 
