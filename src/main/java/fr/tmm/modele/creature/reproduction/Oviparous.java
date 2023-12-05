@@ -14,20 +14,16 @@ public abstract class Oviparous extends Creature {
 
     public void startBecomePregnantThread() {
         Thread becomePregnantThread = new Thread(() -> {
-            while (true) {
+            while (gestationCounter > 0) {
                 try {
                     Thread.sleep(1000);
                     gestationCounter--;
-                    if (gestationCounter == 0) {
-                        layEgg(1);
-                        gestationCounter = Gestation.getValue(this.getType()); // Réinitialiser le compteur
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            layEgg(NbChildren.determineChildrenNb(this.getType()));
         });
-
         becomePregnantThread.start();
     }
     public String layEgg(int nbEgg) {

@@ -13,20 +13,16 @@ public abstract class Viviparous extends Creature {
 
     public void startBecomePregnantThread() {
         Thread becomePregnantThread = new Thread(() -> {
-            while (true) {
+            while (gestationCounter > 0) {
                 try {
                     Thread.sleep(1000);
                     gestationCounter--;
-                    if (gestationCounter == 0) {
-                        calve(1);
-                        gestationCounter = Gestation.getValue(this.getType()); // Réinitialiser le compteur
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            calve(NbChildren.determineChildrenNb(this.getType()));
         });
-
         becomePregnantThread.start();
     }
     public String calve(int nbChild) {
@@ -34,6 +30,11 @@ public abstract class Viviparous extends Creature {
             if (this.getSex().equals("Femelle")) {
                 String strChild = nbChild > 1 ? " enfants." : "enfant.";
                 Log.getInstance().addLog(this.getName() + ", une femelle " + this.getType() + ", vient de mettre bas " + nbChild + strChild);
+                for (int i = 0; i < nbChild; i++) {
+                    double babyWeight = BabySize.Weight.determineFromType(type);
+                    double babyHeight = BabySize.Height.determineFromType(type);
+                    this.listener.onCreatureBirth(this.born(babyWeight, babyHeight));
+                }
             } else {
                 throw new Exception("Les mâles ne peuvent pas mettre bas");
             }
@@ -43,5 +44,4 @@ public abstract class Viviparous extends Creature {
         return "";
     }
 
-    ;
 }

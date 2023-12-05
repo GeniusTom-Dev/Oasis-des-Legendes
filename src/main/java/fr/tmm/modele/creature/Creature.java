@@ -59,6 +59,10 @@ public abstract class Creature implements Runnable {
         this.die();
     }
 
+    public Creature born(double weight, double height) {
+        return null;
+    }
+
     public void makeNoise(){
         Log.getInstance().addLog(this.name + " émet un son puissant !");
     }

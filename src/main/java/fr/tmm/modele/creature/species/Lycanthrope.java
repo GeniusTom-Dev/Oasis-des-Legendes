@@ -1,5 +1,7 @@
 package fr.tmm.modele.creature.species;
 
+import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.reproduction.BabySize;
 import fr.tmm.modele.creature.reproduction.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.lycanthropeColony.Colony;
@@ -51,4 +53,9 @@ public class Lycanthrope extends Viviparous implements Walker {
 
     @Override
     public void run() {super.run();}
+
+    @Override
+    public Creature born(double weight, double height) {
+        return new Lycanthrope("Un lycan", "", weight, height, 0);
+    }
 }

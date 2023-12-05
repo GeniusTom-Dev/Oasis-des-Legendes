@@ -4,21 +4,20 @@ import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
 
 public class Egg implements Runnable {
-    private String type;
+    private Creature mother;
     private int timeBeforeHatching;
-
     private CreatureListener listener;
 
     public Egg(Creature mother) {
-        this.type = mother.getClass().getSimpleName();
-        this.timeBeforeHatching = Incubation.getValue(this.type);
+        this.mother = mother;
+        this.timeBeforeHatching = Incubation.getValue(mother.getType());
         this.listener = mother.getListener();
         Thread t = new Thread(this);
         t.start();
     }
 
     public String getType() {
-        return this.type;
+        return this.mother.getType();
     }
 
     /**
@@ -40,4 +39,6 @@ public class Egg implements Runnable {
     public CreatureListener getListener() {
         return listener;
     }
+
+    public Creature getMother() {return this.mother;}
 }

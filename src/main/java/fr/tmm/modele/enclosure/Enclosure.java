@@ -3,22 +3,17 @@ package fr.tmm.modele.enclosure;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
-import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.creature.reproduction.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.creature.species.*;
 import fr.tmm.modele.utils.Utils;
 
-import fr.tmm.modele.creature.reproduction.BabySize;
-import fr.tmm.modele.creature.reproduction.Gestation;
-import fr.tmm.modele.creature.reproduction.Incubation;
 import fr.tmm.modele.creature.reproduction.Viviparous;
 import fr.tmm.modele.creature.reproduction.Oviparous;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Enclosure implements CreatureListener {
     protected String name;
@@ -38,19 +33,16 @@ public class Enclosure implements CreatureListener {
     public void onEggHatching(Egg egg) {
         Log.getInstance().addLog("Un oeuf de " + egg.getType() + " a éclos dans l'enclos " + name + ".");
         this.eggWaitingToHatch.remove(egg);
-        this.onCreatureBirth(egg.getType());
+        this.onCreatureBirth(egg.getMother());
     }
 
-
-    /*
     @Override
-    public void onCreatureBirth(String type) {
-        // TMP - a changer
-        this.creaturesPresent.add(new Dragon("egghatched", "m",50,50,0));
-        // TODO -> laisser vide mais override la fct pour chaque espece
+    public void onCreatureBirth(Creature mother) {
+        double babyWeight = BabySize.Weight.determineFromType(mother.getType());
+        double babyHeight = BabySize.Height.determineFromType(mother.getType());
+        Creature baby = mother.born(babyWeight, babyHeight);
+        this.creaturesPresent.add(baby);
     }
-
-     */
 
     @Override
     public void onEggLaying(Egg egg) {
@@ -154,19 +146,7 @@ public class Enclosure implements CreatureListener {
         }
         return cleanliness;
     }
-
-    // Méthode pour afficher les caractéristiques de l'enclos
-/*    public void showCaracteristics() {
-        System.out.println("Caractéristiques de l'enclos " + name + ":");
-        System.out.println("Superficie : " + surfaceArea);
-        System.out.println("Capacité maximale : " + maxCapacity);
-        System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
-        System.out.println("Degré de propreté : " + cleanliness);
-        System.out.println("Créatures présentes :");
-        for (Creature creature : creaturesPresent) {
-            System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
-        }
-    }*/
+    
     /////////////////////////////////////////////////:
 
     public void startReproductionThread() {
@@ -191,22 +171,21 @@ public class Enclosure implements CreatureListener {
 
    private void reproduce() {
         // Sélectionner un mâle et une femelle aléatoirement
-        Creature male = getRandomMale();
-        Creature female = getRandomFemale();
+        Creature male = getActiveRandomMale();
+        Creature female = getActiveRandomFemale();
 
         if (male != null && female != null) {
             // Faire se reproduire le mâle et la femelle
-            // Appeler la méthode spécifique pour la reproduction en fonction du type de créature
-            Creature baby = reproduceCreatures(male, female);
+            reproduceCreatures(male, female);
         }
     }
 
-    private Creature getRandomMale() {
+    private Creature getActiveRandomMale() {
         ArrayList<Creature> males = getCreaturesBySex("male");
         return males.get(Utils.getRandomIndexInList(males));
     }
 
-    private Creature getRandomFemale() {
+    private Creature getActiveRandomFemale() {
         ArrayList<Creature> females = getCreaturesBySex("female");
         return females.get(Utils.getRandomIndexInList(females));
     }
@@ -222,55 +201,13 @@ public class Enclosure implements CreatureListener {
     }
 
     private Creature reproduceCreatures(Creature male, Creature female) {
-        // Logique spécifique pour la reproduction d'ovipares
         if (male instanceof Oviparous && female instanceof Oviparous) {
             ((Oviparous) female).startBecomePregnantThread();
-
         }
-
-        // Logique spécifique pour la reproduction de vivipares
         else if (male instanceof Viviparous && female instanceof Viviparous) {
             ((Viviparous) female).startBecomePregnantThread();
         }
         return null;
-    }
-
-    private Creature createBabyCreature(String type, double weight, double height) {
-        if ("Dragon".equalsIgnoreCase(type)) {
-            return new Dragon("Baby Dragon", "Unknown", weight, height, 0);
-        }
-        else if ("Kraken".equalsIgnoreCase(type)){
-            return new Kraken("Baby Kraken", "Unknown", weight, height, 0);
-        }
-        else if ("Lycanthrope".equalsIgnoreCase(type)){
-            return new Lycanthrope("Baby Lycanthrope", "Unknown", weight, height, 0);
-        }
-        else if ("Megalodon".equalsIgnoreCase(type)){
-            return new Megalodon("Baby Megalodon", "Unknown", weight, height, 0);
-        }
-        else if ("Mermaid".equalsIgnoreCase(type)){
-            return new Mermaid("Baby Mermaid", "Unknown", weight, height, 0);
-        }
-        else if ("Nymph".equalsIgnoreCase(type)){
-            return new Nymph("Baby Nymph", "Unknown", weight, height, 0);
-        }
-        else if ("Phoenix".equalsIgnoreCase(type)){
-            return new Phoenix("Baby Phoenix", "Unknown", weight, height, 0);
-        }
-        else if ("Unicorn".equalsIgnoreCase(type)){
-            return new Unicorn("Baby Unicorn", "Unknown", weight, height, 0);
-        }
-        return null;
-    }
-
-    @Override
-    public void onCreatureBirth(String type) {
-        // Utiliser les informations de BabySize pour déterminer la taille du nouveau-né
-        double babyWeight = BabySize.Weight.determineBabyWeightSize(type);
-        double babyHeight = BabySize.Height.determineBabyHeightSize(type);
-
-        Creature babyCreature = createBabyCreature(type, babyWeight, babyHeight);
-        this.creaturesPresent.add(babyCreature);
     }
 
     ///////////////////////////////////////////////////////////////////////////

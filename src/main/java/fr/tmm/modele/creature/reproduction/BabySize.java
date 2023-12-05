@@ -1,7 +1,5 @@
 package fr.tmm.modele.creature.reproduction;
 
-import fr.tmm.modele.creature.Creature;
-
 public class BabySize {
     public enum Height {
         DRAGON(1.5, 2),
@@ -29,7 +27,7 @@ public class BabySize {
             return max;
         }
 
-        public static double getMin(String type) {
+        private static double getMin(String type) {
             for (Height height : values()) {
                 if (height.name().contains(type.toUpperCase())) {
                     return height.min;
@@ -38,7 +36,7 @@ public class BabySize {
             throw new IllegalArgumentException("Creature not found for class: " + type);
         }
 
-        public static double getMax(String type) {
+        private static double getMax(String type) {
             for (Height height : values()) {
                 if (height.name().contains(type.toUpperCase())) {
                     return height.max;
@@ -47,7 +45,7 @@ public class BabySize {
             throw new IllegalArgumentException("Creature not found for class: " + type);
         }
 
-        public static double determineBabyHeightSize(String creatureType) {
+        public static double determineFromType(String creatureType) {
             return BabySize.Height.getMin(creatureType) + Math.random() * (BabySize.Height.getMax(creatureType) - BabySize.Height.getMin(creatureType));
         }
     }
@@ -71,14 +69,14 @@ public class BabySize {
         }
 
         public double getMin() {
-            return min;
+            return this.min;
         }
 
         public double getMax() {
-            return max;
+            return this.max;
         }
 
-        public static double getMin(String type) {
+        private static double getMin(String type) {
             for (Weight weight : values()) {
                 if (weight.name().contains(type.toUpperCase())) {
                     return weight.min;
@@ -87,7 +85,7 @@ public class BabySize {
             throw new IllegalArgumentException("Creature not found for class: " + type);
         }
 
-        public static double getMax(String type) {
+        private static double getMax(String type) {
             for (Weight weight : values()) {
                 if (weight.name().contains(type.toUpperCase())) {
                     return weight.max;
@@ -96,7 +94,7 @@ public class BabySize {
             throw new IllegalArgumentException("Creature not found for class: " + type);
         }
 
-        public static double determineBabyWeightSize(String creatureType) {
+        public static double determineFromType(String creatureType) {
             return BabySize.Weight.getMin(creatureType) + Math.random() * (BabySize.Weight.getMax(creatureType) - BabySize.Weight.getMin(creatureType));
         }
     }
