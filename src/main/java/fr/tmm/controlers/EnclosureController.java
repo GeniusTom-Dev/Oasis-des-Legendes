@@ -53,7 +53,7 @@ public class EnclosureController {
         enclosureSurface.setText(String.valueOf(this.enclosure.getSurfaceArea()));
         enclosureCapacity.setText(String.valueOf(this.enclosure.getMaxCapacity()));
         enclosureCountCreature.setText(String.valueOf(creatures.size()));
-        enclosureClean.setText(String.valueOf(this.enclosure.getCleanlinessDegree()));
+        enclosureClean.textProperty().set(String.valueOf(this.enclosure.getCleanlinessDegree()));
 
 
         for (int i = 0; i < creatures.size(); i++) {
