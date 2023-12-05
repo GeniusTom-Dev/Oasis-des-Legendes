@@ -156,7 +156,7 @@ public class Enclosure implements CreatureListener {
     }
 
     // Méthode pour afficher les caractéristiques de l'enclos
-    public void showCaracteristics() {
+/*    public void showCaracteristics() {
         System.out.println("Caractéristiques de l'enclos " + name + ":");
         System.out.println("Superficie : " + surfaceArea);
         System.out.println("Capacité maximale : " + maxCapacity);
@@ -166,8 +166,8 @@ public class Enclosure implements CreatureListener {
         for (Creature creature : creaturesPresent) {
             System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
         }
-    }
-
+    }*/
+    /////////////////////////////////////////////////:
 
     public void startReproductionThread() {
         Thread reproductionThread = new Thread(() -> {
@@ -203,28 +203,18 @@ public class Enclosure implements CreatureListener {
 
     private Creature getRandomMale() {
         ArrayList<Creature> males = getCreaturesBySex("male");
-        return getRandomCreature(males);
+        return males.get(Utils.getRandomIndexInList(males));
     }
 
     private Creature getRandomFemale() {
         ArrayList<Creature> females = getCreaturesBySex("female");
-        return getRandomCreature(females);
-    }
-
-    private Creature getRandomCreature(ArrayList<Creature> creatures) {
-        if (creatures.isEmpty()) {
-            return null;
-        }
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(creatures.size());
-        return creatures.get(randomIndex);
+        return females.get(Utils.getRandomIndexInList(females));
     }
 
     private ArrayList<Creature> getCreaturesBySex(String sex) {
         ArrayList<Creature> creaturesBySex = new ArrayList<>();
         for (Creature creature : creaturesPresent) {
-            if (creature.getSex().equalsIgnoreCase(sex)) {
+            if (creature.getSex().equalsIgnoreCase(sex) && !creature.isAsleep()) {
                 creaturesBySex.add(creature);
             }
         }
@@ -276,23 +266,14 @@ public class Enclosure implements CreatureListener {
     @Override
     public void onCreatureBirth(String type) {
         // Utiliser les informations de BabySize pour déterminer la taille du nouveau-né
-        double babyWeight = determineBabyWeightSize(type);
-        double babyHeight = determineBabyHeightSize(type);
+        double babyWeight = BabySize.Weight.determineBabyWeightSize(type);
+        double babyHeight = BabySize.Height.determineBabyHeightSize(type);
 
         Creature babyCreature = createBabyCreature(type, babyWeight, babyHeight);
         this.creaturesPresent.add(babyCreature);
     }
 
-    private double determineBabyWeightSize(String creatureType) {
-        return BabySize.Weight.getMin(creatureType) + Math.random() * (BabySize.Weight.getMax(creatureType) - BabySize.Weight.getMin(creatureType));
-    }
-
-    private double determineBabyHeightSize(String creatureType) {
-        return BabySize.Height.getMin(creatureType) + Math.random() * (BabySize.Height.getMax(creatureType) - BabySize.Height.getMin(creatureType));
-    }
-
-
-
+    ///////////////////////////////////////////////////////////////////////////
     // --- GETTER ---
 
     public String getName() {

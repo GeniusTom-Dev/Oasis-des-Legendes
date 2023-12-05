@@ -1,5 +1,8 @@
 package fr.tmm.modele.utils;
 
+import fr.tmm.modele.creature.Creature;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Utils {
@@ -16,6 +19,13 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+    public static int getRandomIndexInList(ArrayList list) {
+        if (list.isEmpty()) return -1;
+        Random random = new Random();
+        int randomIndex = random.nextInt(list.size());
+        return randomIndex;
     }
 
     static public int randomIntInInterval(int min, int max) {

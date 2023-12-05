@@ -46,6 +46,10 @@ public class BabySize {
             }
             throw new IllegalArgumentException("Creature not found for class: " + type);
         }
+
+        public static double determineBabyHeightSize(String creatureType) {
+            return BabySize.Height.getMin(creatureType) + Math.random() * (BabySize.Height.getMax(creatureType) - BabySize.Height.getMin(creatureType));
+        }
     }
 
     public enum Weight {
@@ -90,6 +94,10 @@ public class BabySize {
                 }
             }
             throw new IllegalArgumentException("Creature not found for class: " + type);
+        }
+
+        public static double determineBabyWeightSize(String creatureType) {
+            return BabySize.Weight.getMin(creatureType) + Math.random() * (BabySize.Weight.getMax(creatureType) - BabySize.Weight.getMin(creatureType));
         }
     }
 
