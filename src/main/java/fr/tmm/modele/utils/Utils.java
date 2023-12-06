@@ -10,7 +10,7 @@ public class Utils {
 
     /**
      * Calcul if a bad event is going to happend depending of a risk pourcentage
-     * @param riskPourcentage
+     * @param riskPourcentage : the pourcentage of the bad event
      * @return true if the bad event is going to happend
      */
     static public boolean isBadEventHappening(int riskPourcentage) {
@@ -24,7 +24,7 @@ public class Utils {
 
     /**
      * Calcul a random number between 0 and list size
-     * @param list
+     * @param list : a list
      * @return a random index of the list
      */
     public static int getRandomIndexInList(ArrayList list) {
@@ -34,13 +34,12 @@ public class Utils {
         return randomIndex;
     }
 
-    static public int randomIntInInterval(int min, int max) {
-        Random random = new Random();
-        int nbRandom = random.nextInt((max - min) - 1) + min;
-        return nbRandom;
-    }
-
-
+    /**
+     * Returns the value lower than the current value of an enum
+     * @param enumValue : the current enum value
+     * @return : the lower value of the enum
+     * @param <E> : an enum
+     */
     public static  <E extends Enum<E>> E getWorseState(E enumValue) {
         E[] enumValues = enumValue.getDeclaringClass().getEnumConstants();
         for (int i = 0; i < enumValues.length; i++) {

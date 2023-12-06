@@ -14,7 +14,6 @@ public class Log {
      */
     public static Log getInstance() {
         if (INSTANCE == null) {
-            // TODO -> demander les infos pour creer le maitre du zoo et le nom du zoo
             INSTANCE = new Log();
         }
         return INSTANCE;
@@ -37,7 +36,7 @@ public class Log {
 
     /**
      * Get the last log
-     * @return the lag log
+     * @return the last log
      */
     public String getLastLog() {
         if (this.logs.isEmpty()) {
@@ -46,6 +45,9 @@ public class Log {
         return this.logs.get(0);
     }
 
+    /**
+     * Print all the logs in the console
+     */
     public void showLogs() {
         System.out.println("LOGS : ");
         for (String log : logs) {

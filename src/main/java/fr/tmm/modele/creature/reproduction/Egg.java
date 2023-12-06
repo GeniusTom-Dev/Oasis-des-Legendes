@@ -22,7 +22,10 @@ public class Egg implements Runnable {
     }
 
     /**
-     * Thread of the egg
+     * The run method for the hatching thread. It decrements the time before hatching at regular intervals,
+     * and upon reaching zero, invokes the onEggHatching method of the associated listener.
+     * The hatching process is executed in a separate thread to simulate the passage of time.
+     * @throws RuntimeException If the thread is interrupted unexpectedly.
      */
     @Override
     public void run() {

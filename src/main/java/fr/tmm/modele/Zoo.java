@@ -86,7 +86,7 @@ public class Zoo {
 
     /**
      * Add an enclosure to the zoo
-     * @param enclosure
+     * @param enclosure : The enclosure that will be added to the zoo
      */
     public void addAnEnclosure(Enclosure enclosure) {
         if (this.enclosures.size() < NB_MAX_ENCLOSURE) {

@@ -164,7 +164,7 @@ public abstract class Creature implements Runnable {
     }
 
     public boolean isStarving() {
-        return this.satiety.getValue() == 0;
+        return this.satiety.isStarving();
     }
 
     public void starve() {

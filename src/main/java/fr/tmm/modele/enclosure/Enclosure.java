@@ -21,23 +21,41 @@ public class Enclosure implements CreatureListener, Runnable {
     protected ArrayList<Egg> eggWaitingToHatch = new ArrayList<>();
     protected CleanlinessStatus cleanliness;
 
+    /**
+     * Handles the event when a creature dies in the enclosure.
+     *
+     * @param deadCreature The creature that has died and needs to be removed from the enclosure.
+     */
     @Override
     public void onCreatureDeath(Creature deadCreature) {
         this.creaturesPresent.remove(deadCreature);
     }
 
+    /**
+     * Handles the event when an egg hatches in the enclosure. It logs the hatching event,
+     * removes the hatched egg from the waiting list, and triggers the onCreatureBirth event
+     * for the newborn creature.
+     *
+     * @param egg The hatched egg.
+     */
     @Override
     public void onEggHatching(Egg egg) {
         Log.getInstance().addLog("Un oeuf de " + egg.getType() + " a éclos dans l'enclos " + name + ".");
         this.eggWaitingToHatch.remove(egg);
-        this.onCreatureBirth(egg.getMother());
+        double babyWeight = BabySize.Weight.determineFromType(egg.getType());
+        double babyHeight = BabySize.Height.determineFromType(egg.getType());
+        this.onCreatureBirth(egg.getMother().born(babyWeight, babyHeight));
     }
 
+    /**
+     * Handles the event when a creature is born in the enclosure. It checks whether the enclosure
+     * has reached its maximum capacity. If the maximum capacity is reached, the newborn creature is marked
+     * as dead. Otherwise, the birth event is logged, and the newborn creature is added to the enclosure.
+     *
+     * @param baby The newborn creature.
+     */
     @Override
-    public void onCreatureBirth(Creature mother) {
-        double babyWeight = BabySize.Weight.determineFromType(mother.getType());
-        double babyHeight = BabySize.Height.determineFromType(mother.getType());
-        Creature baby = mother.born(babyWeight, babyHeight);
+    public void onCreatureBirth(Creature baby) {
         if (this.creaturesPresent.size() == this.maxCapacity) {
             baby.die();
         } else {
@@ -46,6 +64,11 @@ public class Enclosure implements CreatureListener, Runnable {
         }
     }
 
+    /**
+     * Handles the event when an egg is laid in the enclosure. It adds the laid egg to the waiting list.
+     *
+     * @param egg The laid egg.
+     */
     @Override
     public void onEggLaying(Egg egg) {
         this.eggWaitingToHatch.add(egg);
@@ -56,13 +79,10 @@ public class Enclosure implements CreatureListener, Runnable {
         DIRTY(25),
         CLEAN(5),
         SPOTLESS(0);
-
         public int getRiskOfGettingSick() {
             return riskOfGettingSick;
         }
-
         private final int riskOfGettingSick;
-
         CleanlinessStatus(int i) {
             this.riskOfGettingSick = i;
         }
