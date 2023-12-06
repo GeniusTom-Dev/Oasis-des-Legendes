@@ -5,6 +5,8 @@ import fr.tmm.modele.enclosure.Aviary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ZooMasterTest {
@@ -17,15 +19,37 @@ class ZooMasterTest {
 
     @BeforeEach
     void init() {
-        this.mermaid = new Mermaid("Mermaid", "f",50,50,10);
+        this.mermaid = new Mermaid("Mermaid", "Female",50,50,10);
         this.dest = new Aquarium("Dest", 50,50);
         this.source = new Aquarium("Source",50,50);
         this.zoo = Zoo.getInstance();
-        this.zooMaster = new ZooMaster("Mathieu", "m", 75,1.76,19);
+        this.zooMaster = new ZooMaster("Mathieu", "Male", 75,1.76,19);
         this.source.addCreature(mermaid);
         zoo.addAnEnclosure(source);
         zoo.addAnEnclosure(dest);
         zoo.setZooMaster(zooMaster);
+    }
+    
+    @Test
+    void testMaxNumberActions() {
+        for (int i = 0; i < zooMaster.getMAX_ACTIONS() + 1; i++) {
+            this.mermaid.setSatiety(50);
+            // will not be performer the 4th time
+            this.zooMaster.feedCreature(source);
+        }
+        assertFalse(this.mermaid.getSatiety() > 50);
+    }
+
+    @Test
+    void testAddActions() {
+        for (int i = 0; i < zooMaster.getMAX_ACTIONS() + 1; i++) {
+            this.mermaid.setSatiety(50);
+            this.zooMaster.feedCreature(source);
+            if (i == 2) {
+                sleep(61);
+            }
+        }
+        assertTrue(this.mermaid.getSatiety() > 50);
     }
 
     @Test
@@ -60,5 +84,13 @@ class ZooMasterTest {
         this.zooMaster.transferer(mermaid, source, aviary);
         assertEquals(this.source.getCreaturesPresent().size(),1);
         assertEquals(aviary.getCreaturesPresent().size(), 0);
+    }
+
+    private void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
  }

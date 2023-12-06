@@ -34,8 +34,6 @@ public class CreatureThreadTest {
         assertFalse(mega.isAlive());
     }
 
-
-
     private void sleep(int seconds) {
         try {
             TimeUnit.SECONDS.sleep(seconds);
