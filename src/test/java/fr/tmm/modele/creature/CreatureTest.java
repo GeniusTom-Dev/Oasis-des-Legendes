@@ -13,7 +13,7 @@ class CreatureTest {
 
     @BeforeEach
     void initialisation() {
-        creature = new Dragon("Creature", "femelle", 80, 2, 5);
+        creature = new Dragon("Creature", "Female", 80, 2, 5);
     }
 
     // --- Satiety ---
@@ -97,10 +97,10 @@ class CreatureTest {
         dragon.die();
         assertTrue(phoenix.isAlive());
         assertTrue(dragon.isAlive());
-        assertTrue(phoenix.getAge() == 0);
+        assertEquals(0, phoenix.getAge());
         assertTrue(phoenix.getHeight() < 50);
         assertTrue(phoenix.getWeight() < 100);
-        assertTrue(dragon.getAge() == 0);
+        assertEquals(0, dragon.getAge());
         assertTrue(dragon.getHeight() < 50);
         assertTrue(dragon.getWeight() < 100);
 
