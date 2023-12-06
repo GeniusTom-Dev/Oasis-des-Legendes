@@ -39,6 +39,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         zoo = Zoo.getInstance();
+        zoo.temporaryInit();
         appStage = stage;
         stage.setResizable(false);
         stage.setTitle("Oasis des légendes");

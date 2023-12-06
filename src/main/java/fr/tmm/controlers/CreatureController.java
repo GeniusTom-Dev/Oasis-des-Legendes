@@ -3,6 +3,7 @@ package fr.tmm.controlers;
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.enclosure.Enclosure;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
@@ -52,19 +53,20 @@ public class CreatureController {
         this.creature = Zoo.getInstance().getEnclosures().get(indexEnclosure).getCreaturesPresent().get(indexCreature);
 
         title.setText(creature.getName());
+        System.out.println("assets/creatures/" + creature.getType().toLowerCase() + ".png");
         creatureImg.setImage(new Image(getClass().getClassLoader().getResourceAsStream("assets/creatures/" + creature.getType().toLowerCase() + ".png")));
-        creatureType.setText(creature.getType());
-        creatureName.setText(creature.getName());
+        creatureType.textProperty().bind(creature.typeProperty());
+        creatureName.textProperty().bind(creature.nameProperty());
         creatureSex.setText(creature.getSex().toString());
-        creatureWeight.textProperty().set(creature.getWeight() + " kg");
-        creatureHeight.textProperty().set(creature.getHeight() + " cm");
-        creatureAge.textProperty().set(creature.getAge() + " ans");
-        creatureSatiety.textProperty().set(creature.getSatiety() + " %");
-        creatureEnergy.textProperty().set(creature.getEnergy() + " %");
-        creatureHealth.textProperty().set(creature.getHealth() + " %");
-        creatureSatietyBar.progressProperty().set(creature.getSatiety() / 100.0);
-        creatureEnergyBar.progressProperty().set(creature.getEnergy() / 100.0);
-        creatureHealthBar.progressProperty().set(creature.getHealth() / 100.0);
+        creatureWeight.textProperty().bind(Bindings.createStringBinding(() -> String.format("%.1f kg", creature.getWeight()), creature.weightProperty()));
+        creatureHeight.textProperty().bind(Bindings.createStringBinding(() -> String.format("%.1f m", creature.getHeight()), creature.heightProperty()));
+        creatureAge.textProperty().bind(creature.ageProperty().asString().concat(" ans"));
+        creatureSatiety.textProperty().bind(creature.satietyProperty().asString().concat(" %"));
+        creatureEnergy.textProperty().bind(creature.energyProperty().asString().concat(" %"));
+        creatureHealth.textProperty().bind(creature.healthProperty().asString().concat(" %"));
+        creatureSatietyBar.progressProperty().bind(creature.satietyProperty().divide(100.0));
+        creatureEnergyBar.progressProperty().bind(creature.energyProperty().divide(100.0));
+        creatureHealthBar.progressProperty().bind(creature.healthProperty().divide(100.0));
     }
 
     public void backButton(ActionEvent actionEvent) {

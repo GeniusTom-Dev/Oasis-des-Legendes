@@ -5,7 +5,7 @@ public class EnergyIndicator extends Indicator {
     boolean isAsleep;
 
     public EnergyIndicator() {
-        this.value = 100;
+        this.value.set(100);
         this.isAsleep = false;
     }
 
@@ -16,7 +16,7 @@ public class EnergyIndicator extends Indicator {
     @Override
     public void decrement(int amount) {
         super.decrement(amount);
-        if (this.value == 0) {
+        if (this.value.get() == 0) {
             fallAsleep();
         }
     }
@@ -28,7 +28,7 @@ public class EnergyIndicator extends Indicator {
     @Override
     public void increment(int amount) {
         super.increment(amount);
-        if (this.isAsleep && this.value == 100) {
+        if (this.isAsleep && this.value.get() == 100) {
             wakeUp();
         }
     }
@@ -40,9 +40,9 @@ public class EnergyIndicator extends Indicator {
     @Override
     public void setValue(int value) {
         super.setValue(value);
-        if (this.value == 0) {
+        if (this.value.get() == 0) {
             fallAsleep();
-        } else if (this.value == 100) {
+        } else if (this.value.get() == 100) {
             wakeUp();
         }
     }

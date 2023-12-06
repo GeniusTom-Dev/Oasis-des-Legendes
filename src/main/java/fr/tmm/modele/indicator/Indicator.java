@@ -1,11 +1,13 @@
 package fr.tmm.modele.indicator;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class Indicator {
 
-    protected int value; // Between 0 and 100
+    protected SimpleIntegerProperty value; // Between 0 and 100
     
     public Indicator() {
-        this.value = 100;
+        this.value = new SimpleIntegerProperty(100);
     }
 
     /**
@@ -13,10 +15,10 @@ public abstract class Indicator {
      * @param amount
      */
     public void increment(int amount) {
-        if (value + amount < 100) {
-            this.value += amount;
+        if (this.value.get() + amount < 100) {
+            this.value.set(this.value.get() + amount);
         } else {
-            this.value = 100;
+            this.value.set(100);
         }
     }
 
@@ -25,10 +27,10 @@ public abstract class Indicator {
      * @param amount
      */
     public void decrement(int amount) {
-        if (value - amount > 0) {
-            this.value -= amount;
+        if (this.value.get() - amount > 0) {
+            this.value.set(this.value.get() - amount);
         } else {
-            this.value = 0;
+            this.value.set(0);
         }
     }
 
@@ -40,7 +42,7 @@ public abstract class Indicator {
         if (newValue < 0 || newValue > 100) {
             throw new IllegalArgumentException("The indicator value must not be lower than 0 and greater than 100");
         }
-        this.value = newValue;
+        this.value.set(newValue);
     }
 
     /**
@@ -48,6 +50,10 @@ public abstract class Indicator {
      * @return the value of the indicator
      */
     public int getValue() {
-        return this.value;
+        return this.value.get();
+    }
+
+    public SimpleIntegerProperty valueProperty() {
+        return value;
     }
 }

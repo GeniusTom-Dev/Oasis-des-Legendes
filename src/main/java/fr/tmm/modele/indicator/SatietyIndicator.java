@@ -7,6 +7,6 @@ public class SatietyIndicator extends Indicator {
      * @return true if the creature is starving
      */
     public boolean isStarving() {
-        return (this.value == 0);
+        return (this.value.get() == 0);
     }
 }

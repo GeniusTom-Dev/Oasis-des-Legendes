@@ -14,7 +14,7 @@ public class HealthIndicator extends Indicator {
      * Completly heal the creature health which set the health value to 100
      */
     public void heal() {
-        this.value = 100;
+        this.value.set(100);
         this.isSick = false;
     }
 
@@ -25,7 +25,7 @@ public class HealthIndicator extends Indicator {
     @Override
     public void decrement(int amount) {
         super.decrement(amount);
-        if (this.value == 0) {
+        if (this.value.get() == 0) {
             this.isAlive = false;
         }
     }
@@ -37,7 +37,7 @@ public class HealthIndicator extends Indicator {
     @Override
     public void setValue(int value) {
         super.setValue(value);
-        if (this.value == 0) {
+        if (this.value.get() == 0) {
             this.isAlive = false;
         } else {
             this.isAlive = true;

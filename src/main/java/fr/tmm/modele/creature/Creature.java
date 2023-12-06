@@ -6,15 +6,19 @@ import fr.tmm.modele.creature.reproduction.*;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.lang.reflect.Constructor;
 
 public abstract class Creature implements Runnable {
-    protected String name;
-    protected String type;
-    protected double weight; // kg
-    protected double height; // cm
-    protected int age;
+    protected StringProperty name;
+    protected StringProperty type;
+    protected SimpleDoubleProperty weight; // kg
+    protected SimpleDoubleProperty height; // cm
+    protected SimpleIntegerProperty age;
     private Sex sex;
     protected SatietyIndicator satiety;
     protected EnergyIndicator energy; // contain a method isAsleep()
@@ -22,21 +26,23 @@ public abstract class Creature implements Runnable {
     protected CreatureListener listener;
 
     public Creature(String name, String sex, double weight, double height, int age) {
-        this.name = name;
-        this.weight = weight;
-        this.height = height;
-        this.age = age;
+        this.name = new SimpleStringProperty(name);
+        this.weight = new SimpleDoubleProperty(weight);
+        this.height = new SimpleDoubleProperty(height);
+        System.out.println("Poids : " + weight);
+        System.out.println("Taille : " + height);
+        this.age = new SimpleIntegerProperty(age);
         this.satiety = new SatietyIndicator();
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
-        this.type = this.getClass().getSimpleName();
+        this.type = new SimpleStringProperty(this.getClass().getSimpleName());
         this.sex = new Female(this);
         Thread t = new Thread(this);
         t.start();
     }
 
     public void die() {
-        if (this.age == 0) {
+        if (this.age.get() == 0) {
             Log.getInstance().addLog("Un bébé " + this.getType() + " est mort-né car il est né dans un enclos plein.");
         } else {
             Log.getInstance().addLog(name + " est mort.");
@@ -48,7 +54,7 @@ public abstract class Creature implements Runnable {
         int cmp = 0;
         while (isAlive()) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 this.energy.decrement(1);
                 this.satiety.decrement(1);
                 // une chance de faire du bruit
@@ -78,17 +84,17 @@ public abstract class Creature implements Runnable {
     }
 
     public void makeNoise(){
-        Log.getInstance().addLog(this.name + " émet un son puissant !");
+        Log.getInstance().addLog(this.getName() + " émet un son puissant !");
     }
 
     // --- Nom, Age, Taille, Poid ---
 
     public String getName() {
-        return name;
+        return this.name.get();
     }
 
     public String getType() {
-        return type;
+        return this.type.get();
     }
 
     public Sex getSex() {
@@ -104,27 +110,27 @@ public abstract class Creature implements Runnable {
     }
 
     public double getWeight() {
-        return weight;
+        return this.weight.get();
     }
 
     public void setWeight(double weight) {
-        this.weight = weight;
+        this.weight.set(weight);
     }
 
     public double getHeight() {
-        return height;
+        return this.height.get();
     }
 
     public void setHeight(double height) {
-        this.height = height;
+        this.height.set(height);
     }
 
     public int getAge() {
-        return age;
+        return this.age.get();
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.age.set(age);
     }
 
     // --- Satiety ---
@@ -195,8 +201,8 @@ public abstract class Creature implements Runnable {
     }
 
     public void aging() {
-        ++this.age;
-        if (this.age == 100) {
+        this.setAge(this.age.get() + 1);
+        if (this.getAge() == 100) {
             this.health.setValue(0);
         }
         if (this.getAge() < 20) {
@@ -219,4 +225,35 @@ public abstract class Creature implements Runnable {
         return listener;
     }
 
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public StringProperty typeProperty() {
+        return type;
+    }
+
+    public SimpleDoubleProperty weightProperty() {
+        return weight;
+    }
+
+    public SimpleDoubleProperty heightProperty() {
+        return height;
+    }
+
+    public SimpleIntegerProperty ageProperty() {
+        return age;
+    }
+
+    public SimpleIntegerProperty satietyProperty() {
+        return satiety.valueProperty();
+    }
+
+    public SimpleIntegerProperty energyProperty() {
+        return energy.valueProperty();
+    }
+
+    public SimpleIntegerProperty healthProperty() {
+        return health.valueProperty();
+    }
 }
