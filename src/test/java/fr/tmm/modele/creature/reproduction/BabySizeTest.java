@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature.reproduction;
 
+import fr.tmm.modele.creature.reproduction.data.BabySize;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

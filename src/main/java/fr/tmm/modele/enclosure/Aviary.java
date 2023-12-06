@@ -74,21 +74,7 @@ public class Aviary extends Enclosure {
      * Set the roof level to the level under
      */
     public void damageRoof() {
-        this.roofState = getWorseRoofState();
-    }
-
-    /**
-     * Get the roof state just under the current one
-     * @return the roof state just under the current one or the current one if the current one is the worst state possible
-     */
-    private RoofState getWorseRoofState() {
-        RoofState[] statuses = RoofState.values();
-        for (int i = 0; i < statuses.length; i++) {
-            if (statuses[i] == roofState && i > 0) {
-                return statuses[i - 1];
-            }
-        }
-        return roofState;
+        this.roofState = Utils.getWorseState(this.roofState);
     }
 
     /**

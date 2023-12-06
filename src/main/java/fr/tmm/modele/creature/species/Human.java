@@ -1,8 +1,6 @@
 package fr.tmm.modele.creature.species;
 
-import fr.tmm.modele.creature.Creature;
-import fr.tmm.modele.creature.reproduction.BabySize;
-import fr.tmm.modele.creature.reproduction.Viviparous;
+import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 
 public class Human extends Viviparous implements Walker {

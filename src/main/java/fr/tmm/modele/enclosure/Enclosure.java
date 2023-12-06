@@ -4,13 +4,12 @@ import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
-import fr.tmm.modele.creature.reproduction.BabySize;
+import fr.tmm.modele.creature.reproduction.data.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
-import fr.tmm.modele.creature.species.*;
 import fr.tmm.modele.utils.Utils;
 
-import fr.tmm.modele.creature.reproduction.Viviparous;
-import fr.tmm.modele.creature.reproduction.Oviparous;
+import fr.tmm.modele.creature.Viviparous;
+import fr.tmm.modele.creature.Oviparous;
 
 
 import java.util.ArrayList;
@@ -41,7 +40,12 @@ public class Enclosure implements CreatureListener {
         double babyWeight = BabySize.Weight.determineFromType(mother.getType());
         double babyHeight = BabySize.Height.determineFromType(mother.getType());
         Creature baby = mother.born(babyWeight, babyHeight);
-        this.creaturesPresent.add(baby);
+        if (this.creaturesPresent.size() == this.maxCapacity) {
+            baby.die();
+        } else {
+            Log.getInstance().addLog(baby.getName() + " vient de naître dans l'enclos " + this.name + ".");
+            this.creaturesPresent.add(baby);
+        }
     }
 
     @Override
@@ -133,23 +137,13 @@ public class Enclosure implements CreatureListener {
     }
 
     public void getDirtier() {
-        this.cleanliness = getWorseState();
+        this.cleanliness = Utils.getWorseState(this.cleanliness);
         Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
-    }
-
-    private CleanlinessStatus getWorseState() {
-        CleanlinessStatus[] statuses = CleanlinessStatus.values();
-        for (int i = 0; i < statuses.length; i++) {
-            if (statuses[i] == cleanliness && i > 0) {
-                return statuses[i - 1];
-            }
-        }
-        return cleanliness;
     }
     
     /////////////////////////////////////////////////:
 
-    public void startReproductionThread() {
+    /*public void startReproductionThread() {
         Thread reproductionThread = new Thread(() -> {
             while (true) {
                 try {
@@ -167,9 +161,9 @@ public class Enclosure implements CreatureListener {
         });
 
         reproductionThread.start();
-    }
+    }*/
 
-   private void reproduce() {
+   /*private void reproduce() {
         // Sélectionner un mâle et une femelle aléatoirement
         Creature male = getActiveRandomMale();
         Creature female = getActiveRandomFemale();
@@ -188,9 +182,9 @@ public class Enclosure implements CreatureListener {
     private Creature getActiveRandomFemale() {
         ArrayList<Creature> females = getCreaturesBySex("female");
         return females.get(Utils.getRandomIndexInList(females));
-    }
+    }*/
 
-    private ArrayList<Creature> getCreaturesBySex(String sex) {
+    /*private ArrayList<Creature> getCreaturesBySex(String sex) {
         ArrayList<Creature> creaturesBySex = new ArrayList<>();
         for (Creature creature : creaturesPresent) {
             if (creature.getSex().equalsIgnoreCase(sex) && !creature.isAsleep()) {
@@ -208,7 +202,7 @@ public class Enclosure implements CreatureListener {
             ((Viviparous) female).startBecomePregnantThread();
         }
         return null;
-    }
+    }*/
 
     ///////////////////////////////////////////////////////////////////////////
     // --- GETTER ---

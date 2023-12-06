@@ -1,4 +1,4 @@
-package fr.tmm.modele.creature.reproduction;
+package fr.tmm.modele.creature.reproduction.data;
 
 public enum Incubation {
     DRAGON(100),

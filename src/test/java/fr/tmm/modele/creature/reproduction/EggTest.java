@@ -24,7 +24,7 @@ class EggTest {
     }
 
     @Test
-    void type() {
+    void eggType() {
         assertEquals(this.egg.getType(), "Dragon");
         assertEquals(this.egg.getListener(), this.mother.getListener());
         assertEquals(this.enclos.getEggWaitingToHatch().size(), 1);
@@ -36,10 +36,14 @@ class EggTest {
         timeBeforeHatch.setAccessible(true);
         timeBeforeHatch.set(this.egg, 1);
         sleep(4);
+        // remove from eggWaiting list
         assertEquals(0, enclos.getEggWaitingToHatch().size());
+        // counter before hatching is equal to O
         assertEquals(0,timeBeforeHatch.get(this.egg));
+        // baby has been addeed to the creature list of the enclosure
         assertEquals(2, this.enclos.getCreaturesPresent().size());
-        // TODO verifier qu'il est bien né
+        // the baby is indeed a baby
+        assertEquals(this.enclos.getCreaturesPresent().get(1).getAge(), 0);
     }
 
     private void sleep(int seconds) {

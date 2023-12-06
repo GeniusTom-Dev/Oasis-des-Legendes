@@ -2,10 +2,10 @@ package fr.tmm.modele.creature.species;
 
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
-import fr.tmm.modele.creature.reproduction.Oviparous;
+import fr.tmm.modele.creature.Oviparous;
 import fr.tmm.modele.creature.Reincarnate;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
-import fr.tmm.modele.creature.reproduction.BabySize;
+import fr.tmm.modele.creature.reproduction.data.BabySize;
 
 public class Phoenix extends Oviparous implements Flyer, Reincarnate {
 

@@ -67,7 +67,8 @@ public class Aquarium extends Enclosure {
      * Lower the salinity level
      */
     public void lowerSalinityLevel() {
-        this.salinityLevel = getWorseState(this.salinityLevel);
+
+        this.salinityLevel = Utils.getWorseState(this.salinityLevel);
     }
 
     /**
@@ -81,7 +82,8 @@ public class Aquarium extends Enclosure {
      * Lower the salinity level
      */
     public void lowerWaterLevel() {
-        this.waterLevel = getWorseState(this.waterLevel);
+
+        this.waterLevel = Utils.getWorseState(this.waterLevel);
     }
 
     /**
@@ -89,21 +91,6 @@ public class Aquarium extends Enclosure {
      */
     public void refillWater() {
         this.waterLevel = StateLevel.EXCELLENT;
-    }
-
-    /**
-     * Get the worst state of a value of the enum
-     * @param level : the current level
-     * @return the level under or the current level if the current level is the worst level possible
-     */
-    private StateLevel getWorseState(StateLevel level) {
-        StateLevel[] statuses = StateLevel.values();
-        for (int i = 0; i < statuses.length; i++) {
-            if (statuses[i] == level && i > 0) {
-                return statuses[i - 1];
-            }
-        }
-        return level;
     }
 
     /**

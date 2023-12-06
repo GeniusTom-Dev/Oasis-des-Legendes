@@ -1,13 +1,13 @@
-package fr.tmm.modele.creature.reproduction;
+package fr.tmm.modele.creature.reproduction.data;
 
 public enum Gestation {
     DRAGON(100),
     KRAKEN(100),
     LYCANTHROPE(100),
     MEGALODON(100),
-    MERMAID(100),
+    MERMAID(5),
     NYMPH(100),
-    PHENIX(100),
+    PHOENIX(100),
     UNICORN(100);
 
     private final int gestationTime;

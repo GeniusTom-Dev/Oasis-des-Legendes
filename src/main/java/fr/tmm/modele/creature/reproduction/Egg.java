@@ -2,6 +2,7 @@ package fr.tmm.modele.creature.reproduction;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.reproduction.data.Incubation;
 
 public class Egg implements Runnable {
     private Creature mother;

@@ -2,6 +2,7 @@ package fr.tmm.modele.creature;
 
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.reproduction.*;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
@@ -9,10 +10,10 @@ import fr.tmm.modele.indicator.SatietyIndicator;
 public abstract class Creature implements Runnable {
     protected String name;
     protected String type;
-    protected String sex;
     protected double weight; // kg
     protected double height; // cm
     protected int age;
+    private Sex sex;
     protected SatietyIndicator satiety;
     protected EnergyIndicator energy; // contain a method isAsleep()
     protected HealthIndicator health; // contain a method isSick and isAlive
@@ -20,7 +21,6 @@ public abstract class Creature implements Runnable {
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
-        this.sex = sex;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -28,12 +28,17 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
+        this.sex = new Female(this);
         Thread t = new Thread(this);
         t.start();
     }
 
     public void die() {
-        Log.getInstance().addLog(name + " est mort.");
+        if (this.age == 0) {
+            Log.getInstance().addLog("Un bébé " + this.getType() + " est mort-né car il est né dans un enclos plein.");
+        } else {
+            Log.getInstance().addLog(name + " est mort.");
+        }
         if (this.listener != null) listener.onCreatureDeath(this);
     }
 
@@ -77,8 +82,16 @@ public abstract class Creature implements Runnable {
         return type;
     }
 
-    public String getSex() {
-        return sex;
+    public Sex getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        if (sex == "Femelle") {
+            this.sex = new Female(this);
+        } else {
+            this.sex = new Male();
+        }
     }
 
     public double getWeight() {

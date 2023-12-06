@@ -83,7 +83,7 @@ public class ExportSave {
         zooMasterDetails.put("height", zoo.getZooMaster().getHeight());
         zooMasterDetails.put("weight", zoo.getZooMaster().getWeight());
         zooMasterDetails.put("age", zoo.getZooMaster().getAge());
-        zooMasterDetails.put("sex", zoo.getZooMaster().getSex());
+        zooMasterDetails.put("sex", zoo.getZooMaster().getSex().toString());
         zooMasterDetails.put("name", zoo.getZooMaster().getName());
         return zooMasterDetails;
     }
@@ -119,7 +119,7 @@ public class ExportSave {
         JSONObject creatureDetail = new JSONObject();
         creatureDetail.put("name", creature.getName());
         creatureDetail.put("type", creature.getType());
-        creatureDetail.put("sex", creature.getSex());
+        creatureDetail.put("sex", creature.getSex().toString());
         creatureDetail.put("height", creature.getHeight());
         creatureDetail.put("weight", creature.getWeight());
         creatureDetail.put("age", creature.getAge());
