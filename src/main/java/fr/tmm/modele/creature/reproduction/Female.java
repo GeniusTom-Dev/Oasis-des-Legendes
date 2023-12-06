@@ -39,13 +39,11 @@ public class Female extends Sex implements Runnable {
         while (this.gestationCounter > 0) {
             try {
                 Thread.sleep(1000);
-                System.out.println("Gestation Counter : " + this.gestationCounter);
                 this.gestationCounter--;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Fin de la gestation de " + this.creature.getName());
         this.isPregnant = false;
         this.reproductionMethod.reproduce(creature, NbChildren.determineChildrenNb(creature.getType()));
     }

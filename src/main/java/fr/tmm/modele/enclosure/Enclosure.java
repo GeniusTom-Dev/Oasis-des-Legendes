@@ -12,7 +12,7 @@ import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
 
-public class Enclosure implements CreatureListener {
+public class Enclosure implements CreatureListener, Runnable {
     protected String name;
     protected double surfaceArea;
     protected int maxCapacity;
@@ -73,7 +73,8 @@ public class Enclosure implements CreatureListener {
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.cleanliness = CleanlinessStatus.SPOTLESS;
-        enclosureThread();
+        Thread t = new Thread(this);
+        t.start();
     }
 
     public void makeCreatureSickDependingOfCleanliness() {
@@ -140,22 +141,22 @@ public class Enclosure implements CreatureListener {
         Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
     }
 
-    public void enclosureThread() {
-        Thread reproductionThread = new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(5000);
-                    if (creaturesPresent.size() < maxCapacity) {
-                        System.out.println("reproduction");
-                        reproduce();
-                    }
-                    makeCreatureSickDependingOfCleanliness();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+    @Override
+    public void run(){
+        while (true) {
+            try {
+                Thread.sleep(5000);
+                if (creaturesPresent.size() < maxCapacity) {
+                    reproduce();
                 }
+                if (Utils.isBadEventHappening(5)) {
+                    this.getDirtier();
+                }
+                makeCreatureSickDependingOfCleanliness();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
-        reproductionThread.start();
+        }
     }
 
    private void reproduce() throws InterruptedException {
@@ -202,7 +203,6 @@ public class Enclosure implements CreatureListener {
         return creaturesBySex;
     }
 
-    ///////////////////////////////////////////////////////////////////////////
     // --- GETTER ---
 
     public String getName() {

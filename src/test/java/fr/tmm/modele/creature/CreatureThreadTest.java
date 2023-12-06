@@ -11,15 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreatureThreadTest {
 
-   /* Dragon creature;
-    Megalodon mega;
-
-    @BeforeEach
-    void initialisation() {
-        creature = new Dragon("Dragon", "femelle", 80, 2, 5);
-        mega = new Megalodon("Megalodon", "femelle", 80, 2, 5);
-    }*/
-
     @Test
     public void basicAction() throws Exception {
         Dragon creature = new Dragon("Dragon", "femelle", 80, 2, 5);

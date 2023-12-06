@@ -199,6 +199,10 @@ public abstract class Creature implements Runnable {
         if (this.age == 100) {
             this.health.setValue(0);
         }
+        if (this.getAge() < 20) {
+            this.setWeight(this.getWeight()*1.1);
+            this.setHeight(this.getHeight()*1.1);
+        }
     }
 
     public boolean isAlive() {

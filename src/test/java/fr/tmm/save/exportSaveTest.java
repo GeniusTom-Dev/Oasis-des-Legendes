@@ -25,11 +25,11 @@ class exportSaveTest {
     }
     @Test
     void test1() throws IOException, JSONException {
-        zoo.setZooMaster( new ZooMaster("Julot", "m", 10, 10, 19));
+        zoo.setZooMaster( new ZooMaster("Julot", "Male", 10, 10, 19));
         zoo.setName("Zoo de Test");
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
-        enclos1.addCreature(new Unicorn("Licorne 1", "m", 10, 10, 10));
-        enclos1.addCreature(new Unicorn("Licorne 2", "m", 10, 10, 10));
+        enclos1.addCreature(new Unicorn("Licorne 1", "Male", 10, 10, 10));
+        enclos1.addCreature(new Unicorn("Licorne 2", "Male", 10, 10, 10));
         zoo.addAnEnclosure(enclos1);
         ExportSave.exportSave("src/test/java/fr/tmm/save/actual1.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual1.json"));
