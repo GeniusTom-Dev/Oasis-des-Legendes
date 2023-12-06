@@ -8,6 +8,8 @@ import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
 import java.lang.reflect.Constructor;
+import java.util.Objects;
+import java.util.Random;
 
 public abstract class Creature implements Runnable {
     protected String name;
@@ -30,7 +32,7 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
-        this.sex = new Female(this);
+        this.sex = this.determineSex(sex);
         Thread t = new Thread(this);
         t.start();
     }
@@ -75,6 +77,18 @@ public abstract class Creature implements Runnable {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private Sex determineSex(String sex) {
+        switch (Objects.requireNonNull(sex)) {
+            case "Female":
+                return new Female(this);
+            case "Male":
+                return  new Male();
+        }
+        Random rand = new Random();
+        int index = rand.nextInt(2);
+        return (index == 0) ? new Female(this) : new Male();
     }
 
     public void makeNoise(){

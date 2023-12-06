@@ -1,6 +1,6 @@
 {
   "zooMaster": {
-    "sex": "m",
+    "sex": "Male",
     "name": "Julot",
     "weight": 10,
     "age": 19,
@@ -13,23 +13,29 @@
         "superficie": 50,
         "creatures": [
           {
+            "isSick": false,
             "satiety": 100,
-            "sex": "m",
+            "sex": "Male",
             "name": "Licorne 1",
             "weight": 10,
             "health": 100,
+            "isAsleep": false,
             "type": "Unicorn",
             "age": 10,
             "height": 10,
             "energy": 100
           },
           {
+            "isSick": false,
             "satiety": 100,
-            "sex": "m",
-            "name": "Licorne 2",
+            "sex": "Female",
             "weight": 10,
             "health": 100,
+            "gestationCounter": 0,
             "type": "Unicorn",
+            "name": "Licorne 2",
+            "isAsleep": false,
+            "isPregnant": false,
             "age": 10,
             "height": 10,
             "energy": 100

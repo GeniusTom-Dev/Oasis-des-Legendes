@@ -22,14 +22,15 @@ class exportSaveTest {
     @BeforeEach
     void init() {
         this.zoo = Zoo.getInstance();
-    }
-    @Test
-    void test1() throws IOException, JSONException {
         zoo.setZooMaster( new ZooMaster("Julot", "Male", 10, 10, 19));
         zoo.setName("Zoo de Test");
+    }
+
+    @Test
+    void test1() throws IOException, JSONException {
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
         enclos1.addCreature(new Unicorn("Licorne 1", "Male", 10, 10, 10));
-        enclos1.addCreature(new Unicorn("Licorne 2", "Male", 10, 10, 10));
+        enclos1.addCreature(new Unicorn("Licorne 2", "Female", 10, 10, 10));
         zoo.addAnEnclosure(enclos1);
         ExportSave.exportSave("src/test/java/fr/tmm/save/actual1.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual1.json"));
@@ -42,8 +43,6 @@ class exportSaveTest {
 
     @Test
     void emptyCreature() throws IOException, JSONException {
-        zoo.setZooMaster( new ZooMaster("Julot", "m", 10, 10, 19));
-        zoo.setName("Zoo de Test");
         zoo.setEnclosures(new ArrayList<Enclosure>());
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
         zoo.addAnEnclosure(enclos1);
@@ -58,8 +57,6 @@ class exportSaveTest {
 
     @Test
     void emptyEnclosure() throws IOException, JSONException {
-        zoo.setZooMaster( new ZooMaster("Julot", "m", 10, 10, 19));
-        zoo.setName("Zoo de Test");
         zoo.setEnclosures(new ArrayList<Enclosure>());
         ExportSave.exportSave("src/test/java/fr/tmm/save/actual3.json");
         byte[] file2Bytes = Files.readAllBytes(Paths.get("src/test/java/fr/tmm/save/actual3.json"));

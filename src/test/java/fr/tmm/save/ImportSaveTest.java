@@ -23,7 +23,7 @@ class ImportSaveTest {
     @Test
     void test1() throws FileNotFoundException, JSONException {
         ImportSave.importSave("src/test/java/fr/tmm/save/expected1.json");
-        assertEquals(zoo.getZooMaster().getSex(), "m");
+        assertEquals(zoo.getZooMaster().getSex().toString(), "Male");
         assertEquals(zoo.getZooMaster().getName(), "Julot");
         assertEquals(zoo.getZooMaster().getWeight(), 10);
         assertEquals(zoo.getZooMaster().getHeight(), 19);
@@ -37,7 +37,7 @@ class ImportSaveTest {
         assertEquals(zoo.getEnclosures().get(0).getClass().getSimpleName(), "Enclosure");
         assertEquals(zoo.getEnclosures().get(0).getCleanlinessDegree().toString(), "SPOTLESS");
         assertEquals(zoo.getAllCreatures().get(0).getName(), "Licorne 1");
-        assertEquals(zoo.getAllCreatures().get(0).getSex(), "m");
+        assertEquals(zoo.getAllCreatures().get(0).getSex().toString(), "Male");
         assertEquals(zoo.getAllCreatures().get(0).getHeight(), 10);
         assertEquals(zoo.getAllCreatures().get(0).getWeight(), 10);
         assertEquals(zoo.getAllCreatures().get(0).getAge(), 10);
@@ -46,7 +46,7 @@ class ImportSaveTest {
         assertEquals(zoo.getAllCreatures().get(0).getSatiety(), 100);
         assertEquals(zoo.getAllCreatures().get(0).getEnergy(), 100);
         assertEquals(zoo.getAllCreatures().get(0).getName(), "Licorne 2");
-        assertEquals(zoo.getAllCreatures().get(0).getSex(), "m");
+        assertEquals(zoo.getAllCreatures().get(0).getSex().toString(), "Male");
         assertEquals(zoo.getAllCreatures().get(0).getHeight(), 10);
         assertEquals(zoo.getAllCreatures().get(0).getWeight(), 10);
         assertEquals(zoo.getAllCreatures().get(0).getAge(), 10);

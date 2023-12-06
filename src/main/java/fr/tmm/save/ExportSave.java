@@ -2,6 +2,7 @@ package fr.tmm.save;
 
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.ZooMaster;
+import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.species.*;
 import fr.tmm.modele.enclosure.Aquarium;
 import fr.tmm.modele.enclosure.Aviary;
@@ -128,6 +129,10 @@ public class ExportSave {
         creatureDetail.put("health", creature.getHealth());
         creatureDetail.put("isSick", creature.isSick());
         creatureDetail.put("isAsleep", creature.isAsleep());
+        if (creature.getSex().toString() == "Female") {
+            creatureDetail.put("isPregnant", ((Female) creature.getSex()).isPregnant());
+            creatureDetail.put("gestationCounter", ((Female) creature.getSex()).getGestationCounter());
+        }
         return creatureDetail;
     }
 }
