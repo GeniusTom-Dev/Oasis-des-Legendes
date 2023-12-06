@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.lang.reflect.Constructor;
+import java.util.Objects;
+import java.util.Random;
 
 public abstract class Creature implements Runnable {
     protected StringProperty name;
@@ -29,14 +31,12 @@ public abstract class Creature implements Runnable {
         this.name = new SimpleStringProperty(name);
         this.weight = new SimpleDoubleProperty(weight);
         this.height = new SimpleDoubleProperty(height);
-        System.out.println("Poids : " + weight);
-        System.out.println("Taille : " + height);
         this.age = new SimpleIntegerProperty(age);
         this.satiety = new SatietyIndicator();
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = new SimpleStringProperty(this.getClass().getSimpleName());
-        this.sex = new Female(this);
+        this.sex = determineSex(sex);
         Thread t = new Thread(this);
         t.start();
     }
@@ -70,6 +70,18 @@ public abstract class Creature implements Runnable {
             }
         }
         this.die();
+    }
+
+    private Sex determineSex(String sex) {
+        switch (Objects.requireNonNull(sex)) {
+            case "Female":
+                return new Female(this);
+            case "Male":
+                return  new Male();
+        }
+        Random rand = new Random();
+        int index = rand.nextInt(2);
+        return (index == 0) ? new Female(this) : new Male();
     }
 
     public Creature born(double weight, double height) {

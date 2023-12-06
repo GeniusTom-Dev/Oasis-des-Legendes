@@ -15,7 +15,7 @@ class CalveTest {
 
     @BeforeEach
     void init() {
-         this.licorne = new Unicorn("Licorne", "f", 50,50,50);
+         this.licorne = new Unicorn("Licorne", "Female", 50,50,50);
          this.enclos = new Enclosure("Un Enclos", 50, 2);
          this.enclos.addCreature(this.licorne);
     }
