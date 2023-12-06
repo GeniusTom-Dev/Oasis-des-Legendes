@@ -10,11 +10,9 @@ public class Female extends Sex implements Runnable {
 
     private final Creature creature;
     private boolean isPregnant = false;
-
     public int getGestationCounter() {
         return gestationCounter;
     }
-
     private int gestationCounter = 0;
     private ReproductionMethod reproductionMethod;
 
@@ -55,6 +53,7 @@ public class Female extends Sex implements Runnable {
     public void setPregnant(boolean pregnant) {
         isPregnant = pregnant;
     }
+    public void setGestationCounter(int counter) {this.gestationCounter = counter;}
 
     public ReproductionMethod getReproductionMethod() {
         return reproductionMethod;

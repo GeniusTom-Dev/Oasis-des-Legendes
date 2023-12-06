@@ -29,6 +29,7 @@ class exportSaveTest {
     @Test
     void test1() throws IOException, JSONException {
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
+        enclos1.setCleanlinessDegree(Enclosure.CleanlinessStatus.CLEAN);
         enclos1.addCreature(new Unicorn("Licorne 1", "Male", 10, 10, 10));
         enclos1.addCreature(new Unicorn("Licorne 2", "Female", 10, 10, 10));
         zoo.addAnEnclosure(enclos1);

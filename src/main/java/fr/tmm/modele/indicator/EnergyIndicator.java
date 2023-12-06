@@ -69,4 +69,8 @@ public class EnergyIndicator extends Indicator {
         return this.isAsleep;
     }
 
+    public void setAsleep(boolean asleep) {
+        isAsleep = asleep;
+    }
+
 }

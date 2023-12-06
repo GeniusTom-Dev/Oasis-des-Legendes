@@ -57,7 +57,6 @@ public class ExportSave {
             // Zoo Details
             JSONObject zooDetails = new JSONObject();
             zooDetails.put("name", zoo.getName());
-            zooDetails.put("nombre max d'enclos", zoo.getNbMaxEnclosure());
 
             // Enclos Array
             JSONArray enclosArray = new JSONArray();

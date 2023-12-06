@@ -207,6 +207,7 @@ public abstract class Creature implements Runnable {
     public HealthIndicator getHealthindicator() {
         return this.health;
     }
+    public EnergyIndicator getEnergyindicator() {return this.energy;}
 
     public void heal() {
         this.health.heal();
