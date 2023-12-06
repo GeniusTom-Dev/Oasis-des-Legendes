@@ -3,6 +3,7 @@ package fr.tmm.controlers;
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.enclosure.Enclosure;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -53,7 +54,7 @@ public class EnclosureController {
         enclosureSurface.setText(String.valueOf(this.enclosure.getSurfaceArea()));
         enclosureCapacity.setText(String.valueOf(this.enclosure.getMaxCapacity()));
         enclosureCountCreature.setText(String.valueOf(creatures.size()));
-        enclosureClean.textProperty().set(String.valueOf(this.enclosure.getCleanlinessDegree()));
+        enclosureClean.setText(String.valueOf(this.enclosure.getCleanlinessDegree()));
 
 
         for (int i = 0; i < creatures.size(); i++) {
@@ -71,5 +72,7 @@ public class EnclosureController {
     }
 
     public void cleanButton(ActionEvent actionEvent) {
+        this.enclosure.clean();
+        enclosureClean.setText(String.valueOf(this.enclosure.getCleanlinessDegree()));
     }
 }

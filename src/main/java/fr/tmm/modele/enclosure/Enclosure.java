@@ -40,7 +40,7 @@ public class Enclosure implements CreatureDeathListener {
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.creaturesPresent = new ArrayList<>();
-        this.cleanliness = CleanlinessStatus.SPOTLESS;
+        this.cleanliness = CleanlinessStatus.UNSANITARY;
     }
 
     public void makeCreatureSickDependingOfCleanliness() {
