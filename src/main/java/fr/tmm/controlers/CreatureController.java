@@ -55,7 +55,7 @@ public class CreatureController {
         creatureImg.setImage(new Image(getClass().getClassLoader().getResourceAsStream("assets/creatures/" + creature.getType().toLowerCase() + ".png")));
         creatureType.setText(creature.getType());
         creatureName.setText(creature.getName());
-        creatureSex.setText(creature.getSex());
+        creatureSex.setText(creature.getSex().toString());
         creatureWeight.textProperty().set(creature.getWeight() + " kg");
         creatureHeight.textProperty().set(creature.getHeight() + " cm");
         creatureAge.textProperty().set(creature.getAge() + " ans");

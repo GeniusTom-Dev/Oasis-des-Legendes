@@ -58,7 +58,7 @@ public class EnclosureController {
 
 
         for (int i = 0; i < creatures.size(); i++) {
-            String buttonString = creatures.get(i).getName() + " | " + creatures.get(i).getSex().toUpperCase() + " | " + creatures.get(i).getType();
+            String buttonString = creatures.get(i).getName() + " | " + creatures.get(i).getSex().toString().toUpperCase() + " | " + creatures.get(i).getType();
             Button button = new Button(buttonString);
             button.setId("creature" + i);
             button.setOnAction(this::showCreature);

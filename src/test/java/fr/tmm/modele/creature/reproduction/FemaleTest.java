@@ -21,7 +21,7 @@ class FemaleTest {
     @BeforeEach
     void init() {
         this.mermaid = new Mermaid("Une sirène", "f", 50,50,50);
-        this.mermaid.setSex("Femelle");
+        this.mermaid.setSex("Female");
         this.enclos = new Aquarium("Aquarium", 50,5);
         this.enclos.addCreature(mermaid);
     }

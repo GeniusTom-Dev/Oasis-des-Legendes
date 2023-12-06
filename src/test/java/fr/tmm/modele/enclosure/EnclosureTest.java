@@ -45,7 +45,7 @@ class EnclosureTest {
     }
 
     @Test
-    void checkIfReproductionWork() throws NoSuchFieldException, IllegalAccessException {
+    void checkIfReproductionOfOvipareWork() throws NoSuchFieldException, IllegalAccessException {
         enclosure.addCreature(dragon1);
         enclosure.addCreature(dragon2);
         dragon1.setSex("Female");
@@ -58,12 +58,35 @@ class EnclosureTest {
 
         Field gestationCounter = Female.class.getDeclaredField("gestationCounter");
         gestationCounter.setAccessible(true);
-        gestationCounter.set(this.dragon1.getSex(), 0); // gestation is completed
+        gestationCounter.set(this.dragon1.getSex(), 1); // gestation is completed
+        sleep(2);
 
-        Log.getInstance().showLogs();
         // check if birth was successful
+        assertEquals(enclosure.getCreaturesPresent().size(), 2);
         assertFalse(enclosure.getEggWaitingToHatch().isEmpty());
-        //assertEquals(0, enclosure.getCreaturesPresent().get(2).getAge());
+    }
+
+    @Test
+    void checkIfReproductionOfVivipareWork() throws NoSuchFieldException, IllegalAccessException {
+        Nymph nymph2 = new Nymph("Nymph 2", "Female",50,50,50);
+        enclosure.addCreature(nymph);
+        enclosure.addCreature(nymph2);
+        nymph.setSex("Female");
+        nymph2.setSex("Male");
+
+        // reproduction normally is launched and complete
+        sleep(6); // launch reproduction
+
+        assertTrue(((Female) nymph.getSex()).isPregnant());
+
+        Field gestationCounter = Female.class.getDeclaredField("gestationCounter");
+        gestationCounter.setAccessible(true);
+        gestationCounter.set(this.nymph.getSex(), 1); // gestation is completed
+        sleep(2);
+
+        // check if birth was successful
+        assertEquals(enclosure.getCreaturesPresent().size(), 3);
+        assertTrue(enclosure.getEggWaitingToHatch().isEmpty());
     }
 
     @Test

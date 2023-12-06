@@ -7,10 +7,8 @@ import fr.tmm.modele.creature.reproduction.data.NbChildren;
 
 public abstract class Viviparous extends Creature {
 
-    private int gestationCounter;
     public Viviparous(String nomEspece, String sexe, double poids, double taille, int age) {
         super(nomEspece, sexe, poids, taille, age);
-        this.gestationCounter = Gestation.getValue(this.getType());
     }
 
 }

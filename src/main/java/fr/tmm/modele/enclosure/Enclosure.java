@@ -9,12 +9,8 @@ import fr.tmm.modele.creature.reproduction.data.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.utils.Utils;
 
-import fr.tmm.modele.creature.Viviparous;
-import fr.tmm.modele.creature.Oviparous;
-
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Enclosure implements CreatureListener {
     protected String name;
@@ -77,8 +73,7 @@ public class Enclosure implements CreatureListener {
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.cleanliness = CleanlinessStatus.SPOTLESS;
-        startReproductionThread();
-        System.out.println("");
+        enclosureThread();
     }
 
     public void makeCreatureSickDependingOfCleanliness() {
@@ -144,10 +139,8 @@ public class Enclosure implements CreatureListener {
         this.cleanliness = Utils.getWorseState(this.cleanliness);
         Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
     }
-    
-    /////////////////////////////////////////////////:
 
-    public void startReproductionThread() {
+    public void enclosureThread() {
         Thread reproductionThread = new Thread(() -> {
             while (true) {
                 try {
@@ -156,7 +149,7 @@ public class Enclosure implements CreatureListener {
                         System.out.println("reproduction");
                         reproduce();
                     }
-
+                    makeCreatureSickDependingOfCleanliness();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -177,12 +170,20 @@ public class Enclosure implements CreatureListener {
 
     private Creature getActiveRandomMale() {
         ArrayList<Creature> males = getCreaturesBySex("Male");
-        return males.get(Utils.getRandomIndexInList(males));
+        int index = Utils.getRandomIndexInList(males);
+        if (index == -1) {
+            return null;
+        }
+        return males.get(index);
     }
 
     private Creature getActiveRandomFemale() {
-        ArrayList<Creature> females = getCreaturesBySex("Female");
-        return females.get(Utils.getRandomIndexInList(females));
+        ArrayList<Creature> males = getCreaturesBySex("Female");
+        int index = Utils.getRandomIndexInList(males);
+        if (index == -1) {
+            return null;
+        }
+        return males.get(index);
     }
 
     public ArrayList<Creature> getCreaturesBySex(String sex) {

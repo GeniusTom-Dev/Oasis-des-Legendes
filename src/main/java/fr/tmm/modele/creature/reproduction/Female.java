@@ -9,13 +9,13 @@ import fr.tmm.modele.creature.reproduction.data.NbChildren;
 public class Female extends Sex implements Runnable {
 
     private final Creature creature;
-    private boolean isPregnant;
+    private boolean isPregnant = false;
 
     public int getGestationCounter() {
         return gestationCounter;
     }
 
-    private int gestationCounter;
+    private int gestationCounter = 0;
     private ReproductionMethod reproductionMethod;
 
     public Female(Creature creature) {
@@ -25,8 +25,6 @@ public class Female extends Sex implements Runnable {
         } else if (creature instanceof Viviparous) {
             this.reproductionMethod = new Calve();
         }
-        this.isPregnant = false;
-        this.gestationCounter = Gestation.getValue(this.creature.getType());
     }
 
     public void startBecomePregnantThread() {

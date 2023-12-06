@@ -3,12 +3,8 @@ package fr.tmm.modele.creature.reproduction.data;
 public enum Incubation {
     DRAGON(100),
     KRAKEN(100),
-    LYCANTHROPE(100),
     MEGALODON(100),
-    MERMAID(100),
-    NYMPH(100),
-    PHENIX(100),
-    UNICORN(100);
+    PHENIX(100);
     private final int incubationTime;
 
     Incubation(int time) {
