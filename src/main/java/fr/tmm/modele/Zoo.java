@@ -2,7 +2,7 @@ package fr.tmm.modele;
 
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Megalodon;
-import fr.tmm.modele.creature.species.Phenix;
+import fr.tmm.modele.creature.species.Phoenix;
 import fr.tmm.modele.creature.species.Unicorn;
 import fr.tmm.modele.enclosure.Aquarium;
 import fr.tmm.modele.enclosure.Aviary;
@@ -18,10 +18,12 @@ public class Zoo {
     private ArrayList<Enclosure> enclosures = new ArrayList<>();
     private static Zoo INSTANCE;
 
-    private Zoo() {
-        temporaryInit();
-    }
+    private Zoo() {}
 
+    /**
+     * Get the unique instance of the class Zoo
+     * @return the instance
+     */
     public static Zoo getInstance() {
         if (INSTANCE == null) {
             // TODO -> demander les infos pour creer le maitre du zoo et le nom du zoo
@@ -30,18 +32,21 @@ public class Zoo {
         return INSTANCE;
     }
 
+    /**
+     * Simulate a zoo with enclosures and creatures
+     */
     public void temporaryInit() {
         this.zooMaster = new ZooMaster("Julo", "m", 10, 10, 19);
         this.name = "Zoo de Test";
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
-        Aquarium aquarium1 = new Aquarium("Aquarium 1", 50, 5, 20, 4);
+        Aquarium aquarium1 = new Aquarium("Aquarium 1", 50, 5);
         Aviary voiliere1 = new Aviary("Voiliere 1", 50, 7);
         enclos1.addCreature(new Unicorn("Licorne 1", "m", 10, 10, 10));
         enclos1.addCreature(new Unicorn("Licorne 2", "m", 10, 10, 10));
         enclos1.addCreature(new Unicorn("Licorne 3", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 1", "m", 10, 10, 10));
         aquarium1.addCreature(new Megalodon("Magalodon 2", "m", 10, 10, 10));
-        voiliere1.addCreature(new Phenix("Phenix 1", "m", 10, 10, 10));
+        voiliere1.addCreature(new Phoenix("Phenix 1", "m", 10, 10, 10));
         this.addAnEnclosure(enclos1);
         this.addAnEnclosure(aquarium1);
         this.addAnEnclosure(voiliere1);
@@ -79,19 +84,29 @@ public class Zoo {
         this.enclosures = enclosures;
     }
 
-    public int addAnEnclosure(Enclosure enclosure) {
+    /**
+     * Add an enclosure to the zoo
+     * @param enclosure
+     */
+    public void addAnEnclosure(Enclosure enclosure) {
         if (this.enclosures.size() < NB_MAX_ENCLOSURE) {
             this.enclosures.add(enclosure);
-            return 0;
         }
-        return -1;
     }
 
+    /**
+     * Get all the creature of the zoo
+     * @return an arrayList with all the creature of the zoo
+     */
     public ArrayList<Creature> getAllCreatures() {
         ArrayList<Creature> creatures = new ArrayList<>();
         for (Enclosure enclo : this.enclosures) {
             creatures.addAll(enclo.getCreaturesPresent());
         }
         return creatures;
+    }
+
+    public void setZooMaster(ZooMaster zooMaster) {
+        this.zooMaster = zooMaster;
     }
 }

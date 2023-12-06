@@ -1,16 +1,10 @@
 package fr.tmm.modele.creature;
 
-import fr.tmm.modele.creature.methodOfMovement.Flyer;
-import fr.tmm.modele.creature.methodOfMovement.Swimmer;
-import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.species.*;
-import fr.tmm.modele.enclosure.Aviary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Method;
-import java.security.Permission;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,9 +76,6 @@ class CreatureTest {
     @Test
     @DisplayName("aging()")
     void aging() {
-        //Field field = Creature.class.getDeclaredField("age");
-        //field.setAccessible(true);
-        //field.set(creature, new int(10));
         creature.setAge(5);
         creature.aging();
         assertEquals(6, creature.getAge());
@@ -100,14 +91,18 @@ class CreatureTest {
 
     @Test
     void reincarnation() {
-        Phenix phenix = new Phenix("Phenix","m",50,50,50);
-        Dragon dragon = new Dragon("Dragon", "m",50,50,50);
-        phenix.die();
+        Phoenix phoenix = new Phoenix("Phenix","m",100,50,50);
+        Dragon dragon = new Dragon("Dragon", "m",100,50,50);
+        phoenix.die();
         dragon.die();
-        assertTrue(phenix.isAlive());
+        assertTrue(phoenix.isAlive());
         assertTrue(dragon.isAlive());
-        assertTrue(phenix.getAge() == 0);
+        assertTrue(phoenix.getAge() == 0);
+        assertTrue(phoenix.getHeight() < 50);
+        assertTrue(phoenix.getWeight() < 100);
         assertTrue(dragon.getAge() == 0);
+        assertTrue(dragon.getHeight() < 50);
+        assertTrue(dragon.getWeight() < 100);
 
     }
 
@@ -126,7 +121,8 @@ class CreatureTest {
 
     @Test
     void makeNoise() {
-        assertEquals("Creature émet un son puissant !", this.creature.makeNoise());
+        this.creature.makeNoise();
+        assertEquals("Creature émet un son puissant !", Log.getInstance().getLastLog());
     }
 
 }

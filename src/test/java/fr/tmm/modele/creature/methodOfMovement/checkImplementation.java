@@ -66,10 +66,10 @@ public class checkImplementation {
 
     @Test
     void checkPhenixImplementation() {
-        Phenix phenix = new Phenix("", "", 5, 5, 5);
-        assertFalse(phenix instanceof Walker);
-        assertTrue(phenix instanceof Flyer);
-        assertFalse(phenix instanceof Swimmer);
+        Phoenix phoenix = new Phoenix("", "", 5, 5, 5);
+        assertFalse(phoenix instanceof Walker);
+        assertTrue(phoenix instanceof Flyer);
+        assertFalse(phoenix instanceof Swimmer);
     }
 
     @Test

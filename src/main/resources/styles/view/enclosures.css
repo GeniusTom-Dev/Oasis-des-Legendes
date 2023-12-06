@@ -1,6 +1,6 @@
-@import "../base.css";
-@import "../component/navbar.css";
-@import "../component/button.css";
+@import "base.css";
+@import "navbar.css";
+@import "button.css";
 
 .scroll-pane {
     -fx-background-color: transparent;

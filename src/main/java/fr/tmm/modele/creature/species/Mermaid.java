@@ -1,7 +1,7 @@
 package fr.tmm.modele.creature.species;
 
+import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.Viviparous;
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
 import fr.tmm.modele.creature.methodOfMovement.Swimmer;
 
 public class Mermaid extends Viviparous implements Swimmer {
@@ -10,7 +10,6 @@ public class Mermaid extends Viviparous implements Swimmer {
     }
 
     @Override
-    public void run() {
+    public void run() {super.run();}
 
-    }
 }

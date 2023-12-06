@@ -1,21 +1,58 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.creature.reproduction.Female;
+import fr.tmm.modele.creature.reproduction.data.BabySize;
+import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.utils.Utils;
 
-import java.util.ArrayList;
+import fr.tmm.modele.creature.Viviparous;
+import fr.tmm.modele.creature.Oviparous;
 
-public class Enclosure implements CreatureDeathListener {
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class Enclosure implements CreatureListener {
     protected String name;
     protected double surfaceArea;
     protected int maxCapacity;
-    protected ArrayList<Creature> creaturesPresent;
+    protected ArrayList<Creature> creaturesPresent = new ArrayList<>();
+
+    protected ArrayList<Egg> eggWaitingToHatch = new ArrayList<>();
     protected CleanlinessStatus cleanliness;
 
     @Override
     public void onCreatureDeath(Creature deadCreature) {
         this.creaturesPresent.remove(deadCreature);
+    }
+
+    @Override
+    public void onEggHatching(Egg egg) {
+        Log.getInstance().addLog("Un oeuf de " + egg.getType() + " a éclos dans l'enclos " + name + ".");
+        this.eggWaitingToHatch.remove(egg);
+        this.onCreatureBirth(egg.getMother());
+    }
+
+    @Override
+    public void onCreatureBirth(Creature mother) {
+        double babyWeight = BabySize.Weight.determineFromType(mother.getType());
+        double babyHeight = BabySize.Height.determineFromType(mother.getType());
+        Creature baby = mother.born(babyWeight, babyHeight);
+        if (this.creaturesPresent.size() == this.maxCapacity) {
+            baby.die();
+        } else {
+            Log.getInstance().addLog(baby.getName() + " vient de naître dans l'enclos " + this.name + ".");
+            this.creaturesPresent.add(baby);
+        }
+    }
+
+    @Override
+    public void onEggLaying(Egg egg) {
+        this.eggWaitingToHatch.add(egg);
     }
 
     public enum CleanlinessStatus {
@@ -28,7 +65,7 @@ public class Enclosure implements CreatureDeathListener {
             return riskOfGettingSick;
         }
 
-        private int riskOfGettingSick;
+        private final int riskOfGettingSick;
 
         CleanlinessStatus(int i) {
             this.riskOfGettingSick = i;
@@ -39,8 +76,9 @@ public class Enclosure implements CreatureDeathListener {
         this.name = name;
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
-        this.creaturesPresent = new ArrayList<>();
-        this.cleanliness = CleanlinessStatus.UNSANITARY;
+        this.cleanliness = CleanlinessStatus.SPOTLESS;
+        startReproductionThread();
+        System.out.println("");
     }
 
     public void makeCreatureSickDependingOfCleanliness() {
@@ -48,34 +86,43 @@ public class Enclosure implements CreatureDeathListener {
             for (Creature creature : this.getCreaturesPresent()) {
                 if (Utils.isBadEventHappening(this.cleanliness.riskOfGettingSick)) {
                     creature.getHealthindicator().setSick(true);
+                    Log.getInstance().addLog(creature.getName() + " est tombé malade.");
                 }
             }
         }
     }
 
     // Méthode pour ajouter une créature à l'enclos
-    public void addCreature(Creature creature) {
-        if (creature != null && creaturesPresent.size() < maxCapacity) {
+    public boolean addCreature(Creature creature) {
+        if (creature instanceof Walker) {
+            return addCreatureThatMatchesEnclosureType(creature);
+        }
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
+                " car ce n'est pas une créature terrestre.");
+        return false;
+    }
+
+    protected boolean addCreatureThatMatchesEnclosureType(Creature creature) {
+        if (creaturesPresent.size() < maxCapacity) {
             // Vérifie si la créature est du même type que celles déjà présentes dans l'enclos
             if (creaturesPresent.isEmpty() || creature.getType().equals(creaturesPresent.get(0).getType())) {
                 creaturesPresent.add(creature);
                 creature.setListener(this);
-                System.out.println(creature.getName() + " a été ajouté à l'enclos " + name + ".");
             } else {
-                System.out.println("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
+                Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
                         " car il contient déjà des créatures de type différent.");
+                return false;
             }
         } else {
-            System.out.println("L'enclos est plein ou la créature est invalide.");
+            return false;
         }
+        return true;
     }
 
     // Méthode pour enlever une créature de l'enclos
     public void removeCreature(Creature creature) {
-        if (creaturesPresent.remove(creature)) {
-            System.out.println(creature.getName() + " a été retiré de l'enclos " + name + ".");
-        } else {
-            System.out.println(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
+        if (!creaturesPresent.remove(creature)) {
+            throw new IllegalArgumentException(creature.getName() + " n'est pas présent dans l'enclos " + name + ".");
         }
     }
 
@@ -84,42 +131,77 @@ public class Enclosure implements CreatureDeathListener {
         for (Creature creature : this.getCreaturesPresent()) {
             creature.eat();
         }
-        System.out.println("Les créatures de l'enclos " + name + " sont nourries.");
+        Log.getInstance().addLog("Les créatures de l'enclos " + name + " ont été nourries.");
     }
 
     // Méthode pour entretenir l'enclos
     public void clean() {
         setCleanlinessDegree(CleanlinessStatus.SPOTLESS);
-        System.out.println("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
+        Log.getInstance().addLog("L'enclos " + name + " a été entretenu. Degré de propreté : " + cleanliness);
     }
 
     public void getDirtier() {
-        this.cleanliness = getWorseState();
+        this.cleanliness = Utils.getWorseState(this.cleanliness);
+        Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
+    }
+    
+    /////////////////////////////////////////////////:
+
+    public void startReproductionThread() {
+        Thread reproductionThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(5000);
+                    if (creaturesPresent.size() < maxCapacity) {
+                        System.out.println("reproduction");
+                        reproduce();
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        reproductionThread.start();
     }
 
-    private CleanlinessStatus getWorseState() {
-        CleanlinessStatus[] statuses = CleanlinessStatus.values();
-        for (int i = 0; i < statuses.length; i++) {
-            if (statuses[i] == cleanliness && i > 0) {
-                return statuses[i - 1];
+   private void reproduce() throws InterruptedException {
+        Creature male = getActiveRandomMale();
+        Creature female = getActiveRandomFemale();
+
+        if (male != null && female != null) {
+            ((Female) female.getSex()).startBecomePregnantThread();
+            Log.getInstance().addLog(male.getName() + " et " + female.getName() + " se sont accouplés.");
+        }
+    }
+
+    private Creature getActiveRandomMale() {
+        ArrayList<Creature> males = getCreaturesBySex("Male");
+        return males.get(Utils.getRandomIndexInList(males));
+    }
+
+    private Creature getActiveRandomFemale() {
+        ArrayList<Creature> females = getCreaturesBySex("Female");
+        return females.get(Utils.getRandomIndexInList(females));
+    }
+
+    public ArrayList<Creature> getCreaturesBySex(String sex) {
+        ArrayList<Creature> creaturesBySex = new ArrayList<>();
+        for (Creature creature : creaturesPresent) {
+            if (creature.getSex().toString() == sex && !creature.isAsleep()) {
+                if (creature.getSex().toString() == "Female") {
+                    if (!((Female) creature.getSex()).isPregnant()) {
+                        creaturesBySex.add(creature);
+                    }
+                } else {
+                    creaturesBySex.add(creature);
+                }
             }
         }
-        return cleanliness;
+        return creaturesBySex;
     }
 
-    // Méthode pour afficher les caractéristiques de l'enclos
-    public void showCaracteristics() {
-        System.out.println("Caractéristiques de l'enclos " + name + ":");
-        System.out.println("Superficie : " + surfaceArea);
-        System.out.println("Capacité maximale : " + maxCapacity);
-        System.out.println("Nombre de créatures présentes : " + creaturesPresent.size());
-        System.out.println("Degré de propreté : " + cleanliness);
-        System.out.println("Créatures présentes :");
-        for (Creature creature : creaturesPresent) {
-            System.out.println("- " + creature.getName() + " (Type : " + creature.getType() + ")");
-        }
-    }
-
+    ///////////////////////////////////////////////////////////////////////////
     // --- GETTER ---
 
     public String getName() {
@@ -151,6 +233,10 @@ public class Enclosure implements CreatureDeathListener {
 
     public void setCleanlinessDegree(CleanlinessStatus cleanlinessDegree) {
         this.cleanliness = cleanlinessDegree;
+    }
+
+    public ArrayList<Egg> getEggWaitingToHatch() {
+        return eggWaitingToHatch;
     }
 
 }

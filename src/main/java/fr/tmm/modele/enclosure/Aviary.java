@@ -1,5 +1,6 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.methodOfMovement.Flyer;
 import fr.tmm.modele.utils.Utils;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 public class Aviary extends Enclosure {
     private RoofState roofState;
 
+    /**
+     * Enumeration representing the state of the aviary roof
+     */
     public enum RoofState {
         BROKEN(50), // 50% chance of a creature escaping
         DAMAGED(20), // 20% chance of a creature escaping
@@ -24,25 +28,33 @@ public class Aviary extends Enclosure {
     public Aviary(String name, double surfaceArea, int maxCapacity) {
         super(name, surfaceArea, maxCapacity);
         this.roofState = RoofState.INTACT;
-        /*scheduleRoofCheck();*/
     }
 
+    /**
+     * Check that a creature is a swimmer and can be added to an enclosure
+     * @param creature : the creature who is going to be checked
+     * @return true if the creature is a swimmer
+     */
     @Override
-    public void addCreature(Creature creature) {
+    public boolean addCreature(Creature creature) {
         if (creature instanceof Flyer) {
-            super.addCreature(creature);
-        } else {
-            System.out.println("Impossible d'ajouter " + creature.getName() + " à la volière " + name +
-                    " car ce n'est pas une créature volante.");
+            return super.addCreatureThatMatchesEnclosureType(creature);
         }
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à la voilière " + name +
+                    " car ce n'est pas une créature volantes.");
+        return false;
     }
 
+    /**
+     * Allow some creature to escape depending of the roof state
+     */
     public void chanceOfEscapingDependingRoofState() {
         if (this.roofState.riskOfEvasion != 0) {
             ArrayList<Creature> escapedCreature = new ArrayList<>();
             for (Creature creature : this.getCreaturesPresent()) {
                 if (Utils.isBadEventHappening(this.roofState.riskOfEvasion)) {
                     escapedCreature.add(creature);
+                    Log.getInstance().addLog(creature.getName() + " s'est échappé.");
                 }
             }
             for (Creature creature: escapedCreature) {
@@ -51,84 +63,33 @@ public class Aviary extends Enclosure {
         }
     }
 
+    /**
+     * Set the roof state to INTACT
+     */
     public void repareRoof() {
         this.roofState = RoofState.INTACT;
     }
 
+    /**
+     * Set the roof level to the level under
+     */
     public void damageRoof() {
-        this.roofState = getWorseRoofState();
+        this.roofState = Utils.getWorseState(this.roofState);
     }
 
-    private RoofState getWorseRoofState() {
-        RoofState[] statuses = RoofState.values();
-        for (int i = 0; i < statuses.length; i++) {
-            if (statuses[i] == roofState && i > 0) {
-                return statuses[i - 1];
-            }
-        }
-        return roofState;
-    }
-
+    /**
+     * Get the roof state of the aviary
+     * @return the roof state of the aviary of type RoofState
+     */
     public RoofState getRoofState() {
         return this.roofState;
     }
 
+    /**
+     * Set the roof state value of the aviary
+     * @param newRoofState of type RoofState
+     */
     public void setRoofState(RoofState newRoofState) {
         this.roofState = newRoofState;
     }
-
- /*   private void scheduleRoofCheck() {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                checkRoofState();
-            }
-        }, 0, 5 * 60 * 1000);
-    }*/
-
-/*
-    private void checkRoofState() {
-        alterRoofState();
-        System.out.println("L'état du toit est : " + roofState);
-
-        if (roofState.equals("CRITICAL")) {
-            Timer criticalTimer = new Timer();
-            criticalTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    deleteAviary();
-                }
-            }, 5 * 60 * 1000);
-        }
-    }
-*/
-
-/*    private void alterRoofState() {
-        double randomValue = Math.random();
-
-        if (roofState.equals("EXCELLENT")) {
-            if (randomValue > 0.5) {
-                roofState = "GOOD";
-            } else if (randomValue > 0.2) {
-                roofState = "FAIR";
-            } else {
-                roofState = "CRITICAL";
-            }
-        } else if (roofState.equals("GOOD")) {
-            if (randomValue > 0.7) {
-                roofState = "FAIR";
-            } else if (randomValue > 0.3) {
-                roofState = "CRITICAL";
-            }
-        } else if (roofState.equals("FAIR")) {
-            if (randomValue > 0.8) {
-                roofState = "CRITICAL";
-            }
-        }
-    }
-
-    private void deleteAviary() {
-        System.out.println("La volière a été supprimée en raison de l'état critique du toit.");
-    }*/
 }

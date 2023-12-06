@@ -1,30 +1,28 @@
 package fr.tmm.modele.creature;
 
-import fr.tmm.modele.creature.listener.CreatureDeathListener;
+import fr.tmm.modele.Log;
+import fr.tmm.modele.creature.listener.CreatureListener;
+import fr.tmm.modele.creature.reproduction.*;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
+import java.lang.reflect.Constructor;
+
 public abstract class Creature implements Runnable {
     protected String name;
     protected String type;
-    protected String sex;
-    protected double weight;
-    protected double height;
+    protected double weight; // kg
+    protected double height; // cm
     protected int age;
+    private Sex sex;
     protected SatietyIndicator satiety;
     protected EnergyIndicator energy; // contain a method isAsleep()
     protected HealthIndicator health; // contain a method isSick and isAlive
-
-    public void setListener(CreatureDeathListener listener) {
-        this.listener = listener;
-    }
-
-    protected CreatureDeathListener listener;
+    protected CreatureListener listener;
 
     public Creature(String name, String sex, double weight, double height, int age) {
         this.name = name;
-        this.sex = sex;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -32,35 +30,58 @@ public abstract class Creature implements Runnable {
         this.energy = new EnergyIndicator();
         this.health = new HealthIndicator();
         this.type = this.getClass().getSimpleName();
+        this.sex = new Female(this);
+        Thread t = new Thread(this);
+        t.start();
     }
 
     public void die() {
-        listener.onCreatureDeath(this);
-    }
-
-    /*public void run() {
-        int cmp = 0;
-        try {
-            Thread.sleep(5000);
-            this.energy.decrement(1);
-            this.satiety.decrement(1);
-            // une chance de faire du bruit
-            // perdre de la vie si il est malade
-            // perdre de la vie si il est entrain de mourir de faim
-            if (cmp == 5) {
-                ++this.age;
-                cmp = 0;
-            } else {
-                ++cmp;
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        if (this.age == 0) {
+            Log.getInstance().addLog("Un bébé " + this.getType() + " est mort-né car il est né dans un enclos plein.");
+        } else {
+            Log.getInstance().addLog(name + " est mort.");
         }
-    }*/
-
-    public String makeNoise() {
-        return this.name + " émet un son puissant !";
+        if (this.listener != null) listener.onCreatureDeath(this);
     }
+
+    public void run() {
+        int cmp = 0;
+        while (isAlive()) {
+            try {
+                Thread.sleep(5000);
+                this.energy.decrement(1);
+                this.satiety.decrement(1);
+                // une chance de faire du bruit
+                if (this.isSick()) this.health.decrement(2);
+                if (this.isStarving()) starve();
+                ++cmp;
+                if (cmp == 5) {
+                    this.aging();
+                    cmp = 0;
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        this.die();
+    }
+
+    public Creature born(double weight, double height) {
+        try {
+            Class<? extends Creature> clazz = this.getClass();
+            Constructor<? extends Creature> constructor = clazz.getConstructor(String.class, String.class, double.class, double.class, int.class);
+            return constructor.newInstance("Nom par défaut", "", weight, height, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void makeNoise(){
+        Log.getInstance().addLog(this.name + " émet un son puissant !");
+    }
+
+    // --- Nom, Age, Taille, Poid ---
 
     public String getName() {
         return name;
@@ -70,8 +91,16 @@ public abstract class Creature implements Runnable {
         return type;
     }
 
-    public String getSex() {
-        return sex;
+    public Sex getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        if (sex == "Female") {
+            this.sex = new Female(this);
+        } else {
+            this.sex = new Male();
+        }
     }
 
     public double getWeight() {
@@ -100,10 +129,6 @@ public abstract class Creature implements Runnable {
 
     // --- Satiety ---
 
-    public String displaySatietyLevel() {
-        return satiety.toString();
-    }
-
     public void setSatiety(int satiety) {
         this.satiety.setValue(satiety);
     }
@@ -125,14 +150,11 @@ public abstract class Creature implements Runnable {
     }
 
     public void starve() {
+        Log.getInstance().addLog(name + " est entrain de mourir de faim.");
         this.health.decrement(10);
     }
 
     // --- Energy ---
-
-    public String displayEnergyLevel() {
-        return this.energy.toString();
-    }
 
     public void setEnergy(int energy) {
         this.energy.setValue(energy);
@@ -156,10 +178,6 @@ public abstract class Creature implements Runnable {
 
     // --- Health ---
 
-    public String displayHealthLevel() {
-        return this.health.toString();
-    }
-
     public void setHealth(int health) {
         this.health.setValue(health);
     }
@@ -178,6 +196,9 @@ public abstract class Creature implements Runnable {
 
     public void aging() {
         ++this.age;
+        if (this.age == 100) {
+            this.health.setValue(0);
+        }
     }
 
     public boolean isAlive() {
@@ -185,4 +206,13 @@ public abstract class Creature implements Runnable {
     }
 
     public boolean isSick() {return this.health.isSick();}
+
+    public void setListener(CreatureListener listener) {
+        this.listener = listener;
+    }
+
+    public CreatureListener getListener() {
+        return listener;
+    }
+
 }

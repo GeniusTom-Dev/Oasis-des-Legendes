@@ -1,0 +1,46 @@
+{
+  "zooMaster": {
+    "sex": "m",
+    "name": "Julot",
+    "weight": 10,
+    "age": 19,
+    "height": 10
+  },
+  "zoo": {
+    "nombre max d'enclos": 10,
+    "enclos": [
+      {
+        "superficie": 50,
+        "creatures": [
+          {
+            "satiety": 100,
+            "sex": "m",
+            "name": "Licorne 1",
+            "weight": 10,
+            "health": 100,
+            "type": "Unicorn",
+            "age": 10,
+            "height": 10,
+            "energy": 100
+          },
+          {
+            "satiety": 100,
+            "sex": "m",
+            "name": "Licorne 2",
+            "weight": 10,
+            "health": 100,
+            "type": "Unicorn",
+            "age": 10,
+            "height": 10,
+            "energy": 100
+          }
+        ],
+        "maxCapacity": 5,
+        "type": "Enclosure",
+        "nom": "Enclos 1",
+        "cleanliness": "SPOTLESS"
+      }
+    ],
+    "name": "Zoo de Test"
+  }
+}
