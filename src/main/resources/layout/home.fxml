@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.tmm.controlers.HomeController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/home.css" fx:id="borderPane" styleClass="root">
+
+    <top>
+        <HBox alignment="CENTER">
+            <HBox styleClass="navbar">
+                <VBox styleClass="case" alignment="CENTER">
+                    <Label text="Nombre de créature:"/>
+                    <Label text="chargement..."/>
+                </VBox>
+
+                <VBox styleClass="case" alignment="CENTER">
+                    <Label text="Nombre de créature:"/>
+                    <Label text="chargement..."/>
+                </VBox>
+
+                <VBox styleClass="case" alignment="CENTER">
+                    <ImageView>
+                        <Image url="/assets/logo.png" requestedWidth="50" requestedHeight="50"/>
+                    </ImageView>
+                </VBox>
+
+                <VBox styleClass="case" alignment="CENTER">
+                    <Label text="Nombre de créature:"/>
+                    <Label text="chargement..."/>
+                </VBox>
+
+                <VBox styleClass="case" alignment="CENTER">
+                    <Label text="Nombre de créature:"/>
+                    <Label text="chargement..."/>
+                </VBox>
+            </HBox>
+        </HBox>
+    </top>
+
+
+    <bottom>
+        <VBox>
+            <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
+                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                    <HBox.margin>
+                        <Insets left="10"/>
+                    </HBox.margin>
+                </Button>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                    <HBox.margin>
+                        <Insets right="10"/>
+                    </HBox.margin>
+                </Button>
+            </HBox>
+
+            <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
+                <HBox prefWidth="1000">
+                    <Button prefWidth="150" prefHeight="150" onAction="#toEnclosure">
+                        <graphic>
+                            <ImageView fitWidth="100" fitHeight="100">
+                                <Image url="@/assets/enclosure.png"/>
+                            </ImageView>
+                        </graphic>
+                        <HBox.margin>
+                            <Insets bottom="10"/>
+                        </HBox.margin>
+                    </Button>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                        <HBox.margin>
+                            <Insets bottom="10"/>
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+
+            </HBox>
+        </VBox>
+<!--        <HBox styleClass="lineButton">-->
+<!--            <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">-->
+
+<!--            </Button>-->
+<!--        </HBox>-->
+    </bottom>
+</BorderPane>

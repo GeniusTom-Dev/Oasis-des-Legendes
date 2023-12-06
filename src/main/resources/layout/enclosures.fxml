@@ -1,0 +1,44 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.tmm.controlers.EnclosuresController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/enclosures.css" fx:id="borderPane" styleClass="root">
+
+    <top>
+        <HBox spacing="125">
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#backButton">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/left-arrow.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <HBox styleClass="navbar" alignment="CENTER">
+                <Text fill="white" fx:id="title">
+                    <font>
+                        <Font size="24" />
+                    </font>
+                    Liste des enclos
+                </Text>
+            </HBox>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox prefWidth="900" maxWidth="900" maxHeight="500">
+
+            <FlowPane minHeight="500" maxHeight="500" alignment="CENTER" fx:id="enclosuresLine" hgap="20" vgap="20"></FlowPane>
+        </VBox>
+    </center>
+
+</BorderPane>
