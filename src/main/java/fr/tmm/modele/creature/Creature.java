@@ -7,6 +7,8 @@ import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
 
+import java.lang.reflect.Constructor;
+
 public abstract class Creature implements Runnable {
     protected String name;
     protected String type;
@@ -65,7 +67,14 @@ public abstract class Creature implements Runnable {
     }
 
     public Creature born(double weight, double height) {
-        return null;
+        try {
+            Class<? extends Creature> clazz = this.getClass();
+            Constructor<? extends Creature> constructor = clazz.getConstructor(String.class, String.class, double.class, double.class, int.class);
+            return constructor.newInstance("Nom par défaut", "", weight, height, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void makeNoise(){
@@ -87,7 +96,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void setSex(String sex) {
-        if (sex == "Femelle") {
+        if (sex == "Female") {
             this.sex = new Female(this);
         } else {
             this.sex = new Male();

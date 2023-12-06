@@ -12,8 +12,4 @@ public class Megalodon extends Oviparous implements Swimmer {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Megalodon("Un mégalodon", "", weight, height, 0);
-    }
 }

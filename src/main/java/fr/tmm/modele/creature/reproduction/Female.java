@@ -8,7 +8,7 @@ import fr.tmm.modele.creature.reproduction.data.NbChildren;
 
 public class Female extends Sex implements Runnable {
 
-    private Creature creature;
+    private final Creature creature;
     private boolean isPregnant;
 
     public int getGestationCounter() {
@@ -29,7 +29,7 @@ public class Female extends Sex implements Runnable {
         this.gestationCounter = Gestation.getValue(this.creature.getType());
     }
 
-    public void startBecomePregnantThread() throws InterruptedException {
+    public void startBecomePregnantThread() {
         this.isPregnant = true;
         this.gestationCounter = Gestation.getValue(this.creature.getType());
         Thread t = new Thread(this);
@@ -47,9 +47,9 @@ public class Female extends Sex implements Runnable {
                 e.printStackTrace();
             }
         }
+        System.out.println("Fin de la gestation de " + this.creature.getName());
         this.isPregnant = false;
         this.reproductionMethod.reproduce(creature, NbChildren.determineChildrenNb(creature.getType()));
-        System.out.println(NbChildren.determineChildrenNb(creature.getType()));
     }
 
     public boolean isPregnant() {

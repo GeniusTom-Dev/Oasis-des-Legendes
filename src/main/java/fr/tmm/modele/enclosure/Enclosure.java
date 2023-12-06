@@ -4,6 +4,7 @@ import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.reproduction.data.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.utils.Utils;
@@ -13,6 +14,7 @@ import fr.tmm.modele.creature.Oviparous;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Enclosure implements CreatureListener {
     protected String name;
@@ -63,7 +65,7 @@ public class Enclosure implements CreatureListener {
             return riskOfGettingSick;
         }
 
-        private int riskOfGettingSick;
+        private final int riskOfGettingSick;
 
         CleanlinessStatus(int i) {
             this.riskOfGettingSick = i;
@@ -75,6 +77,8 @@ public class Enclosure implements CreatureListener {
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
         this.cleanliness = CleanlinessStatus.SPOTLESS;
+        startReproductionThread();
+        System.out.println("");
     }
 
     public void makeCreatureSickDependingOfCleanliness() {
@@ -143,14 +147,13 @@ public class Enclosure implements CreatureListener {
     
     /////////////////////////////////////////////////:
 
-    /*public void startReproductionThread() {
+    public void startReproductionThread() {
         Thread reproductionThread = new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(5000); // ajustez la fréquence selon vos besoins
-
-                    // Vérifier si l'enclos a atteint sa capacité maximale
+                    Thread.sleep(5000);
                     if (creaturesPresent.size() < maxCapacity) {
+                        System.out.println("reproduction");
                         reproduce();
                     }
 
@@ -159,50 +162,44 @@ public class Enclosure implements CreatureListener {
                 }
             }
         });
-
         reproductionThread.start();
-    }*/
+    }
 
-   /*private void reproduce() {
-        // Sélectionner un mâle et une femelle aléatoirement
+   private void reproduce() throws InterruptedException {
         Creature male = getActiveRandomMale();
         Creature female = getActiveRandomFemale();
 
         if (male != null && female != null) {
-            // Faire se reproduire le mâle et la femelle
-            reproduceCreatures(male, female);
+            ((Female) female.getSex()).startBecomePregnantThread();
+            Log.getInstance().addLog(male.getName() + " et " + female.getName() + " se sont accouplés.");
         }
     }
 
     private Creature getActiveRandomMale() {
-        ArrayList<Creature> males = getCreaturesBySex("male");
+        ArrayList<Creature> males = getCreaturesBySex("Male");
         return males.get(Utils.getRandomIndexInList(males));
     }
 
     private Creature getActiveRandomFemale() {
-        ArrayList<Creature> females = getCreaturesBySex("female");
+        ArrayList<Creature> females = getCreaturesBySex("Female");
         return females.get(Utils.getRandomIndexInList(females));
-    }*/
+    }
 
-    /*private ArrayList<Creature> getCreaturesBySex(String sex) {
+    public ArrayList<Creature> getCreaturesBySex(String sex) {
         ArrayList<Creature> creaturesBySex = new ArrayList<>();
         for (Creature creature : creaturesPresent) {
-            if (creature.getSex().equalsIgnoreCase(sex) && !creature.isAsleep()) {
-                creaturesBySex.add(creature);
+            if (creature.getSex().toString() == sex && !creature.isAsleep()) {
+                if (creature.getSex().toString() == "Female") {
+                    if (!((Female) creature.getSex()).isPregnant()) {
+                        creaturesBySex.add(creature);
+                    }
+                } else {
+                    creaturesBySex.add(creature);
+                }
             }
         }
         return creaturesBySex;
     }
-
-    private Creature reproduceCreatures(Creature male, Creature female) {
-        if (male instanceof Oviparous && female instanceof Oviparous) {
-            ((Oviparous) female).startBecomePregnantThread();
-        }
-        else if (male instanceof Viviparous && female instanceof Viviparous) {
-            ((Viviparous) female).startBecomePregnantThread();
-        }
-        return null;
-    }*/
 
     ///////////////////////////////////////////////////////////////////////////
     // --- GETTER ---

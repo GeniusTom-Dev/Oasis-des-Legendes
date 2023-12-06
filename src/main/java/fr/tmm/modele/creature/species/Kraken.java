@@ -12,8 +12,4 @@ public class Kraken extends Oviparous implements Swimmer {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Kraken("Un kraken", "", weight, height, 0);
-    }
 }

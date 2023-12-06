@@ -35,8 +35,4 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincar
         super.run();
     }
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Dragon("Un dragon", "", weight, height, 0);
-    }
 }

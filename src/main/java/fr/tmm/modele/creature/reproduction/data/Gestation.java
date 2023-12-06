@@ -5,7 +5,7 @@ public enum Gestation {
     KRAKEN(100),
     LYCANTHROPE(100),
     MEGALODON(100),
-    MERMAID(5),
+    MERMAID(100),
     NYMPH(100),
     PHOENIX(100),
     UNICORN(100);

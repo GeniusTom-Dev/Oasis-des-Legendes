@@ -25,8 +25,4 @@ public class Nymph extends Viviparous implements Walker, Reincarnate {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Nymph("Une nymphe", "", weight, height, 0);
-    }
 }

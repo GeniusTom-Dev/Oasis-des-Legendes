@@ -40,6 +40,16 @@ public class Log {
      * @return the lag log
      */
     public String getLastLog() {
+        if (this.logs.isEmpty()) {
+            return null;
+        }
         return this.logs.get(0);
+    }
+
+    public void showLogs() {
+        System.out.println("LOGS : ");
+        for (String log : logs) {
+            System.out.println(log);
+        }
     }
 }

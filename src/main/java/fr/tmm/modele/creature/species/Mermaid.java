@@ -12,8 +12,4 @@ public class Mermaid extends Viviparous implements Swimmer {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Mermaid("Une sirène", "", weight, height, 0);
-    }
 }

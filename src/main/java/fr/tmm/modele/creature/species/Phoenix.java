@@ -31,8 +31,4 @@ public class Phoenix extends Oviparous implements Flyer, Reincarnate {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Phoenix("Un phénix", "", weight, height, 0);
-    }
 }

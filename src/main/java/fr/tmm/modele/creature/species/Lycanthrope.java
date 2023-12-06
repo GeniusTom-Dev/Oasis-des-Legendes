@@ -53,8 +53,4 @@ public class Lycanthrope extends Viviparous implements Walker {
     @Override
     public void run() {super.run();}
 
-    @Override
-    public Creature born(double weight, double height) {
-        return new Lycanthrope("Un lycan", "", weight, height, 0);
-    }
 }

@@ -1,11 +1,18 @@
 package fr.tmm.modele.enclosure;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.species.Dragon;
 import fr.tmm.modele.creature.species.Megalodon;
 import fr.tmm.modele.creature.species.Nymph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +31,39 @@ class EnclosureTest {
         this.dragon2 = new Dragon("Dragon2", "male", 50, 50, 50);
         this.dragon3 = new Dragon("Dragon3", "male", 50, 50, 50);
         this.nymph = new Nymph("Nymph", "male", 50, 50, 50);
+    }
+    @Test
+    void creatureGetBySex() {
+        enclosure.addCreature(dragon1);
+        enclosure.addCreature(dragon2);
+        enclosure.addCreature(dragon3);
+        dragon1.setSex("Female");
+        dragon2.setSex("Female");
+        dragon2.setSex("Male");
+        assertEquals(enclosure.getCreaturesBySex("Female").size(), 2);
+        assertEquals(enclosure.getCreaturesBySex("Male").size(), 1);
+    }
+
+    @Test
+    void checkIfReproductionWork() throws NoSuchFieldException, IllegalAccessException {
+        enclosure.addCreature(dragon1);
+        enclosure.addCreature(dragon2);
+        dragon1.setSex("Female");
+        dragon2.setSex("Male");
+
+        // reproduction normally is launched and complete
+        sleep(6); // launch reproduction
+
+        assertTrue(((Female) dragon1.getSex()).isPregnant());
+
+        Field gestationCounter = Female.class.getDeclaredField("gestationCounter");
+        gestationCounter.setAccessible(true);
+        gestationCounter.set(this.dragon1.getSex(), 0); // gestation is completed
+
+        Log.getInstance().showLogs();
+        // check if birth was successful
+        assertFalse(enclosure.getEggWaitingToHatch().isEmpty());
+        //assertEquals(0, enclosure.getCreaturesPresent().get(2).getAge());
     }
 
     @Test
@@ -138,6 +178,14 @@ class EnclosureTest {
             if (creature.isSick()) ++cmp;
         }
         assertEquals(0, cmp);
+    }
+
+    private void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
