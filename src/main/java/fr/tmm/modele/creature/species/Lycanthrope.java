@@ -5,6 +5,7 @@ import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.lycanthropeColony.Colony;
 import fr.tmm.modele.lycanthropeColony.Pack;
+import fr.tmm.modele.lycanthropeColony.Rank;
 
 public class Lycanthrope extends Viviparous implements Walker {
 
@@ -14,7 +15,7 @@ public class Lycanthrope extends Viviparous implements Walker {
     }
     private int force; // nb de 0 à 10
     private int dominationFactor; // nb de gens dominé sur nb de gens qui domine
-    private Character rank; // alpha, beta, ..., omega
+    private Rank rank; // alpha, beta, ..., omega
     private int level; // ageCategorie + force + dominationFactor + rang
     private int impetuosityFactor;
     private Pack pack;
@@ -52,5 +53,38 @@ public class Lycanthrope extends Viviparous implements Walker {
 
     @Override
     public void run() {super.run();}
+
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    public int getDominationFactor() {
+        return dominationFactor;
+    }
+
+    public void setDominationFactor(int dominationFactor) {
+        this.dominationFactor = dominationFactor;
+    }
+
+    public Rank getRank() {
+        return this.rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
 
 }

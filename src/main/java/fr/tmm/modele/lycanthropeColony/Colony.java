@@ -17,6 +17,17 @@ public class Colony {
             }
         }
     }
+
+    public Pack getPackFromLycan(Lycanthrope targetLycan) {
+        for (Pack pack : this.packs) {
+            for (Lycanthrope lycan : pack.getLycanthropes()) {
+                if (lycan.equals(targetLycan)) {
+                    return pack;
+                }
+            }
+        }
+        return null;
+    }
 }
 
 
