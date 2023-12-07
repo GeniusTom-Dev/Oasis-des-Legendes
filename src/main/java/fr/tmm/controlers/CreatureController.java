@@ -53,7 +53,6 @@ public class CreatureController {
         this.creature = Zoo.getInstance().getEnclosures().get(indexEnclosure).getCreaturesPresent().get(indexCreature);
 
         title.setText(creature.getName());
-        System.out.println("assets/creatures/" + creature.getType().toLowerCase() + ".png");
         creatureImg.setImage(new Image(getClass().getClassLoader().getResourceAsStream("assets/creatures/" + creature.getType().toLowerCase() + ".png")));
         creatureType.textProperty().bind(creature.typeProperty());
         creatureName.textProperty().bind(creature.nameProperty());

@@ -7,6 +7,7 @@ import fr.tmm.modele.creature.species.Unicorn;
 import fr.tmm.modele.enclosure.Aquarium;
 import fr.tmm.modele.enclosure.Aviary;
 import fr.tmm.modele.enclosure.Enclosure;
+import fr.tmm.modele.lycanthropeColony.Colony;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class Zoo {
     private ZooMaster zooMaster;
     final private int NB_MAX_ENCLOSURE = 10;
     private ArrayList<Enclosure> enclosures = new ArrayList<>();
+    private Colony colony = new Colony();
     private static Zoo INSTANCE;
 
     private Zoo() {}
@@ -108,5 +110,9 @@ public class Zoo {
 
     public void setZooMaster(ZooMaster zooMaster) {
         this.zooMaster = zooMaster;
+    }
+
+    public Colony getColony() {
+        return colony;
     }
 }

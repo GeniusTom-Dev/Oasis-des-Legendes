@@ -1,11 +1,14 @@
 package fr.tmm.modele.creature.species;
 
+import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.lycanthropeColony.Colony;
 import fr.tmm.modele.lycanthropeColony.Pack;
 import fr.tmm.modele.lycanthropeColony.Rank;
+
+import java.util.Objects;
 
 public class Lycanthrope extends Viviparous implements Walker {
 
@@ -24,20 +27,27 @@ public class Lycanthrope extends Viviparous implements Walker {
         super(name, sex, weight, height, age);
     }
 
-    public void howl() {
-        // TODO
+    public void howl(String type) {
+        Zoo.getInstance().getColony().startHowl(this, type);
+
     }
 
-    public void hearHowl() {
-        // TODO -> doivent remonter jusqu'à la colony -> probablement devoir mettre un place un listener
+    public void hearHowl(String type) {
+        if(Objects.equals(type, "startFromPack")) {
+            this.howl("packResponse");
+        }
     }
 
     public void separatingFromPack() {
-        this.pack = null;
+        this.pack = null; // TODO : a la place pack . remove (this)
     }
 
     public void transform() {
         // TODO -> humain/loup -> surement hyper casse couille à faire
+    }
+
+    public void attack(){
+        Zoo.getInstance().getColony().startAttack(this);
     }
 
     public void calculLevel() {
