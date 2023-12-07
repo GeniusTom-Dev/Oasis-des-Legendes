@@ -22,7 +22,7 @@ public class Calve implements ReproductionMethod{
      * The log entry includes details such as the mother's name, type, and the number of offspring born.
      */
     public void calve(Creature mother, int nbChild) {
-        if (nbChild >= 0) throw new IllegalArgumentException("Le nombre d'enfants ne peut pas être inférieur à 1.");
+        if (nbChild < 1) throw new IllegalArgumentException("Le nombre d'enfants ne peut pas être inférieur à 1.");
         String strChild = nbChild > 1 ? " enfants." : "enfant.";
         Log.getInstance().addLog(mother.getName() + ", une femelle " + mother.getType() + ", vient de mettre bas " + nbChild + strChild);
         for (int i = 0; i < nbChild; i++) {
