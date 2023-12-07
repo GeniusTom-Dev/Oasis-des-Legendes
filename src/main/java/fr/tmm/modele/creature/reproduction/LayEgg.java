@@ -21,7 +21,7 @@ public class LayEgg implements ReproductionMethod{
      * The log entry includes details such as the mother's name, type, and the number of eggs laid.
      */
     public void layEgg(Creature mother, int nbEgg) {
-        if (nbEgg >= 0) throw new IllegalArgumentException("Le nombre d'oeufs ne peut pas être inférieur à 1.");
+        if (nbEgg < 1) throw new IllegalArgumentException("Le nombre d'oeufs ne peut pas être inférieur à 1.");
         String strEgg = nbEgg > 1 ? " œufs." : "œuf.";
         Log.getInstance().addLog(mother.getName() + ", une femelle " + mother.getType() + ", vient de pondre " + nbEgg + strEgg);
         for (int i = 0; i < nbEgg; i++) {
