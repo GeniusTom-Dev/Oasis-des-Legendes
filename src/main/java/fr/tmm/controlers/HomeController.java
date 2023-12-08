@@ -28,6 +28,7 @@ public class HomeController {
     }
 
     public void toCreatureList(ActionEvent actionEvent) {
+        ListCreatureController listCreatureController = (ListCreatureController) setScene("layout/listCreature.fxml", "Liste des créatures");
     }
 
     public void toGameMaster(ActionEvent actionEvent) {

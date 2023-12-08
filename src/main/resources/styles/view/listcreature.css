@@ -1,0 +1,13 @@
+@import "../base.css";
+@import "../component/navbar.css";
+@import "../component/button.css";
+
+.box{
+    -fx-background-color: radial-gradient(center 50% 50%, radius 100%, #5d6e6f, #121c24);
+    -fx-background-radius: 50;
+    -fx-border-width: 5;
+    -fx-border-color: linear-gradient(#565e62, #739d93);
+    -fx-border-radius: 50;
+    -fx-text-fill: white;
+    -fx-min-width: 400;
+}
