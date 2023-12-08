@@ -44,15 +44,19 @@ public class CreatureController {
     public ProgressBar creatureEnergyBar;
     @FXML
     public ProgressBar creatureHealthBar;
+    @FXML
     public Button actionCounter;
 
     private int indexEnclosure;
 
     private Creature creature;
 
+    private Zoo zoo;
+
     public void setIndexCreature(int indexEnclosure, int indexCreature){
         this.indexEnclosure = indexEnclosure;
-        this.creature = Zoo.getInstance().getEnclosures().get(indexEnclosure).getCreaturesPresent().get(indexCreature);
+        this.zoo = Zoo.getInstance();
+        this.creature = this.zoo.getEnclosures().get(indexEnclosure).getCreaturesPresent().get(indexCreature);
 
         title.setText(creature.getName());
         creatureImg.setImage(new Image(getClass().getClassLoader().getResourceAsStream("assets/creatures/" + creature.getType().toLowerCase() + ".png")));
@@ -68,6 +72,7 @@ public class CreatureController {
         creatureSatietyBar.progressProperty().bind(creature.satietyProperty().divide(100.0));
         creatureEnergyBar.progressProperty().bind(creature.energyProperty().divide(100.0));
         creatureHealthBar.progressProperty().bind(creature.healthProperty().divide(100.0));
+        actionCounter.textProperty().bind(this.zoo.getZooMaster().actionsProperty().asString());
     }
 
     public void backButton(ActionEvent actionEvent) {

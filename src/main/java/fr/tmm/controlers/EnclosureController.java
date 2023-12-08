@@ -32,6 +32,7 @@ public class EnclosureController {
     public Text enclosureCountCreature;
     @FXML
     public Text enclosureClean;
+    @FXML
     public Button actionCounter;
 
     private int indexEnclosure;
@@ -59,6 +60,8 @@ public class EnclosureController {
         enclosureCapacity.setText(String.valueOf(this.enclosure.getMaxCapacity()));
         enclosureCountCreature.setText(String.valueOf(creatures.size()));
         enclosureClean.textProperty().bind(this.enclosure.cleanProperty());
+        actionCounter.textProperty().bind(this.zoo.getZooMaster().actionsProperty().asString());
+
 
 
         for (int i = 0; i < creatures.size(); i++) {

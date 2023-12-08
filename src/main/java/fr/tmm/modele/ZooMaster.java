@@ -3,9 +3,8 @@ package fr.tmm.modele;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Human;
 import fr.tmm.modele.enclosure.Enclosure;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import java.util.Map;
 
 public class ZooMaster extends Human implements Runnable {
 
@@ -23,8 +22,8 @@ public class ZooMaster extends Human implements Runnable {
             try {
                 Thread.sleep(1000);
                 if (this.actionsLeft.get() < MAX_ACTIONS) {
+                    Thread.sleep(10000);
                     addAnAction();
-                    Thread.sleep(60000);
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -81,7 +80,9 @@ public class ZooMaster extends Human implements Runnable {
 
     public void addAnAction() {
         if (this.actionsLeft.get() < MAX_ACTIONS) {
-            this.actionsLeft.setValue(this.actionsLeft.get() + 1);
+            Platform.runLater(() -> {
+                this.actionsLeft.setValue(this.actionsLeft.get() + 1);
+            });
         }
     }
 
@@ -96,6 +97,6 @@ public class ZooMaster extends Human implements Runnable {
     }
 
     public SimpleIntegerProperty actionsProperty() {
-        return actionsLeft;
+        return this.actionsLeft;
     }
 }
