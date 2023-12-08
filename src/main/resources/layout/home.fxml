@@ -69,7 +69,7 @@
                     <Button prefWidth="150" prefHeight="150" onAction="#toEnclosure">
                         <graphic>
                             <ImageView fitWidth="100" fitHeight="100">
-                                <Image url="@/assets/enclosure.png"/>
+                                <Image url="@/assets/icons/enclosure.png"/>
                             </ImageView>
                         </graphic>
                         <HBox.margin>

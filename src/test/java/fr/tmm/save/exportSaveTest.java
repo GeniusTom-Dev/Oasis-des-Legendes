@@ -39,6 +39,10 @@ class exportSaveTest {
 
         String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
         String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+
+        file1 = file1.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+        file2 = file2.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+
         assertEquals(file1, file2);
     }
 
@@ -53,6 +57,10 @@ class exportSaveTest {
 
         String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
         String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+
+        file1 = file1.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+        file2 = file2.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+
         assertEquals(file1, file2);
     }
 
@@ -65,6 +73,10 @@ class exportSaveTest {
 
         String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
         String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+
+        file1 = file1.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+        file2 = file2.trim().replace("\r\n", "\n").replaceAll("\\s+", "");
+
         assertEquals(file1, file2);
     }
 

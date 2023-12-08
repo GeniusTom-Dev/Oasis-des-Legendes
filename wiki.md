@@ -1,17 +1,17 @@
 # RAPPORT DE DOC
 ## MANUEL D'UTILISATION
 
-| **Ecran**       | **Description**                                                                                                                                                                                                                        | **Photo**                                                                                                                                                          |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ecran d'accueil | Lors de l'ouverture de l'application, on se retrouve sur l'écran d'acceuil où nous avons la possibilité de visiter les différents enclos (!!! METTRE FONCTIONNALITE DES AUTRES BOUTONS !!!)                                            | ![Ecran d'accueil](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20principal.png?raw=true) |
-| Ecran types enclos | Après sélection du bouton des enclos on se retrouve sur cette page qui nous donne la possibilité de choisir le type d'enclos que nous voulons visiter (Un enclos, un aquarium ou un voliere)                                           | ![Ecran types enclos](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20enclos.png?raw=true) |
-| Ecran enclos    | Si nous voulons visiter l'enclos terrestre on clique sur le bouton adéquat qui nous ramène sur cette page qui nous donne plusieurs informations sur l'enclos, l'état de l'enclos et la possibilité de visualiser les créatures.        | ![Ecran enclos](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20enclos%201.png?raw=true)   |
-| Ecran licorne   | Les écrans des créatures se présentent comme ceci, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé.                                                                | ![Ecran licorne](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20licorne.png?raw=true)     |
-| Ecran Aquarium  | Si nous voulons visiter l'aquarium on clique sur le bouton adéquat qui nous ramène sur cette page qui nous donne plusieurs informations sur l'aquarium, l'état de l'aquarium et la possibilité de visualiser les créatures marines.    | ![Ecran Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20aquarium.png?raw=true)   |
-| Ecran megalodon | Les écrans des créatures se présentent toutes de la même manière, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé, mais une photo différente pour chaque créature. | ![Ecran megalodon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20megalodon.png?raw=true) |
-| Ecran voliere   | Tous les enclos sont présentés pareils. On peut voir l'état de propreté des enclos avec la possibilité de le nettoyer.                                                                                                                 | ![Ecran voliere](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20voliere.png?raw=true)     |
-| Ecran voliere propre | Après avoir nettoyer l'enclos son état de propreté se modifie, il va ensuite se remodifier au fil du temps aléatoirement.                                                                                                              | ![Ecran voliere propre](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20voliere%20propre.png?raw=true)         |
-| Ecran phenix   | Les écrans des créatures se présentent toutes de la même manière, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé, mais une photo différente pour chaque créature. | ![Ecran phenix](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20phenix.png?raw=true)|
+| **Ecran**       | **Description**                                                                                                                                                                                                                       | **Photo**                                                                                                                                                                      |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ecran d'accueil | Lors de l'ouverture de l'application, on se retrouve sur l'écran d'acceuil où nous avons la possibilité de visiter les différents enclos                                            | ![Ecran d'accueil](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20principal.png?raw=true )            |
+| Ecran types enclos | Après sélection du bouton des enclos on se retrouve sur cette page qui nous donne la possibilité de choisir le type d'enclos que nous voulons visiter (Un enclos, un aquarium ou un voliere)                                          | ![Ecran types enclos](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20enclos.png?raw=true)             |
+| Ecran enclos    | Si nous voulons visiter l'enclos terrestre on clique sur le bouton adéquat qui nous ramène sur cette page qui nous donne plusieurs informations sur l'enclos, l'état de l'enclos et la possibilité de visualiser les créatures.       | ![Ecran enclos](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20enclos%201.png?raw=true)               |
+| Ecran licorne   | Les écrans des créatures se présentent comme ceci, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé.                                                               | ![Ecran licorne](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20licorne.png?raw=true)                 |
+| Ecran Aquarium  | Si nous voulons visiter l'aquarium on clique sur le bouton adéquat qui nous ramène sur cette page qui nous donne plusieurs informations sur l'aquarium, l'état de l'aquarium et la possibilité de visualiser les créatures marines.   | ![Ecran Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20aquarium.png?raw=true)               |
+| Ecran megalodon | Les écrans des créatures se présentent toutes de la même manière, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé, mais une photo différente pour chaque créature. | ![Ecran megalodon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20megalodon.png?raw=true)             |
+| Ecran voliere   | Tous les enclos sont présentés pareils. On peut voir l'état de propreté des enclos avec la possibilité de le nettoyer.                                                                                                                | ![Ecran voliere](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20voliere.png?raw=true)                 |
+| Ecran voliere propre | Après avoir nettoyer l'enclos son état de propreté se modifie, il va ensuite se remodifier au fil du temps aléatoirement.                                                                                                             | ![Ecran voliere propre](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20voliere%20propre.png?raw=true) |
+| Ecran phenix   | Les écrans des créatures se présentent toutes de la même manière, on voit les informations sur la créature qu'on visite, une image de la créature ainsi que ses informations de santé, mais une photo différente pour chaque créature. | ![Ecran phenix](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/screen%20interface/Ecran%20phenix.png?raw=true)                   |
 
 
 ***
@@ -142,13 +142,13 @@ Nous avons opté pour cette image en arrière plan car nous avons trouvé qu'ell
 
 ### ARCHITECTURE DE L'INFORMATION
 
+
 #### Diagramme UML
 
 | **Nom Diagramme Class**  | **Description** | **Diagramme UML** |
 |--------------------------|-----------------|-------------------|
-| Diagramme Class Aquarium  | ... | ![Diagramme Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramAquarium.png?raw=true) |
-| Diagramme Class Dragon  | ... | ![Diagramme Dragon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramDragon.png?raw=true) |
-
+| Diagramme Class Aquarium  | Ici nous avons repris la classe Aquarium. Nous pouvons observer que cette classe hérite de la classe Enclosure qui hérite elle même de 2 interfaces. En effet, dans notre application, il existe 2 types d'enclos : Aquarium et Aviary. C'est pour cela qu'il y a des héritages entre certaines classes. | ![Diagramme Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramAquarium.png?raw=true) |
+| Diagramme Class Dragon  | Nous pouvons observer que la classe Dragon hérite d'une classe abstraite Oviparious qui elle même hérite d'une classe abstraite Creature. De plus, la classe Dragon implémente 4 interfaces différentes. En effet, en Java il est possible d'implémenter plusieurs interfaces à une classe. Cependant, il est possible de faire hériter qu'une seule classe à une autre classe.  Nous avons opté pour cette approche car elle permet d'exploiter les avantages de l'héritage de classe et de l'implémentation d'interface simultanément. L'héritage de classe permet la réutilisation du code, car la classe dérivée peut hériter des membres (méthodes et champs) de la classe de base. D'un autre côté, les interfaces permettent de spécifier un ensemble de comportements que la classe doit implémenter. | ![Diagramme Dragon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramDragon.png?raw=true) |
 ***
 
 ### CHOIX DES TECHNOLOGIES
@@ -160,5 +160,30 @@ Nous avons utilisé GitHub pour la mise en commun du code de l'application.
 
 ***
 
-### SECURITE ET PERFORMANCES
+## CLOTURE DU TRAVAIL
+### SYNTHESE
+
+Ce projet avait pour but de réalisé une application en Java présentant un Zoo magique. 
+
+Il a été donné dans une période de temps courte afin de mettre les élèves en conditions réelles de projets en entreprise afin de réaliser les taches les plus importantes en premier temps.
+
+***
+
+## BILAN TECHNIQUE
+
+Tout ce projet a été réalisé en Java avec l'IDE IntelliJ. En utilisant un système de versionning avec GitHub afin de permettre une collaboration plus efficace entre l'équipe. 
+
+Nous avons utilisé un modèle MVC pour l'architecture du code ainsi que du JavaFX pour la réalisation de l'interface graphique. 
+
+***
+
+## DIFFICULTES RENCONTREES
+***
+
+## ECART AVEC LES PREVISIONS
+***
+
+## MESURES D'AMELIORATION
+
+
 ***
