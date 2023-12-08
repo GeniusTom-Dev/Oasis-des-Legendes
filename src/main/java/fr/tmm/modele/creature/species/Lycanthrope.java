@@ -20,6 +20,7 @@ public class Lycanthrope extends Viviparous implements Walker {
     private int dominationFactor; // nb de gens dominé sur nb de gens qui domine
     private Rank rank; // alpha, beta, ..., omega
     private int level; // ageCategorie + force + dominationFactor + rang
+
     private int impetuosityFactor;
 
     public Lycanthrope(String name, String sex, double weight, double height, int age) {
@@ -30,16 +31,22 @@ public class Lycanthrope extends Viviparous implements Walker {
         new PackHowl(this);
     }
 
-    public void dominationHowl() {
-        new DominationHowl(this);
+    public void dominationHowl(Lycanthrope target) {
+        new DominationHowl(this, target);
+    }
+
+    public void aggresivityHowl(Lycanthrope target) {
+        new AgressivityHowl(this, target);
+    }
+
+    public void submissiveHowl(Lycanthrope lycanthrope) {
+        new SubmissiveHowl(this, lycanthrope);
     }
 
     public void hearHowl(Howl howl) {
         if (!this.isAsleep() && !this.isSick()) {
             if (howl instanceof PackHowl) {
                 Log.getInstance().addLog(this.getName() + " a repondu au hurlement de " + howl.getEmetteur().getName()+ ".");
-            } else if (howl instanceof DominationHowl) {
-
             }
         }
     }
@@ -53,8 +60,8 @@ public class Lycanthrope extends Viviparous implements Walker {
         // TODO -> humain/loup -> surement hyper casse couille à faire
     }
 
-    public void attack(){
-        Zoo.getInstance().getColony().startAttack(this);
+    public void attack(Lycanthrope target){
+        Zoo.getInstance().getColony().startAttack(this, target);
     }
 
     public void calculLevel() {
@@ -103,5 +110,12 @@ public class Lycanthrope extends Viviparous implements Walker {
         this.level = level;
     }
 
+    public int getImpetuosityFactor() {
+        return impetuosityFactor;
+    }
+
+    public void setImpetuosityFactor(int impetuosityFactor) {
+        this.impetuosityFactor = impetuosityFactor;
+    }
 
 }

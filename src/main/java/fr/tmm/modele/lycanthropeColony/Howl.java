@@ -6,6 +6,10 @@ public abstract class Howl {
 
     private Lycanthrope emetteur;
 
+    public Howl(Lycanthrope emetteur) {
+        this.emetteur = emetteur;
+    }
+
     public Lycanthrope getEmetteur() {
         return emetteur;
     }

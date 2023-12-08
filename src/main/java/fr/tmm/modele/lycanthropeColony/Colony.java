@@ -1,10 +1,11 @@
 package fr.tmm.modele.lycanthropeColony;
 
+import fr.tmm.modele.Zoo;
+import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Lycanthrope;
+import fr.tmm.modele.enclosure.Enclosure;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class Colony {
@@ -15,16 +16,25 @@ public class Colony {
     private ArrayList<Pack> packs = new ArrayList<>();
     private ArrayList<Lycanthrope> loneWolf = new ArrayList<>();
 
-    public void hearPackHowl(PackHowl packHowl) {
-        for (Pack pack : this.packs) {
-            for (Lycanthrope lycanthrope : pack.getLycanthropes()) {
-
+    public void determineIfNewColonyHasToBeCreated() {
+        for (Enclosure enclos : Zoo.getInstance().getEnclosures()) {
+            if (enclos.getCreaturesPresent().size() > 2 && enclos.getCreaturesPresent().get(0) instanceof Lycanthrope) {
+                for (Creature lycan : enclos.getCreaturesPresent()) {
+                    if (Zoo.getInstance().getColony().getPackFromLycan((Lycanthrope) lycan) != null) {
+                        return;
+                    }
+                }
+                // meute doit être créer
+                Lycanthrope male = getMaleWithHeightestLevel(enclos.getCreaturesPresent());
+                Lycanthrope female = getFemaleWithHeightestLevel(enclos.getCreaturesPresent());
+                this.addPack(new Pack(male, female));
             }
         }
     }
 
     /**
      * Add a pack to the colony
+     *
      * @param pack : the pack to add
      */
     public void addPack(Pack pack) {
@@ -36,6 +46,7 @@ public class Colony {
 
     /**
      * Find the pack of a lycanthrope
+     *
      * @param targetLycan : the lycan
      * @return the pack of the lycan
      */
@@ -53,77 +64,73 @@ public class Colony {
     public Lycanthrope getRandomLycanthrope(Lycanthrope actualLycanthrope) {
         Lycanthrope adversaryLycanthrope = null;
         Pack lycanPack = this.getPackFromLycan(actualLycanthrope);
-        do{
+        do {
             adversaryLycanthrope = lycanPack.getLycanthropes().get(new Random().nextInt(lycanPack.getLycanthropes().size()));
-        }while(adversaryLycanthrope == actualLycanthrope && lycanPack.getCoupleAlpha().getFemale() != adversaryLycanthrope);
+        } while (adversaryLycanthrope == actualLycanthrope && lycanPack.getCoupleAlpha().getFemale() != adversaryLycanthrope);
         return adversaryLycanthrope;
     }
 
-    public void startAttack(Lycanthrope attackerLycanthrope) {
-        Lycanthrope targetLycanthrope = getRandomLycanthrope(attackerLycanthrope);
-        if(attackerLycanthrope.getLevel() > targetLycanthrope.getLevel() || (targetLycanthrope.getRank() == Rank.OMEGA && attackerLycanthrope.getRank() != Rank.OMEGA)){
+    public void startAttack(Lycanthrope attackerLycanthrope, Lycanthrope targetLycanthrope) {
+        //Lycanthrope targetLycanthrope = getRandomLycanthrope(attackerLycanthrope);
+        // est ce que domination réussie
+        if (attackerLycanthrope.getLevel() > targetLycanthrope.getLevel() || (targetLycanthrope.getRank() == Rank.OMEGA && attackerLycanthrope.getRank() != Rank.OMEGA)) {
             attackerLycanthrope.setDominationFactor(attackerLycanthrope.getDominationFactor() + 1);
-            if(attackerLycanthrope.getRank().ordinal() < targetLycanthrope.getRank().ordinal()) {
+            // si l'attaquant à un rang inférieur au dominé, il inverse de rang
+            if (attackerLycanthrope.getRank().ordinal() > targetLycanthrope.getRank().ordinal()) {
                 Rank saveRank = attackerLycanthrope.getRank();
                 attackerLycanthrope.setRank(targetLycanthrope.getRank());
                 targetLycanthrope.setRank(saveRank);
             }
-            if(targetLycanthrope.getRank() == Rank.OMEGA) {
-                if(Math.random() > 0.5) {
+            // possibilité de quitter la meute si la cible est omega
+            if (targetLycanthrope.getRank() == Rank.OMEGA) {
+                if (Math.random() > 0.5) {
                     this.getPackFromLycan(targetLycanthrope).getLycanthropes().remove(targetLycanthrope);
                 }
 
             }
-            //attackerLycanthrope.howl("domination");
-            //targetLycanthrope.howl("soumission");
-        }else{
+            //attackerLycanthrope.dominationHowl(targetLycanthrope);
+            // le soumis émet un cris de soumissions
+            targetLycanthrope.submissiveHowl(attackerLycanthrope);
+        } else {
             attackerLycanthrope.setDominationFactor(attackerLycanthrope.getDominationFactor() - 1);
-            if(attackerLycanthrope.getRank() == Rank.OMEGA) {
-                if(Math.random() > 0.5) {
+            // si l'attaquant à un rang inférieur au dominé, il inverse de rang
+            if (attackerLycanthrope.getRank().ordinal() < targetLycanthrope.getRank().ordinal()) {
+                Rank saveRank = attackerLycanthrope.getRank();
+                attackerLycanthrope.setRank(targetLycanthrope.getRank());
+                targetLycanthrope.setRank(saveRank);
+            }
+            if (attackerLycanthrope.getRank() == Rank.OMEGA) {
+                if (Math.random() > 0.5) {
                     this.getPackFromLycan(attackerLycanthrope).getLycanthropes().remove(attackerLycanthrope);
                 }
-
             }
-            //attackerLycanthrope.howl("soumission");
-            //targetLycanthrope.howl("domination");
+            //attackerLycanthrope.submissiveHowl(targetLycanthrope);
+            targetLycanthrope.aggresivityHowl(attackerLycanthrope);
+            attackerLycanthrope.submissiveHowl(targetLycanthrope);
         }
     }
+
+    public Lycanthrope getFemaleWithHeightestLevel(ArrayList<Creature> lycans) {
+        Lycanthrope heightestLevelFemale = null;
+        for (Creature lycan : lycans) {
+            if (lycan.getSex().toString() == "Female") {
+                if (heightestLevelFemale == null || ((Lycanthrope) lycan).getLevel() > heightestLevelFemale.getLevel()) {
+                    heightestLevelFemale = (Lycanthrope) lycan;
+                }
+            }
+        }
+        return heightestLevelFemale;
+    }
+
+    public Lycanthrope getMaleWithHeightestLevel(ArrayList<Creature> lycans) {
+        Lycanthrope heightestLevelMale = null;
+        for (Creature lycan : lycans) {
+            if (lycan.getSex().toString() == "Male") {
+                if (heightestLevelMale == null || ((Lycanthrope) lycan).getLevel() > heightestLevelMale.getLevel()) {
+                    heightestLevelMale = (Lycanthrope) lycan;
+                }
+            }
+        }
+        return heightestLevelMale;
+    }
 }
-
-
-/*
-Appartenance : -> loup.packHowl() -> doit remonter de loup à pack
-    - Log
-    - Possibilité de répondre
-
-Domination : -> dominant.dominationHowl(Lycanthrope soumis) -> lancer depuis meute
-    - possibilité de répondre
-
-Soumission : -> si a reçu domination
-    -Log
-
-Aggression : -> si à reçu un hurlement de domination ou envers un oméga
-    - Log
-
-////////////////////////////////////////////////////////////////////////////////
-
-Howl {
-    Lycanthrope source
-    Lycanthrop dest
-    type
-}
-
-packHowl() {
-    this.listener.packHowl(Lycan source)
-}
-
-dominationHowl(Lycan soumis) {
-    soumis.hear()
-}
-
-
-
-
-
-
- */

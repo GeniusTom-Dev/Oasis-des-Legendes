@@ -7,7 +7,7 @@ import fr.tmm.modele.creature.species.Lycanthrope;
 public class PackHowl extends Howl {
 
     public PackHowl(Lycanthrope emetteur) {
-        this.setEmetteur(emetteur);
+        super(emetteur);
         Log.getInstance().addLog(emetteur.getName() + " pousse un hurlement d'appartenance.");
 
         // Determine if a lycan from another pack respond
