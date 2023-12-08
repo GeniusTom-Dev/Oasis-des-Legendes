@@ -34,7 +34,7 @@ public class Lycanthrope extends Human implements Walker {
         if (Zoo.getInstance().getColony().getPackFromLycan(this) == null) {
             this.dominationFactor = 0;
             this.rank = null;
-            this.level = 0
+            this.level = 0;
         } else {
             updateDominationFactor();
             this.rank = Rank.getRankByIndex(new Random().nextInt(1,Rank.values().length));
