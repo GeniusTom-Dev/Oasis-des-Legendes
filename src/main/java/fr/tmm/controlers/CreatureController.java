@@ -83,6 +83,8 @@ public class CreatureController {
 
 
     public void moveCreature() {
-        //TODO AFFICHER NEW INTERFACE
+        MoveCreatureController moveCreatureController = (MoveCreatureController) setScene("layout/moveCreature.fxml", "Envoyer vers...");
+        assert moveCreatureController != null;
+        moveCreatureController.sendData(this.zoo.getEnclosures().get(this.indexEnclosure), this.creature);
     }
 }

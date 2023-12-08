@@ -42,6 +42,7 @@ public class Zoo {
         this.name = "Zoo de Test";
         Enclosure enclos1 = new Enclosure("Enclos 1", 50, 5);
         Aquarium aquarium1 = new Aquarium("Aquarium 1", 50, 5);
+        Aquarium aquarium2 = new Aquarium("Aquarium 2", 50, 5);
         Aviary voiliere1 = new Aviary("Voiliere 1", 50, 7);
         enclos1.addCreature(new Unicorn("Licorne 1", "m", 10, 10, 10));
         enclos1.addCreature(new Unicorn("Licorne 2", "m", 10, 10, 10));
@@ -51,6 +52,7 @@ public class Zoo {
         voiliere1.addCreature(new Phoenix("Phenix 1", "m", 10, 10, 10));
         this.addAnEnclosure(enclos1);
         this.addAnEnclosure(aquarium1);
+        this.addAnEnclosure(aquarium2);
         this.addAnEnclosure(voiliere1);
     }
 
