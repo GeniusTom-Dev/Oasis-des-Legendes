@@ -30,10 +30,16 @@ public class Lycanthrope extends Human implements Walker {
         Random rand = new Random();
         updateAgeCategorie();
         this.force = rand.nextInt(0,11);
-        updateDominationFactor();
-        this.rank = Rank.getRankByIndex(new Random().nextInt(1,Rank.values().length));
         this.impetuosityFactor = rand.nextInt(0,16);
-        calculLevel();
+        if (Zoo.getInstance().getColony().getPackFromLycan(this) == null) {
+            this.dominationFactor = 0;
+            this.rank = null;
+            this.level = 0
+        } else {
+            updateDominationFactor();
+            this.rank = Rank.getRankByIndex(new Random().nextInt(1,Rank.values().length));
+            calculLevel();
+        }
     }
 
     public void updateHierarchie() {

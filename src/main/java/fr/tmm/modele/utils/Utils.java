@@ -59,6 +59,7 @@ public class Utils {
      * @throws IllegalArgumentException Si enumValue n'est pas valide
      */
     public static <E extends Enum<E>> int getIndex(E enumValue) {
+        if (enumValue == null) throw new IllegalArgumentException("La valeur passé en paramètre n'est pas présente dans une enum.");;
         E[] enumValues = enumValue.getDeclaringClass().getEnumConstants();
         for (int i = 0; i < enumValues.length; i++) {
             if (enumValues[i] == enumValue) {
