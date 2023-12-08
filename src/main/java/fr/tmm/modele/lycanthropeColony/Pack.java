@@ -20,12 +20,25 @@ public class Pack {
         this.coupleAlpha = new CoupleAlpha(maleAlpha, femaleAlpha);
     }
 
+    public void determineHierarchy() {
+        selectionSort(this.getLycanthropes());
+        int rank = 1;
+        for (int i = 0; i < this.getLycanthropes().size()-1; i++) {
+            if (this.getLycanthropes().get(i).getRank() != Rank.ALPHA) {
+                this.getLycanthropes().get(i).setRank(Rank.getRankByIndex(rank));
+                ++rank;
+            }
+        }
+        this.getLycanthropes().get(this.getLycanthropes().size()-1).setRank(Rank.OMEGA);
+    }
+
     public ArrayList<Lycanthrope> getLycanthropes() {
         return this.lycanthropes;
     }
 
     public void addLycanthrope(Lycanthrope lycanthrope) {
         this.getLycanthropes().add(lycanthrope);
+        this.determineHierarchy();
     }
 
     public void removeLycanthrope(Lycanthrope lycanthrope) {
@@ -55,6 +68,28 @@ public class Pack {
 
     public CoupleAlpha getCoupleAlpha() {
         return coupleAlpha;
+    }
+
+    /**
+     * Sorts an ArrayList of integers using the selection sort algorithm.
+     * @param list the ArrayList to be sorted.
+     */
+    private void selectionSort(ArrayList<Lycanthrope> list) {
+        int n = list.size();
+        for (int i = 0; i < n - 1; i++) {
+            // Find the maximum element in the unsorted part
+            int maxIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (list.get(j).getLevel() > list.get(maxIndex).getLevel()) {
+                    maxIndex = j;
+                }
+            }
+
+            // Swap the maximum element with the first element in the unsorted part
+            Lycanthrope temp = list.get(maxIndex);
+            list.set(maxIndex, list.get(i));
+            list.set(i, temp);
+        }
     }
 
 }

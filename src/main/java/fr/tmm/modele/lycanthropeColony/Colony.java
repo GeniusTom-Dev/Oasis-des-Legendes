@@ -2,13 +2,73 @@ package fr.tmm.modele.lycanthropeColony;
 
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
+import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.species.Lycanthrope;
 import fr.tmm.modele.enclosure.Enclosure;
+import fr.tmm.modele.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Colony {
+public class Colony implements Runnable{
+
+    Boolean saisonDesAmours = true;
+    public Colony() {
+        Thread t = new Thread(this);
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        int cmp = 0;
+        while (true) {
+            try {
+                Thread.sleep(1000); // 1s
+                determineIfNewColonyHasToBeCreated();
+                launchPackHowl();
+                launchDominationHowl();
+                if (this.saisonDesAmours) {
+                    for (Pack pack : this.getPacks()) {
+                        if (Math.random() < 0.2)
+                            ((Female) pack.getCoupleAlpha().getFemale().getSex()).startBecomePregnantThread();
+                    }
+                }
+                ++cmp;
+                if (cmp == 60) {
+                    cmp = 0;
+                    this.saisonDesAmours = !this.saisonDesAmours;
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void launchPackHowl() {
+        for (Pack pack : getPacks()) {
+            if (Math.random() < 0.3) {
+                int index = Utils.getRandomIndexInList(pack.getLycanthropes());
+                pack.getLycanthropes().get(index).packHowl();
+            }
+        }
+    }
+
+    private void launchDominationHowl() {
+        for (Pack pack : getPacks()) {
+            for (Lycanthrope lycan : pack.getLycanthropes()) {
+                Lycanthrope adv = getRandomLycanthrope(lycan);
+                if (adv != null && (adv.getLevel() <= lycan.getImpetuosityFactor() || adv.getRank() == Rank.OMEGA)) {
+                    lycan.dominationHowl(adv);
+                }
+            }
+        }
+    }
+
+//    private void transformInHuman() {
+//        for (Pack pack : getPacks()) {
+//
+//        }
+//    }
+
     public ArrayList<Pack> getPacks() {
         return packs;
     }
@@ -18,7 +78,7 @@ public class Colony {
 
     public void determineIfNewColonyHasToBeCreated() {
         for (Enclosure enclos : Zoo.getInstance().getEnclosures()) {
-            if (enclos.getCreaturesPresent().size() > 2 && enclos.getCreaturesPresent().get(0) instanceof Lycanthrope) {
+            if (enclos.getCreaturesPresent().size() >= 2 && enclos.getCreaturesPresent().get(0) instanceof Lycanthrope) {
                 for (Creature lycan : enclos.getCreaturesPresent()) {
                     if (Zoo.getInstance().getColony().getPackFromLycan((Lycanthrope) lycan) != null) {
                         return;
@@ -64,9 +124,14 @@ public class Colony {
     public Lycanthrope getRandomLycanthrope(Lycanthrope actualLycanthrope) {
         Lycanthrope adversaryLycanthrope = null;
         Pack lycanPack = this.getPackFromLycan(actualLycanthrope);
-        do {
-            adversaryLycanthrope = lycanPack.getLycanthropes().get(new Random().nextInt(lycanPack.getLycanthropes().size()));
-        } while (adversaryLycanthrope == actualLycanthrope && lycanPack.getCoupleAlpha().getFemale() != adversaryLycanthrope);
+        if (lycanPack.getLycanthropes().size() > 2) {
+            do {
+                int index = Utils.getRandomIndexInList(lycanPack.getLycanthropes());
+                adversaryLycanthrope = lycanPack.getLycanthropes().get(index);
+                if (adversaryLycanthrope.equals(actualLycanthrope)) continue;
+                if (lycanPack.getCoupleAlpha().getFemale().equals(adversaryLycanthrope)) continue;
+            } while (true);
+        }
         return adversaryLycanthrope;
     }
 

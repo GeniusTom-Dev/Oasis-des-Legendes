@@ -28,4 +28,20 @@ public enum Rank {
 
     Rank(char α) {
     }
+
+    /**
+     * Returns a rank based on an index.
+     *
+     * @param index the index for which the rank should be returned.
+     * @return the rank corresponding to the index.
+     * @throws IllegalArgumentException if the index is out of bounds.
+     */
+    public static Rank getRankByIndex(int index) {
+        if (index >= 0 && index < values().length) {
+            return values()[index];
+        } else {
+            return OMEGA;
+        }
+    }
+
 }

@@ -4,7 +4,11 @@ import fr.tmm.modele.Log;
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.species.Lycanthrope;
 
+import java.util.ArrayList;
+
 public class PackHowl extends Howl {
+
+    ArrayList<Lycanthrope> lycanWhoAlreadyRespond = new ArrayList<>();
 
     public PackHowl(Lycanthrope emetteur) {
         super(emetteur);
@@ -19,9 +23,11 @@ public class PackHowl extends Howl {
             }
         }
         // Make all the lycan from the same pack respond
-        for (Lycanthrope lycan : Zoo.getInstance().getColony().getPackFromLycan(this.getEmetteur()).getLycanthropes()) {
-            if (!lycan.equals(this.getEmetteur())) {
+        Pack lycanPack = Zoo.getInstance().getColony().getPackFromLycan(this.getEmetteur());
+        for (Lycanthrope lycan : lycanPack.getLycanthropes()) {
+            if (!lycan.equals(this.getEmetteur()) && !this.lycanWhoAlreadyRespond.contains(lycan)) {
                 lycan.hearHowl(this);
+                this.lycanWhoAlreadyRespond.add(lycan);
             }
         }
     }

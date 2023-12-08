@@ -7,6 +7,7 @@ import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.reproduction.data.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
+import fr.tmm.modele.creature.species.Lycanthrope;
 import fr.tmm.modele.utils.Utils;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -102,7 +103,7 @@ public class Enclosure implements CreatureListener, Runnable {
     public void makeCreatureSickDependingOfCleanliness() {
         if (this.cleanliness.riskOfGettingSick != 0) {
             for (Creature creature : this.getCreaturesPresent()) {
-                if (Utils.isBadEventHappening(this.cleanliness.riskOfGettingSick)) {
+                if (!creature.isSick() && Utils.isBadEventHappening(this.cleanliness.riskOfGettingSick)) {
                     creature.getHealthindicator().setSick(true);
                     Log.getInstance().addLog(creature.getName() + " est tombé malade.");
                 }
@@ -167,7 +168,7 @@ public class Enclosure implements CreatureListener, Runnable {
     public void run(){
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 if (creaturesPresent.size() < maxCapacity) {
                     reproduce();
                 }
@@ -185,7 +186,7 @@ public class Enclosure implements CreatureListener, Runnable {
         Creature male = getActiveRandomMale();
         Creature female = getActiveRandomFemale();
 
-        if (male != null && female != null) {
+        if (male != null && female != null && !(female instanceof Lycanthrope)) {
             ((Female) female.getSex()).startBecomePregnantThread();
             Log.getInstance().addLog(male.getName() + " et " + female.getName() + " se sont accouplés.");
         }

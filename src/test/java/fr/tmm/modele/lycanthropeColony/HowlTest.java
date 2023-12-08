@@ -7,6 +7,8 @@ import fr.tmm.modele.enclosure.Enclosure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class HowlTest {
@@ -42,6 +44,11 @@ class HowlTest {
         this.weakLycan.setRank(Rank.BETA);
         this.strongLycan.setRank(Rank.GAMMA);
     }
+//    @Test
+//    void test() {
+//        sleep(60);
+//        Log.getInstance().showLogs();
+//    }
 
     @Test
     void omegaIsSubmissive() {
@@ -67,6 +74,14 @@ class HowlTest {
         assertEquals(this.strongLycan.getRank(), Rank.BETA);
         Log.getInstance().showLogs();
         assertTrue(Log.getInstance().getLogs().contains(weakLycan.getName() + " se soumet à " + strongLycan.getName()+"."));
+    }
+
+    private void sleep(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 package fr.tmm.modele.lycanthropeColony;
 
+import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.species.Lycanthrope;
+import fr.tmm.modele.enclosure.Enclosure;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,20 @@ class PackTest {
         this.maleAlpha = new Lycanthrope("Male Alpha", "Male", 50,50,50);
         this.lycan1 = new Lycanthrope("Lycan 1", "Male", 50,50,50);
         this.pack = new Pack(maleAlpha, femaleAlpha);
+    }
+
+    @Test
+    void determineHierarchy() {
+        Lycanthrope lycan2 = new Lycanthrope("Lycan2", "Male",50,50,50);
+        this.pack.addLycanthrope(lycan1);
+        this.pack.addLycanthrope(lycan2);
+        this.lycan1.setLevel(3);
+        lycan2.setLevel(1);
+        this.pack.determineHierarchy();
+        assertEquals(maleAlpha.getRank(), Rank.ALPHA);
+        assertEquals(femaleAlpha.getRank(), Rank.ALPHA);
+        assertEquals(lycan1.getRank(), Rank.BETA);
+        assertEquals(lycan2.getRank(), Rank.OMEGA);
     }
 
     @Test
@@ -60,4 +76,5 @@ class PackTest {
         assertEquals(this.pack.getCoupleAlpha().getMale(), this.maleAlpha);
         assertEquals(maleAlpha.getRank(), Rank.ALPHA);
     }
+
 }
