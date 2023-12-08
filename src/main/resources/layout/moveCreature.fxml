@@ -1,14 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.tmm.controlers.MoveCreatureController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/movecontroller.css" fx:id="borderPane" styleClass="root">
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+    <top>
+        <HBox spacing="125">
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#backButton">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/left-arrow.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <HBox styleClass="navbar" alignment="CENTER">
+                <Text fill="white" fx:id="title">
+                    <font>
+                        <Font size="24" />
+                    </font>
+                    Envoyer vers...
+                </Text>
+            </HBox>
+        </HBox>
+    </top>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="layout.MoveCreature"
-            prefHeight="400.0" prefWidth="600.0">
+    <center>
+        <VBox prefWidth="900" maxWidth="900" maxHeight="500">
+            <FlowPane minHeight="500" maxHeight="500" alignment="CENTER" fx:id="listEnclausure" hgap="20" vgap="20" styleClass="box"/>
+        </VBox>
+    </center>
 
-</AnchorPane>
+</BorderPane>
