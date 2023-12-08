@@ -22,7 +22,7 @@
   <a href="#credits">Credits</a> •
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![screenshot](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/screen%20interface/homePage.png?raw=true)
 
 ## Fonctionnalités
 
