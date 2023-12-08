@@ -49,4 +49,22 @@ public class Utils {
         }
         return enumValue;
     }
+
+    /**
+     * Cette méthode renvoie l'index d'une valeur spécifiée dans l'enum correspondant.
+     *
+     * @param enumValue La valeur dont vous souhaitez obtenir l'index.
+     * @param <E>       Le type d'enum.
+     * @return L'index de la valeur dans l'enum, ou -1 si la valeur n'est pas trouvée.
+     * @throws IllegalArgumentException Si enumValue n'est pas valide
+     */
+    public static <E extends Enum<E>> int getIndex(E enumValue) {
+        E[] enumValues = enumValue.getDeclaringClass().getEnumConstants();
+        for (int i = 0; i < enumValues.length; i++) {
+            if (enumValues[i] == enumValue) {
+                return i;
+            }
+        }
+        throw new IllegalArgumentException("La valeur passé en paramètre n'est pas présente dans une enum.");
+    }
 }

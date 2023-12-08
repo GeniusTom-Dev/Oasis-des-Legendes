@@ -49,6 +49,10 @@ public class Pack {
         return heightestLevelFemale;
     }
 
+    public Lycanthrope getRancomLycanthrpe() {
+        return this.getLycanthropes().get(Utils.getRandomIndexInList(this.getLycanthropes()));
+    }
+
     public CoupleAlpha getCoupleAlpha() {
         return coupleAlpha;
     }

@@ -1,5 +1,6 @@
 package fr.tmm.modele.creature.species;
 
+import fr.tmm.modele.Log;
 import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.Viviparous;
@@ -7,6 +8,7 @@ import fr.tmm.modele.creature.methodOfMovement.Walker;
 import fr.tmm.modele.lycanthropeColony.Colony;
 import fr.tmm.modele.lycanthropeColony.Pack;
 import fr.tmm.modele.lycanthropeColony.Rank;
+import fr.tmm.modele.utils.Utils;
 
 import java.util.Objects;
 
@@ -21,7 +23,6 @@ public class Lycanthrope extends Viviparous implements Walker {
     private Rank rank; // alpha, beta, ..., omega
     private int level; // ageCategorie + force + dominationFactor + rang
     private int impetuosityFactor;
-    private Pack pack;
 
     public Lycanthrope(String name, String sex, double weight, double height, int age) {
         super(name, sex, weight, height, age);
@@ -29,7 +30,7 @@ public class Lycanthrope extends Viviparous implements Walker {
 
     public void howl(String type) {
         Zoo.getInstance().getColony().startHowl(this, type);
-
+        Log.getInstance().addLog(name + " émet un hurlement de " + type + ".");
     }
 
     public void hearHowl(String type) {
@@ -38,8 +39,9 @@ public class Lycanthrope extends Viviparous implements Walker {
         }
     }
 
+    // FAIT
     public void separatingFromPack() {
-        this.pack = null; // TODO : a la place pack . remove (this)
+        Zoo.getInstance().getColony().getPackFromLycan(this).removeLycanthrope(this);
     }
 
     public void transform() {
@@ -56,7 +58,7 @@ public class Lycanthrope extends Viviparous implements Walker {
         else if (this.ageCategorie == AgeCategorie.ADULTE) tmpLevel += 7;
         else if (this.ageCategorie == AgeCategorie.VIEUX) tmpLevel += 5;
         tmpLevel += this.force;
-        tmpLevel += Colony.allRank.size() - Colony.allRank.indexOf(this.rank);
+        tmpLevel += Rank.values().length - Utils.getIndex(this.rank);
         tmpLevel += this.dominationFactor;
         this.level = tmpLevel;
     }

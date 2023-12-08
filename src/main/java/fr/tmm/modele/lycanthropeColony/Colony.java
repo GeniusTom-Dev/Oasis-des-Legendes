@@ -8,9 +8,12 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Colony {
-    private ArrayList<Pack> packs;
-    private ArrayList<Lycanthrope> loneWolf;
-    public static final List<Character> allRank = List.of('α', 'β', 'γ', 'δ', 'ε', 'ω');
+    public ArrayList<Pack> getPacks() {
+        return packs;
+    }
+
+    private ArrayList<Pack> packs = new ArrayList<>();
+    private ArrayList<Lycanthrope> loneWolf = new ArrayList<>();
 
     public void hearPackHowl(PackHowl packHowl) {
         for (Pack pack : this.packs) {
@@ -20,6 +23,22 @@ public class Colony {
         }
     }
 
+    /**
+     * Add a pack to the colony
+     * @param pack : the pack to add
+     */
+    public void addPack(Pack pack) {
+        this.packs.add(pack);
+        for (Lycanthrope lycan : pack.getLycanthropes()) {
+            this.loneWolf.remove(lycan);
+        }
+    }
+
+    /**
+     * Find the pack of a lycanthrope
+     * @param targetLycan : the lycan
+     * @return the pack of the lycan
+     */
     public Pack getPackFromLycan(Lycanthrope targetLycan) {
         for (Pack pack : this.packs) {
             for (Lycanthrope lycan : pack.getLycanthropes()) {
