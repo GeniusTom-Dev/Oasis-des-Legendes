@@ -141,6 +141,14 @@ Nous avons opté pour cette image en arrière plan car nous avons trouvé qu'ell
 ***
 
 ### ARCHITECTURE DE L'INFORMATION
+
+#### Diagramme UML
+
+| **Nom Diagramme Class**  | **Description** | **Diagramme UML** |
+|--------------------------|-----------------|-------------------|
+| Diagramme Class Aquarium  | ... | ![Diagramme Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramAquarium.png?raw=true) |
+| Diagramme Class Dragon  | ... | ![Diagramme Dragon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramDragon.png?raw=true) |
+
 ***
 
 ### CHOIX DES TECHNOLOGIES
