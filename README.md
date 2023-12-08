@@ -19,7 +19,6 @@
 <p align="center">
   <a href="#fonctionnalités">Fonctionnalités</a> •
   <a href="#utilisation">Utilisation</a> •
-  <a href="#téléchargement">Téléchargement</a> •
   <a href="#credits">Credits</a> •
 </p>
 
@@ -34,24 +33,8 @@
 
 ## Utilisation
 
-Un <a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki">Manuel d'utilisation</a> de l'application est disponible.
-
-Pour cloner et utiliser l'application,  vous pouvez réaliser les commandes ci dessous depuis votre terminal:
-
-```bash
-# Cloner le dossier
-$ git clone https://github.com/GeniuusTom-Dev/Oasis-des-Legendes
-
-# aller dans le dossier
-$ cd Oasis-des-Legendes
-
-# Lancer l'application
-$ jsp
-```
-
-## Téléchargement
-
-Vous pouvez [téléchargé](https://github.com/GeniusTom-Dev/Oasis-des-Legendes) la dernière version du projet.
+Un <a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki/MANUEL-D'UTILISATION">Manuel d'utilisation</a> de l'application est disponible.
+Une <a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki/ETUDE-DE-CONCEPTION-ET-CLOTURE-DE-TRAVAIL">Étude de conception et de la clôture de travail a été réalisé.</a> 
 
 ## Credits
 
