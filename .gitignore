@@ -39,3 +39,6 @@ misc.xml
 workspace.xml
 .idea/workspace.xml
 .idea/workspace.xml
+/src/test/java/fr/tmm/save/actual1.json
+/src/test/java/fr/tmm/save/actual2.json
+/src/test/java/fr/tmm/save/actual3.json
