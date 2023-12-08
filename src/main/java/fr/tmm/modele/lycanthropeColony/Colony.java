@@ -74,8 +74,8 @@ public class Colony {
                 }
 
             }
-            attackerLycanthrope.howl("domination");
-            targetLycanthrope.howl("soumission");
+            //attackerLycanthrope.howl("domination");
+            //targetLycanthrope.howl("soumission");
         }else{
             attackerLycanthrope.setDominationFactor(attackerLycanthrope.getDominationFactor() - 1);
             if(attackerLycanthrope.getRank() == Rank.OMEGA) {
@@ -84,24 +84,8 @@ public class Colony {
                 }
 
             }
-            attackerLycanthrope.howl("soumission");
-            targetLycanthrope.howl("domination");
-        }
-    }
-
-    public void startHowl(Lycanthrope lycanthrope, String type) {
-        if(Objects.equals(type, "pack")) {
-            if(Math.random() > 0.5) {
-                for(Pack packs : this.packs) {
-                    for(Lycanthrope lycan : packs.getLycanthropes()) {
-                        lycan.hearHowl("startFromPack");
-                    }
-                }
-            }else{
-                for(Lycanthrope lycan : this.getPackFromLycan(lycanthrope).getLycanthropes()) {
-                    lycan.hearHowl("startFromPack");
-                }
-            }
+            //attackerLycanthrope.howl("soumission");
+            //targetLycanthrope.howl("domination");
         }
     }
 }

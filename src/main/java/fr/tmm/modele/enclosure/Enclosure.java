@@ -210,7 +210,7 @@ public class Enclosure implements CreatureListener, Runnable {
     public ArrayList<Creature> getCreaturesBySex(String sex) {
         ArrayList<Creature> creaturesBySex = new ArrayList<>();
         for (Creature creature : creaturesPresent) {
-            if (creature.getSex().toString() == sex && !creature.isAsleep()) {
+            if (creature.getSex().toString() == sex && !creature.isAsleep() && creature.isAlive()) {
                 if (creature.getSex().toString() == "Female") {
                     if (!((Female) creature.getSex()).isPregnant()) {
                         creaturesBySex.add(creature);

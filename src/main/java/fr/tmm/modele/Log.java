@@ -54,4 +54,11 @@ public class Log {
             System.out.println(log);
         }
     }
+
+    /**
+     * Clear the log list
+     */
+    public void clear() {
+        this.logs = new ArrayList<>();
+    }
 }

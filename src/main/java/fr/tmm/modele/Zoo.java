@@ -115,4 +115,9 @@ public class Zoo {
     public Colony getColony() {
         return colony;
     }
+
+    public void clear() {
+        this.enclosures = new ArrayList<>();
+        this.colony = new Colony();
+    }
 }

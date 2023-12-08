@@ -5,9 +5,7 @@ import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
-import fr.tmm.modele.lycanthropeColony.Colony;
-import fr.tmm.modele.lycanthropeColony.Pack;
-import fr.tmm.modele.lycanthropeColony.Rank;
+import fr.tmm.modele.lycanthropeColony.*;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.Objects;
@@ -28,14 +26,21 @@ public class Lycanthrope extends Viviparous implements Walker {
         super(name, sex, weight, height, age);
     }
 
-    public void howl(String type) {
-        Zoo.getInstance().getColony().startHowl(this, type);
-        Log.getInstance().addLog(name + " émet un hurlement de " + type + ".");
+    public void packHowl() {
+        new PackHowl(this);
     }
 
-    public void hearHowl(String type) {
-        if(Objects.equals(type, "startFromPack")) {
-            this.howl("packResponse");
+    public void dominationHowl() {
+        new DominationHowl(this);
+    }
+
+    public void hearHowl(Howl howl) {
+        if (!this.isAsleep() && !this.isSick()) {
+            if (howl instanceof PackHowl) {
+                Log.getInstance().addLog(this.getName() + " a repondu au hurlement de " + howl.getEmetteur().getName()+ ".");
+            } else if (howl instanceof DominationHowl) {
+
+            }
         }
     }
 
