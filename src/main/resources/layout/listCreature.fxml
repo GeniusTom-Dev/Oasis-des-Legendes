@@ -10,10 +10,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.control.ScrollBar?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fr.tmm.controlers.LogsController" prefWidth="1280" prefHeight="720"
-            stylesheets="@/styles/view/logs.css" fx:id="borderPane" styleClass="root">
+            fx:controller="fr.tmm.controlers.ListCreatureController" prefWidth="1280" prefHeight="720"
+            stylesheets="@/styles/view/listcreature.css" fx:id="borderPane" styleClass="root">
 
     <top>
         <HBox spacing="125">
@@ -25,22 +24,20 @@
                 </graphic>
             </Button>
             <HBox styleClass="navbar" alignment="CENTER">
-                <Text fill="white">
+                <Text fill="white" fx:id="title">
                     <font>
                         <Font size="24" />
                     </font>
-                    Logs
+                    Liste des créatures
                 </Text>
             </HBox>
         </HBox>
     </top>
 
     <center>
-        <ScrollPane styleClass="box" minWidth="900" maxWidth="900" maxHeight="500" vbarPolicy="NEVER">
-            <VBox minWidth="400" maxHeight="450" spacing="20" fx:id="listMessageLogs">
-
-            </VBox>
-        </ScrollPane>
+        <VBox prefWidth="900" maxWidth="900" maxHeight="500">
+            <FlowPane minHeight="500" maxHeight="500" alignment="CENTER" fx:id="listCreature" hgap="20" vgap="20" styleClass="box"/>
+        </VBox>
     </center>
 
 </BorderPane>

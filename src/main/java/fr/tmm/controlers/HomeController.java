@@ -1,5 +1,6 @@
 package fr.tmm.controlers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
@@ -22,4 +23,14 @@ public class HomeController {
         EnclosuresController enclosuresController = (EnclosuresController) setScene("layout/enclosures.fxml", "Enclos");
     }
 
+    public void toHistory(ActionEvent actionEvent) {
+        LogsController logsController = (LogsController) setScene("layout/logs.fxml", "Oasis des légendes | Logs");
+    }
+
+    public void toCreatureList(ActionEvent actionEvent) {
+        ListCreatureController listCreatureController = (ListCreatureController) setScene("layout/listCreature.fxml", "Liste des créatures");
+    }
+
+    public void toGameMaster(ActionEvent actionEvent) {
+    }
 }

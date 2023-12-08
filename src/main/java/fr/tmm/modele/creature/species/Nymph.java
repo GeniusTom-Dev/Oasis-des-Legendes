@@ -19,7 +19,7 @@ public class Nymph extends Viviparous implements Walker, Reincarnate {
         this.setHeight(BabySize.Height.determineFromType(this.getType()));
         this.health.setValue(100);
         this.health.setSick(false);
-        Log.getInstance().addLog(name + " a ressuscité.");
+        Log.getInstance().addLog(this.getName() + " a ressuscité.");
     }
 
     @Override

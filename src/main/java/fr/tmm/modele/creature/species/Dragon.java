@@ -22,7 +22,7 @@ public class Dragon extends Oviparous implements Walker, Swimmer, Flyer, Reincar
         this.setHeight(BabySize.Height.determineFromType(this.getType()));
         this.health.setValue(100);
         this.health.setSick(false);
-        Log.getInstance().addLog(name + " a ressuscité.");
+        Log.getInstance().addLog(this.getName() + " a ressuscité.");
     }
 
     @Override

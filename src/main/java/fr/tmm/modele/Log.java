@@ -26,7 +26,7 @@ public class Log {
     public void addLog(String text) {
         this.logs.add(0, text);
         if (this.logs.size() > 20) {
-            this.logs.subList(0,20);
+            this.logs.remove(this.logs.size() - 1);
         }
     }
 
