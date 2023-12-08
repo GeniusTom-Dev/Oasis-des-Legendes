@@ -51,13 +51,23 @@
     <bottom>
         <VBox>
             <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
-                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                <Button prefWidth="150" prefHeight="150" onAction="#toHistory">
+                    <graphic>
+                        <ImageView fitWidth="75" fitHeight="75">
+                            <Image url="@/assets/icons/history.png"/>
+                        </ImageView>
+                    </graphic>
                     <HBox.margin>
                         <Insets left="10"/>
                     </HBox.margin>
                 </Button>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                <Button prefWidth="150" prefHeight="150" onAction="#toCreatureList">
+                    <graphic>
+                        <ImageView fitWidth="100" fitHeight="100">
+                            <Image url="@/assets/icons/creatures.png"/>
+                        </ImageView>
+                    </graphic>
                     <HBox.margin>
                         <Insets right="10"/>
                     </HBox.margin>
@@ -66,10 +76,10 @@
 
             <HBox styleClass="lineButton" prefWidth="1280" alignment="CENTER">
                 <HBox prefWidth="1000">
-                    <Button prefWidth="150" prefHeight="150" onAction="#toEnclosure">
+                    <Button prefWidth="150" prefHeight="150" onAction="#toGameMaster">
                         <graphic>
                             <ImageView fitWidth="100" fitHeight="100">
-                                <Image url="@/assets/icons/enclosure.png"/>
+                                <Image url="@/assets/icons/game_master.png"/>
                             </ImageView>
                         </graphic>
                         <HBox.margin>
@@ -77,7 +87,12 @@
                         </HBox.margin>
                     </Button>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Button prefWidth="150" prefHeight="150" text="Bouton" onAction="#toEnclosure">
+                    <Button prefWidth="150" prefHeight="150" onAction="#toEnclosure">
+                        <graphic>
+                            <ImageView fitWidth="100" fitHeight="100">
+                                <Image url="@/assets/icons/enclosure.png"/>
+                            </ImageView>
+                        </graphic>
                         <HBox.margin>
                             <Insets bottom="10"/>
                         </HBox.margin>

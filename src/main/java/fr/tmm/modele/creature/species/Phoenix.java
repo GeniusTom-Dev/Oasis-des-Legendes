@@ -24,7 +24,7 @@ public class Phoenix extends Oviparous implements Flyer, Reincarnate {
         this.health.setSick(false);
         Thread t = new Thread(this);
         t.start();
-        Log.getInstance().addLog(name + " a ressuscité.");
+        Log.getInstance().addLog(this.getName() + " a ressuscité.");
     }
 
     @Override

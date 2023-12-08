@@ -45,7 +45,7 @@ public abstract class Creature implements Runnable {
         if (this.age.get() == 0) {
             Log.getInstance().addLog("Un bébé " + this.getType() + " est mort-né car il est né dans un enclos plein.");
         } else {
-            Log.getInstance().addLog(name + " est mort.");
+            Log.getInstance().addLog(this.getName() + " est mort.");
         }
         if (this.listener != null) listener.onCreatureDeath(this);
     }
@@ -168,7 +168,7 @@ public abstract class Creature implements Runnable {
     }
 
     public void starve() {
-        Log.getInstance().addLog(name + " est entrain de mourir de faim.");
+        Log.getInstance().addLog(this.getName() + " est entrain de mourir de faim.");
         this.health.decrement(10);
     }
 
