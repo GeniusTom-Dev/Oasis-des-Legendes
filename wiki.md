@@ -147,8 +147,8 @@ Nous avons opté pour cette image en arrière plan car nous avons trouvé qu'ell
 
 | **Nom Diagramme Class**  | **Description** | **Diagramme UML** |
 |--------------------------|-----------------|-------------------|
-| Diagramme Class Aquarium  | ... | ![Diagramme Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramAquarium.png?raw=true) |
-| Diagramme Class Dragon  | ... | ![Diagramme Dragon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramDragon.png?raw=true) |
+| Diagramme Class Aquarium  | Ici nous avons repris la classe Aquarium. Nous pouvons observer que cette classe hérite de la classe Enclosure qui hérite elle même de 2 interfaces. En effet, dans notre application, il existe 2 types d'enclos : Aquarium et Aviary. C'est pour cela qu'il y a des héritages entre certaines classes. | ![Diagramme Aquarium](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramAquarium.png?raw=true) |
+| Diagramme Class Dragon  | Nous pouvons observer que la classe Dragon hérite d'une classe abstraite Oviparious qui elle même hérite d'une classe abstraite Creature. De plus, la classe Dragon implémente 4 interfaces différentes. En effet, en Java il est possible d'implémenter plusieurs interfaces à une classe. Cependant, il est possible de faire hériter qu'une seule classe à une autre classe.  Nous avons opté pour cette approche car elle permet d'exploiter les avantages de l'héritage de classe et de l'implémentation d'interface simultanément. L'héritage de classe permet la réutilisation du code, car la classe dérivée peut hériter des membres (méthodes et champs) de la classe de base. D'un autre côté, les interfaces permettent de spécifier un ensemble de comportements que la classe doit implémenter. | ![Diagramme Dragon](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/master/src/main/resources/assets/diagrams/diagramDragon.png?raw=true) |
 ***
 
 ### CHOIX DES TECHNOLOGIES
