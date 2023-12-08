@@ -135,7 +135,7 @@ Toutes les images de notre application ont été réalisées par Dall-e
 Afin de réaliser notre application nous avons pris comme base cette maquette :
 ![maquette](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/maquette.png?raw=true)
 
-Cette maquette nous semblons être une bonne base, nous l'avons réadaptée pour qu'elle corresponde à notre application :
+Nous avons opté pour cette image en arrière plan car nous avons trouvé qu'elle peut correspondre à l'univers de notre application :
 ![Background](https://github.com/GeniusTom-Dev/Oasis-des-Legendes/blob/interface/src/main/resources/assets/background.png?raw=true)
 
 ***
