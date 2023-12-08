@@ -116,7 +116,7 @@ public class Enclosure implements CreatureListener, Runnable {
         if (creature instanceof Walker) {
             return addCreatureThatMatchesEnclosureType(creature);
         }
-        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + name +
+        Log.getInstance().addLog("Impossible d'ajouter " + creature.getName() + " à l'enclos " + this.getName() +
                 " car ce n'est pas une créature terrestre.");
         return false;
     }
