@@ -6,6 +6,7 @@ import fr.tmm.modele.enclosure.Enclosure;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +44,7 @@ public class CreatureController {
     public ProgressBar creatureEnergyBar;
     @FXML
     public ProgressBar creatureHealthBar;
+    public Button actionCounter;
 
     private int indexEnclosure;
 

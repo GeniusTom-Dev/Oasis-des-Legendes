@@ -32,6 +32,7 @@ public class EnclosureController {
     public Text enclosureCountCreature;
     @FXML
     public Text enclosureClean;
+    public Button actionCounter;
 
     private int indexEnclosure;
 

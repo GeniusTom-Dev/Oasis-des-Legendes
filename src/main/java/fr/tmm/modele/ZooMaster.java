@@ -3,11 +3,14 @@ package fr.tmm.modele;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.species.Human;
 import fr.tmm.modele.enclosure.Enclosure;
+import javafx.beans.property.SimpleIntegerProperty;
+
+import java.util.Map;
 
 public class ZooMaster extends Human implements Runnable {
 
     private final int MAX_ACTIONS = 3;
-    private int actionsLeft = 3;
+    private SimpleIntegerProperty actionsLeft = new SimpleIntegerProperty(MAX_ACTIONS);
     public ZooMaster(String name, String sex, double weight, double height, int age) {
         super(name, sex, weight, height, age);
         Thread t = new Thread();
@@ -19,7 +22,7 @@ public class ZooMaster extends Human implements Runnable {
         while (true) {
             try {
                 Thread.sleep(1000);
-                if (this.actionsLeft < MAX_ACTIONS) {
+                if (this.actionsLeft.get() < MAX_ACTIONS) {
                     addAnAction();
                     Thread.sleep(60000);
                 }
@@ -73,22 +76,26 @@ public class ZooMaster extends Human implements Runnable {
     }
 
     public boolean isThereActionLeft() {
-        return this.actionsLeft > 0;
+        return this.actionsLeft.get() > 0;
     }
 
     public void addAnAction() {
-        if (this.actionsLeft < MAX_ACTIONS) {
-            this.actionsLeft += 1;
+        if (this.actionsLeft.get() < MAX_ACTIONS) {
+            this.actionsLeft.setValue(this.actionsLeft.get() + 1);
         }
     }
 
     public void removeAnAction() {
         if (isThereActionLeft()) {
-            this.actionsLeft -=1;
+            this.actionsLeft.setValue(this.actionsLeft.get() - 1);
         }
     }
 
     public int getMAX_ACTIONS() {
         return MAX_ACTIONS;
+    }
+
+    public SimpleIntegerProperty actionsProperty() {
+        return actionsLeft;
     }
 }
