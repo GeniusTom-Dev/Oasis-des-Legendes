@@ -23,13 +23,16 @@ public class Pack {
     public void determineHierarchy() {
         selectionSort(this.getLycanthropes());
         int rank = 1;
-        for (int i = 0; i < this.getLycanthropes().size()-1; i++) {
+        for (int i = 0; i < this.getLycanthropes().size(); i++) {
             if (this.getLycanthropes().get(i).getRank() != Rank.ALPHA) {
                 this.getLycanthropes().get(i).setRank(Rank.getRankByIndex(rank));
                 ++rank;
             }
         }
-        this.getLycanthropes().get(this.getLycanthropes().size()-1).setRank(Rank.OMEGA);
+//        for (int i = this.getLycanthropes().size()-1; i > 0 ; i--) {
+//            if (this.getLycanthropes().get(i).getRank() == Rank.ALPHA)
+//
+//        }
     }
 
     public ArrayList<Lycanthrope> getLycanthropes() {

@@ -63,7 +63,7 @@ public class Enclosure implements CreatureListener, Runnable {
             baby.die();
         } else {
             Log.getInstance().addLog(baby.getName() + " vient de naître dans l'enclos " + this.name + ".");
-            this.creaturesPresent.add(baby);
+            this.addCreature(baby);
         }
     }
 
