@@ -5,14 +5,17 @@ import fr.tmm.modele.Zoo;
 import fr.tmm.modele.creature.Creature;
 import fr.tmm.modele.creature.Viviparous;
 import fr.tmm.modele.creature.methodOfMovement.Walker;
+import fr.tmm.modele.creature.reproduction.Sex;
 import fr.tmm.modele.lycanthropeColony.*;
 import fr.tmm.modele.utils.Utils;
 
 import java.util.Objects;
+import java.util.Random;
 
-public class Lycanthrope extends Viviparous implements Walker {
+public class Lycanthrope extends Human implements Walker {
 
     private AgeCategorie ageCategorie;
+
     private enum AgeCategorie {
         JEUNE, ADULTE, VIEUX
     }
@@ -20,11 +23,22 @@ public class Lycanthrope extends Viviparous implements Walker {
     private int dominationFactor; // nb de gens dominé sur nb de gens qui domine
     private Rank rank; // alpha, beta, ..., omega
     private int level; // ageCategorie + force + dominationFactor + rang
-
-    private int impetuosityFactor;
+    private int impetuosityFactor; // nb de 0 à 15
 
     public Lycanthrope(String name, String sex, double weight, double height, int age) {
         super(name, sex, weight, height, age);
+        Random rand = new Random();
+        updateAgeCategorie();
+        this.force = rand.nextInt(0,11);
+        updateDominationFactor();
+        this.rank = Rank.getRankByIndex(new Random().nextInt(1,Rank.values().length));
+        this.impetuosityFactor = rand.nextInt(0,16);
+        calculLevel();
+    }
+
+    public void updateHierarchie() {
+        updateDominationFactor();
+        calculLevel();
     }
 
     public void packHowl() {
@@ -51,13 +65,9 @@ public class Lycanthrope extends Viviparous implements Walker {
         }
     }
 
-    // FAIT
+
     public void separatingFromPack() {
         Zoo.getInstance().getColony().getPackFromLycan(this).removeLycanthrope(this);
-    }
-
-    public void transform() {
-        // TODO -> humain/loup -> surement hyper casse couille à faire
     }
 
     public void attack(Lycanthrope target){
@@ -116,6 +126,54 @@ public class Lycanthrope extends Viviparous implements Walker {
 
     public void setImpetuosityFactor(int impetuosityFactor) {
         this.impetuosityFactor = impetuosityFactor;
+    }
+
+    public void updateDominationFactor() {
+        setDominationFactor(this.getNbLycanWithInferiorRank()/this.getNbLycanWithSuperiorRank());
+    }
+
+    private int getNbLycanWithInferiorRank() {
+        Pack pack = Zoo.getInstance().getColony().getPackFromLycan(this);
+        int cmp = 0;
+        for (Lycanthrope lycan : pack.getLycanthropes()) {
+            if (lycan.getRank().ordinal() > this.getRank().ordinal()) {
+                ++cmp;
+            }
+        }
+        return cmp;
+    }
+
+    private int getNbLycanWithSuperiorRank() {
+        Pack pack = Zoo.getInstance().getColony().getPackFromLycan(this);
+        int cmp = 0;
+        for (Lycanthrope lycan : pack.getLycanthropes()) {
+            if (lycan.getRank().ordinal() < this.getRank().ordinal()) {
+                ++cmp;
+            }
+        }
+        return cmp;
+    }
+
+    @Override
+    public void setAge(int age) {
+        super.setAge(age);
+        updateAgeCategorie();
+    }
+
+    @Override
+    public void aging() {
+        super.aging();
+        updateAgeCategorie();
+    }
+
+    private void updateAgeCategorie() {
+        if (this.getAge() < 25) {
+            this.ageCategorie = AgeCategorie.JEUNE;
+        } else if (this.getAge() < 75) {
+            this.ageCategorie = AgeCategorie.ADULTE;
+        } else {
+            this.ageCategorie = AgeCategorie.VIEUX;
+        }
     }
 
 }

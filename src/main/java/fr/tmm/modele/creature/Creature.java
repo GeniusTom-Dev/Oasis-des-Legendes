@@ -3,9 +3,11 @@ package fr.tmm.modele.creature;
 import fr.tmm.modele.Log;
 import fr.tmm.modele.creature.listener.CreatureListener;
 import fr.tmm.modele.creature.reproduction.*;
+import fr.tmm.modele.creature.reproduction.data.BabyName;
 import fr.tmm.modele.indicator.EnergyIndicator;
 import fr.tmm.modele.indicator.HealthIndicator;
 import fr.tmm.modele.indicator.SatietyIndicator;
+import fr.tmm.modele.utils.Utils;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,6 +18,8 @@ import java.util.Objects;
 import java.util.Random;
 
 public abstract class Creature implements Runnable {
+
+
     protected StringProperty name;
     protected StringProperty type;
     protected SimpleDoubleProperty weight; // kg
@@ -37,6 +41,7 @@ public abstract class Creature implements Runnable {
         this.health = new HealthIndicator();
         this.type = new SimpleStringProperty(this.getClass().getSimpleName());
         this.sex = determineSex(sex);
+        this.setName(determineName());
         Thread t = new Thread(this);
         t.start();
     }
@@ -70,6 +75,14 @@ public abstract class Creature implements Runnable {
             }
         }
         this.die();
+    }
+
+    private String determineName() {
+        if (this.getSex().toString() == "Female") {
+            return BabyName.femaleNames.get(Utils.getRandomIndexInList(BabyName.femaleNames));
+        } else {
+            return BabyName.maleNames.get(Utils.getRandomIndexInList(BabyName.maleNames));
+        }
     }
 
     private Sex determineSex(String sex) {
@@ -127,6 +140,10 @@ public abstract class Creature implements Runnable {
 
     public void setWeight(double weight) {
         this.weight.set(weight);
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public double getHeight() {

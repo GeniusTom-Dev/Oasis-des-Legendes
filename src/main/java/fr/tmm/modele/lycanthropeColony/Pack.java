@@ -29,10 +29,12 @@ public class Pack {
                 ++rank;
             }
         }
-//        for (int i = this.getLycanthropes().size()-1; i > 0 ; i--) {
-//            if (this.getLycanthropes().get(i).getRank() == Rank.ALPHA)
-//
-//        }
+        for (int i = this.getLycanthropes().size()-1; i > 0 ; i--) {
+            if (this.getLycanthropes().get(i).getRank() != Rank.ALPHA) {
+                this.getLycanthropes().get(i).setRank(Rank.OMEGA);
+                return;
+            }
+        }
     }
 
     public ArrayList<Lycanthrope> getLycanthropes() {
