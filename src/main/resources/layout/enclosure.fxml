@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.FlowPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.tmm.controlers.EnclosureController" prefWidth="1280" prefHeight="720"
             stylesheets="@/styles/view/enclosure.css" fx:id="borderPane" styleClass="root">
@@ -118,11 +119,6 @@
                         </font>
                     </Text>
                 </HBox>
-                <Region VBox.vgrow="ALWAYS"/>
-                <HBox minHeight="50" maxHeight="50" alignment="CENTER" style="-fx-padding: 0 0 30 0;">
-                    <Button styleClass="cleanButton" alignment="CENTER" onAction="#cleanButton" text="Nettoyer l'enclo">
-                    </Button>
-                </HBox>
             </VBox>
 
 
@@ -138,6 +134,26 @@
             </ScrollPane>
         </HBox>
     </center>
+
+    <right>
+        <VBox alignment="CENTER" fx:id="enclosuresLine" spacing="30" style="-fx-padding: 0 20 0 0">
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#feedCreature">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/feed.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#cleanEnclosure">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/clean.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </right>
 
 
 </BorderPane>

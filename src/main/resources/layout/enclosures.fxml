@@ -36,8 +36,7 @@
 
     <center>
         <VBox prefWidth="900" maxWidth="900" maxHeight="500">
-
-            <FlowPane minHeight="500" maxHeight="500" alignment="CENTER" fx:id="enclosuresLine" hgap="20" vgap="20"></FlowPane>
+            <FlowPane minHeight="500" maxHeight="500" alignment="CENTER" fx:id="enclosuresLine" hgap="20" vgap="20"/>
         </VBox>
     </center>
 

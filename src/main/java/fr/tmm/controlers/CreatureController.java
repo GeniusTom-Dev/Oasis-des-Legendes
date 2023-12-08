@@ -73,4 +73,9 @@ public class CreatureController {
         assert enclosureController != null;
         enclosureController.setIndexEnclosure(this.indexEnclosure);
     }
+
+
+    public void moveCreature() {
+        //TODO AFFICHER NEW INTERFACE
+    }
 }

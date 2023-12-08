@@ -18,7 +18,7 @@
             stylesheets="@/styles/view/creature.css" fx:id="borderPane" styleClass="root">
 
     <top>
-        <HBox alignment="CENTER">
+        <HBox spacing="125">
             <Button styleClass="actionButton" alignment="CENTER" onAction="#backButton">
                 <graphic>
                     <ImageView fitWidth="25" fitHeight="25">
@@ -26,7 +26,6 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Region HBox.hgrow="ALWAYS"/>
             <HBox styleClass="navbar" alignment="CENTER">
                 <Text fill="white" fx:id="title">
                     <font>
@@ -35,14 +34,6 @@
                     Nom de l'enclo
                 </Text>
             </HBox>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button styleClass="actionButton" alignment="CENTER">
-                <graphic>
-                    <ImageView fitWidth="25" fitHeight="25">
-                        <Image url="@/assets/icons/actionButton.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
         </HBox>
     </top>
 
@@ -204,9 +195,20 @@
                 <ImageView fitWidth="400" fitHeight="400" fx:id="creatureImg" styleClass="image"></ImageView>
             </VBox>
         </HBox>
-
-
     </center>
+
+    <right>
+        <VBox alignment="CENTER" fx:id="enclosuresLine" spacing="30" style="-fx-padding: 0 20 0 0">
+
+            <Button styleClass="actionButton" alignment="CENTER" onAction="#moveCreature">
+                <graphic>
+                    <ImageView fitWidth="25" fitHeight="25">
+                        <Image url="@/assets/icons/move.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </right>
 
 
 </BorderPane>

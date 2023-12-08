@@ -36,7 +36,7 @@ public class ZooMaster extends Human implements Runnable {
      * @param source   : the current enclosure of the creature
      * @param dest     : the future enclosure of the creature
      */
-    public void transferer(Creature creature, Enclosure source, Enclosure dest) {
+    public void moveCreature(Creature creature, Enclosure source, Enclosure dest) {
         if (isThereActionLeft()) {
             if (creature == null || source == null || dest == null) {
                 throw new IllegalArgumentException("One of the parameter is null");
@@ -65,7 +65,7 @@ public class ZooMaster extends Human implements Runnable {
      * Feed the creature of an enclosure
      * @param enclos : The enclosure that the zookeeper wants to feed the creatures
      */
-    public void feedCreature(Enclosure enclos) {
+    public void feedEnclosure(Enclosure enclos) {
         if (isThereActionLeft()) {
             enclos.feedCreatures();
             removeAnAction();

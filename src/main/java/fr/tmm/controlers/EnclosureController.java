@@ -34,7 +34,10 @@ public class EnclosureController {
     public Text enclosureClean;
 
     private int indexEnclosure;
+
     private Enclosure enclosure;
+
+    private Zoo zoo = Zoo.getInstance();;
 
     private void showCreature(ActionEvent event) {
         Node source = (Node) event.getSource();
@@ -46,7 +49,7 @@ public class EnclosureController {
 
     public void setIndexEnclosure(int indexEnclosure) {
         this.indexEnclosure = indexEnclosure;
-        this.enclosure = Zoo.getInstance().getEnclosures().get(indexEnclosure);
+        this.enclosure = this.zoo.getEnclosures().get(indexEnclosure);
         ArrayList<Creature> creatures = this.enclosure.getCreaturesPresent();
         title.setText(this.enclosure.getName());
 
@@ -54,7 +57,7 @@ public class EnclosureController {
         enclosureSurface.setText(String.valueOf(this.enclosure.getSurfaceArea()));
         enclosureCapacity.setText(String.valueOf(this.enclosure.getMaxCapacity()));
         enclosureCountCreature.setText(String.valueOf(creatures.size()));
-        enclosureClean.setText(String.valueOf(this.enclosure.getCleanlinessDegree()));
+        enclosureClean.textProperty().bind(this.enclosure.cleanProperty());
 
 
         for (int i = 0; i < creatures.size(); i++) {
@@ -71,8 +74,11 @@ public class EnclosureController {
         EnclosuresController enclosuresController = (EnclosuresController) setScene("layout/enclosures.fxml", "Enclo");
     }
 
-    public void cleanButton(ActionEvent actionEvent) {
-        this.enclosure.clean();
-        enclosureClean.setText(String.valueOf(this.enclosure.getCleanlinessDegree()));
+    public void cleanEnclosure() {
+        this.zoo.getZooMaster().cleanEnclosure(this.enclosure);
+    }
+
+    public void feedCreature() {
+        this.zoo.getZooMaster().feedEnclosure(this.enclosure);
     }
 }

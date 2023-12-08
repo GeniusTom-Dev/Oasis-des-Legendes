@@ -35,7 +35,7 @@ class ZooMasterTest {
         for (int i = 0; i < zooMaster.getMAX_ACTIONS() + 1; i++) {
             this.mermaid.setSatiety(50);
             // will not be performer the 4th time
-            this.zooMaster.feedCreature(source);
+            this.zooMaster.feedEnclosure(source);
         }
         assertFalse(this.mermaid.getSatiety() > 50);
     }
@@ -44,7 +44,7 @@ class ZooMasterTest {
     void testAddActions() {
         for (int i = 0; i < zooMaster.getMAX_ACTIONS() + 1; i++) {
             this.mermaid.setSatiety(50);
-            this.zooMaster.feedCreature(source);
+            this.zooMaster.feedEnclosure(source);
             if (i == 2) {
                 sleep(61);
             }
@@ -55,7 +55,7 @@ class ZooMasterTest {
     @Test
     void feedCreature() {
         this.mermaid.setSatiety(50);
-        this.zooMaster.feedCreature(source);
+        this.zooMaster.feedEnclosure(source);
         assertTrue(this.mermaid.getSatiety() > 50);
     }
 
@@ -71,7 +71,7 @@ class ZooMasterTest {
     void normalTransfert() {
         assertEquals(this.source.getCreaturesPresent().size(),1);
         assertEquals(this.dest.getCreaturesPresent().size(), 0);
-        this.zooMaster.transferer(mermaid, source, dest);
+        this.zooMaster.moveCreature(mermaid, source, dest);
         assertEquals(this.source.getCreaturesPresent().size(),0);
         assertEquals(this.dest.getCreaturesPresent().size(), 1);
     }
@@ -81,7 +81,7 @@ class ZooMasterTest {
         Aviary aviary = new Aviary("Aviary",50,50);
         assertEquals(this.source.getCreaturesPresent().size(),1);
         assertEquals(aviary.getCreaturesPresent().size(), 0);
-        this.zooMaster.transferer(mermaid, source, aviary);
+        this.zooMaster.moveCreature(mermaid, source, aviary);
         assertEquals(this.source.getCreaturesPresent().size(),1);
         assertEquals(aviary.getCreaturesPresent().size(), 0);
     }

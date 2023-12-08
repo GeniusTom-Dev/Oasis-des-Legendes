@@ -8,6 +8,7 @@ import fr.tmm.modele.creature.reproduction.Female;
 import fr.tmm.modele.creature.reproduction.data.BabySize;
 import fr.tmm.modele.creature.reproduction.Egg;
 import fr.tmm.modele.utils.Utils;
+import javafx.beans.property.SimpleStringProperty;
 
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Enclosure implements CreatureListener, Runnable {
 
     protected ArrayList<Egg> eggWaitingToHatch = new ArrayList<>();
     protected CleanlinessStatus cleanliness;
+    protected SimpleStringProperty cleanProperty = new SimpleStringProperty();
 
     /**
      * Handles the event when a creature dies in the enclosure.
@@ -92,7 +94,7 @@ public class Enclosure implements CreatureListener, Runnable {
         this.name = name;
         this.surfaceArea = area;
         this.maxCapacity = maxCapacity;
-        this.cleanliness = CleanlinessStatus.SPOTLESS;
+        this.setCleanlinessDegree(CleanlinessStatus.SPOTLESS);
         Thread t = new Thread(this);
         t.start();
     }
@@ -157,7 +159,7 @@ public class Enclosure implements CreatureListener, Runnable {
     }
 
     public void getDirtier() {
-        this.cleanliness = Utils.getWorseState(this.cleanliness);
+        this.setCleanlinessDegree(Utils.getWorseState(this.cleanliness));
         Log.getInstance().addLog("La propreté de l'enclos " + name + " s'est dégradé. Degrés de propreté actuel : " + cleanliness);
     }
 
@@ -254,6 +256,11 @@ public class Enclosure implements CreatureListener, Runnable {
 
     public void setCleanlinessDegree(CleanlinessStatus cleanlinessDegree) {
         this.cleanliness = cleanlinessDegree;
+        this.cleanProperty.setValue(cleanlinessDegree.toString());
+    }
+
+    public SimpleStringProperty cleanProperty() {
+        return cleanProperty;
     }
 
     public ArrayList<Egg> getEggWaitingToHatch() {
