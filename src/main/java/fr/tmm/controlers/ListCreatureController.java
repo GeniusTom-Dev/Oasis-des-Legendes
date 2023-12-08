@@ -35,8 +35,8 @@ public class ListCreatureController implements Initializable {
             ImageView image = new ImageView();
             image.setImage(new Image(file.toURI().toString()));
 
-            image.setFitHeight(200);
-            image.setFitWidth(200);
+            image.setFitHeight(150);
+            image.setFitWidth(150);
 
             listCreature.getChildren().add(image);
         }
