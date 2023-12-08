@@ -34,6 +34,7 @@
 ## Utilisation
 
 Un <a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki/MANUEL-D'UTILISATION">Manuel d'utilisation</a> de l'application est disponible.
+<br>
 Une <a href="https://github.com/GeniusTom-Dev/Oasis-des-Legendes/wiki/ETUDE-DE-CONCEPTION-ET-CLOTURE-DE-TRAVAIL">Étude de conception et de la clôture de travail a été réalisé.</a> 
 
 ## Credits
